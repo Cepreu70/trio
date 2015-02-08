@@ -1,0 +1,75 @@
+/* line 4, F:/Projects/Trio/style.scss */
+*, div, p, span, img, a, input {
+  position: relative;
+  left: 0;
+  top: 0;
+  box-sizing: border-box; }
+
+/* line 11, F:/Projects/Trio/style.scss */
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  box-sizing: border-box; }
+
+/* line 20, F:/Projects/Trio/style.scss */
+.centerize {
+  left: initial;
+  max-width: 1920px;
+  margin: 0 auto;
+  width: 100%; }
+
+/* line 30, F:/Projects/Trio/style.scss */
+body .app {
+  width: 100%;
+  height: 100%;
+  background-color: red; }
+  /* line 35, F:/Projects/Trio/style.scss */
+  body .app header {
+    height: 120px;
+    color: #ffffff; }
+    /* line 38, F:/Projects/Trio/style.scss */
+    body .app header .centerize {
+      height: 100%; }
+    /* line 41, F:/Projects/Trio/style.scss */
+    body .app header .left {
+      width: 33.3%;
+      text-align: left;
+      left: initial;
+      height: 100%;
+      float: left; }
+    /* line 48, F:/Projects/Trio/style.scss */
+    body .app header .center {
+      width: 33.3%;
+      text-align: center;
+      left: initial;
+      height: 100%;
+      float: left; }
+      /* line 55, F:/Projects/Trio/style.scss */
+      body .app header .center .logo {
+        width: 100%;
+        max-width: 171px;
+        height: 100%;
+        left: initial;
+        background: url(images/Logo.svg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% auto;
+        margin: 0 auto; }
+    /* line 67, F:/Projects/Trio/style.scss */
+    body .app header .right {
+      width: 33.3%;
+      text-align: right;
+      left: initial;
+      height: 100%;
+      float: left; }
+    /* line 74, F:/Projects/Trio/style.scss */
+    body .app header .btn-header {
+      border-radius: 50%;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      padding: 22px 33px; }
+
+/*# sourceMappingURL=style.css.map */
