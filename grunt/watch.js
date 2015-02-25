@@ -7,6 +7,7 @@ module.exports = {
 
     localScripts: {
         files: [
+            'www/app/helper/**/*.js',
             'www/app/controller/**/*.js',
             'www/app/models/**/*.js',
             'www/app/data/**/*.js',

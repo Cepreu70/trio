@@ -1,5 +1,9 @@
-(function(){
-    appTrio.controller('galleryController', function($scope) {
-        $scope.pageClass = 'page-gallery';
-    });
+(function() {
+    'use strict';
+    app.controller('galleryController', ['$routeParams', function($scope, $routeParams) {
+        getScope('appCtrl').app.pageClass = 'page-gallery';
+
+        this.name = "galleryController";
+        this.params = $routeParams;
+    }])
 })();

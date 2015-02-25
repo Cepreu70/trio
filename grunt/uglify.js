@@ -12,7 +12,7 @@ module.exports = {
             beautify: true,
             mangle: false
         },
-        src: ['www/app/data/**/*.js', 'www/app/config/**/*.js', 'www/app/models/**/*.js', 'www/app/controller/**/*.js'],
+        src: ['www/app/helper/**/*.js', 'www/app/data/**/*.js', 'www/app/config/**/*.js', 'www/app/models/**/*.js', 'www/app/controller/**/*.js'],
         dest: 'www/app.js'
     }
 };

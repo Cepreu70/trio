@@ -1,36 +1,33 @@
-var appTrio = angular.module('app', ['ngRoute', 'ngAnimate']);
-(function(){
+var app;
+(function(angular) {
 
-// define our application and pull in ngRoute and ngAnimate
+    'use strict';
 
-// ROUTING ===============================================
-// set our routing for this application
-// each route will pull in a different controller
-    appTrio.config(function($routeProvider, $locationProvider) {
+    app = angular.module('ngApp', ['ngRoute', 'ngAnimate'])
+        .config(['$routeProvider', '$locationProvider',
+            function($routeProvider, $locationProvider) {
+                $routeProvider
+                    .when('/', {
+                        templateUrl: 'app/view/home/home.html',
+                        controller: 'homeController'
+                    })
+                    .when('/gallery', {
+                        templateUrl: 'app/view/gallery/gallery.html',
+                        controller: 'galleryController'
+                    })
+                    .when('/portfolio', {
+                        templateUrl: 'app/view/portfolio/portfolio.html',
+                        controller: 'portfolioController'
+                    });
+                $locationProvider.html5Mode(true);
+            }])
 
-        $routeProvider
+        .controller('appCtrl', ['$route', '$routeParams', '$location',
+            function($scope, $route, $routeParams, $location) {
+                $scope.pageClass = 'page-home';
+                this.$route = $route;
+                this.$location = $location;
+                this.$routeParams = $routeParams;
+            }])
 
-            // home page
-            .when('/', {
-                templateUrl: 'app/view/home/home.html',
-                controller: 'homeController',
-                animation: 'first'
-            })
-
-            // about page
-            .when('/portfolio', {
-                templateUrl: 'app/view/portfolio/portfolio.html',
-                controller: 'portfolioController',
-                animation: 'second'
-            })
-
-            // contact page
-            .when('/gallery', {
-                templateUrl: 'app/view/gallery/gallery.html',
-                controller: 'galleryController',
-                animation: 'third'
-            });
-
-    });
-
-})();
+})(window.angular);

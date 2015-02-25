@@ -7,6 +7,7 @@
   "devDependencies": {
     "autoprefixer-core": "*",
     "bower": "*",
+    "connect-modrewrite": "^0.7.11",
     "csswring": "*",
     "grunt": "~0.4.5",
     "grunt-cli": "*",
@@ -22,7 +23,6 @@
     "grunt-postcss": "*",
     "grunt-preprocess": "~4.0.0",
     "grunt-sass": "latest",
-    "grunt-web-server": "^1.2.3",
     "load-grunt-config": "~0.16.0"
   },
   "dependencies": {
