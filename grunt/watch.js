@@ -34,7 +34,8 @@ module.exports = {
         ],
         tasks: [
             'sass:dev',
-            'cssmin'
+            'cssmin',
+            'postcss'
         ]
     },
     html: {

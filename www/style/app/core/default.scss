@@ -1,10 +1,17 @@
+body, html{
+  min-height: 100% !important;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  background-color: black;
+}
 /* make our pages be full width and full height */
 /* positioned absolutely so that the pages can overlap each other as they enter and leave */
-.page        {
-  bottom:0;
-  position:absolute;
+.page {
+  padding-top: 1px;
+  position: relative;
   text-align:center;
-  top:0;
+  top: 0;
   transform: translateZ(0);
   width:100%;
 }
@@ -16,37 +23,28 @@
 /* PAGES (specific colors for each page)
 ============================================================================= */
 
-.page.ng-enter, .page.ng-leave {
-  -webkit-transition:transform linear 0.4s, opacity linear 0.4s;
-  transition:transform linear 0.4s, opacity linear 0.4s;
+@keyframes enter_page {
+  0% { opacity:0; transform: translateX(100%); }
+  40% { opacity:1; }
+  100% { transform: translateX(0%); position: inherit; }
+}
+@keyframes leave_page {
+  0% { opacity:1;}
+  40% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
 
+.page{
+  &.ng-enter{
+    animation: enter_page 1s linear;
+    position: fixed;
+  }
+  &.ng-leave{
+    animation: leave_page 1s linear;
+  }
   display:block;
   width:100%;
-  border-left:1px solid black;
-
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  bottom:0;
-  padding:10px;
 }
-
-.page.ng-enter {
-  transform: translateY(10%);
-  position: fixed;
-  opacity: 0.2;
-}
-.page.ng-enter.ng-enter-active {
-  transform: translateY(0%);
-  opacity: 1;
-}
-.page.ng-leave.ng-leave-active {
-  transform: translateY(-5%);
-  position: fixed;
-  opacity: 0.2;
-}
-
 
 
 
