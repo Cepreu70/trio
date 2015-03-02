@@ -1,6 +1,5 @@
 var getScope = function(nameCtrl) {
-    return console.log(angular.element(document.getElementById(nameCtrl)).scope()), 
-    angular.element(document.getElementById(nameCtrl)).scope();
+    return angular.element(document.getElementById(nameCtrl)).scope();
 }, app;
 
 !function(angular) {
@@ -17,7 +16,7 @@ var getScope = function(nameCtrl) {
             controller: "portfolioController"
         }), $locationProvider.html5Mode(!0);
     } ]).controller("appCtrl", [ "$route", "$routeParams", "$location", function($scope, $route, $routeParams, $location) {
-        $scope.pageClass = "page-home", this.$route = $route, this.$location = $location, 
+        $scope.pageClass = "page-home", $scope.firstLaunch = !0, this.$route = $route, this.$location = $location, 
         this.$routeParams = $routeParams;
     } ]);
 }(window.angular), function() {
@@ -29,7 +28,10 @@ var getScope = function(nameCtrl) {
 }(), function() {
     "use strict";
     app.controller("homeController", [ "$routeParams", function($scope, $routeParams) {
-        getScope("appCtrl").app.pageClass = "page-home", this.name = "homeController", this.params = $routeParams;
+        getScope("appCtrl").app.pageClass = "page-home", this.name = "homeController", this.params = $routeParams, 
+        $(document).ready(function() {
+            $(".parallax").parallax();
+        });
     } ]);
 }(), function() {
     "use strict";

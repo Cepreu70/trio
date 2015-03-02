@@ -1,3 +1,22 @@
+@import '../app/core/init';
+
 .page-home{
-  background:#00D0BC; color:#00907c;
+  .parallax-container {
+    height: 960px;
+    @include respond-to(md){
+      height: auto;
+    }
+    @include respond-to(sm){
+      height: auto;
+    }
+    img{
+      object-fit: cover;
+    }
+  }
+  .block{
+    padding-top: 1px;
+    height: 900px;
+    background-color: white;
+    width: 100%;
+  }
 }

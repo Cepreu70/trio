@@ -9,9 +9,13 @@
 
 <!-- apply our angular app -->
 <body ng-app="ngApp">
-
+<div class="header">
+    <p class="header-btn left">меню</p>
+    <p class="header-btn right">Связаться</p>
+    <p class="logo-trio"></p>
+</div>
 <div id="appCtrl" ng-controller="appCtrl as app">
-    <div ng-view class="page {{ app.pageClass }}"></div>
+    <div ng-view class="page {{ app.pageClass }} {{ app.firstLaunch ? 'first-launch' : '' }}" ></div>
 </div>
 
 </body>

@@ -1,0 +1,59 @@
+@import 'core/init';
+
+.header{
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  position: fixed;
+  z-index: 1000;
+  color: #ffffff;
+  .header-btn{
+    top: 0;
+    margin: 30px;
+    padding: 10px 30px;
+    border-radius: 50px;
+    border: 2px solid white;
+    text-align: center;
+    vertical-align: middle;
+    color: inherit;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color $animation-time, color $animation-time;
+    &:hover{
+      background-color: #fff;
+      border-color: white;
+      color: #232219;
+    }
+    &.left{
+      float: left;
+      margin-left: 40px;
+    }
+    &.right{
+      float: right;
+      margin-right: 40px;
+    }
+  }
+
+  .logo-trio{
+    width: 170px;
+    height: 40px;
+    margin: 0 auto;
+    margin-top: 40px;
+    background: url("img/logo.png");
+  }
+
+  &.fixed{
+    background-color: white;
+    color: #232219;
+    .header-btn{
+      border: 2px solid #232219;
+      &:hover{
+        &:hover{
+          background-color: #232219;
+          color: white;
+        }
+      }
+    }
+  }
+}

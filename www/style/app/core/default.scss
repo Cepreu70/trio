@@ -4,7 +4,13 @@ body, html{
   width: 100%;
   position: relative;
   background-color: black;
+  font-family: CoreSans;
 }
+
+div, span, img, a, p{
+  position: relative;
+}
+
 /* make our pages be full width and full height */
 /* positioned absolutely so that the pages can overlap each other as they enter and leave */
 .page {
@@ -16,28 +22,22 @@ body, html{
   width:100%;
 }
 
-.page h1    { font-size:60px; }
-.page a     { margin-top:50px; }
-
 
 /* PAGES (specific colors for each page)
 ============================================================================= */
 
 @keyframes enter_page {
-  0% { opacity:0; transform: translateX(100%); }
-  40% { opacity:1; }
-  100% { transform: translateX(0%); position: inherit; }
+  0% { opacity:0; }
+  100% { opacity:1; }
 }
 @keyframes leave_page {
   0% { opacity:1;}
-  40% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
+  100% { opacity: 0; }
 }
 
 .page{
   &.ng-enter{
     animation: enter_page 1s linear;
-    position: fixed;
   }
   &.ng-leave{
     animation: leave_page 1s linear;

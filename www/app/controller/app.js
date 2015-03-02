@@ -25,6 +25,7 @@ var app;
         .controller('appCtrl', ['$route', '$routeParams', '$location',
             function($scope, $route, $routeParams, $location) {
                 $scope.pageClass = 'page-home';
+                $scope.firstLaunch = true;
                 this.$route = $route;
                 this.$location = $location;
                 this.$routeParams = $routeParams;

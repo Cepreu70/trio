@@ -10,7 +10,7 @@ module.exports = {
                 var rewrite = require('connect-modrewrite');
                 // 1. mod-rewrite behavior
                 var rules = [
-                    '!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$ /index.html'
+                    '!\\.html|\\.js|\\.css|\\.svg|\\.jp(e?)g|\\.png|\\.gif$\\.woff|\\.ttf|\\.eot| /index.html'
                 ];
                 middleware.push(rewrite(rules));
 
