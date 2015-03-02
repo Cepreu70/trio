@@ -5398,1214 +5398,7 @@ function toast(a, b, c, d) {
         Jd(X, tc);
     }));
 }(window, document), !window.angular.$$csp() && window.angular.element(document).find("head").prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}</style>'), 
-function(N, f, W) {
-    "use strict";
-    f.module("ngAnimate", [ "ng" ]).directive("ngAnimateChildren", function() {
-        return function(X, C, g) {
-            g = g.ngAnimateChildren, f.isString(g) && 0 === g.length ? C.data("$$ngAnimateChildren", !0) : X.$watch(g, function(f) {
-                C.data("$$ngAnimateChildren", !!f);
-            });
-        };
-    }).factory("$$animateReflow", [ "$$rAF", "$document", function(f) {
-        return function(g) {
-            return f(function() {
-                g();
-            });
-        };
-    } ]).config([ "$provide", "$animateProvider", function(X, C) {
-        function g(f) {
-            for (var n = 0; n < f.length; n++) {
-                var g = f[n];
-                if (1 == g.nodeType) return g;
-            }
-        }
-        function ba(f, n) {
-            return g(f) == g(n);
-        }
-        var u, t = f.noop, n = f.forEach, da = C.$$selectors, aa = f.isArray, ea = f.isString, ga = f.isObject, r = {
-            running: !0
-        };
-        X.decorator("$animate", [ "$delegate", "$$q", "$injector", "$sniffer", "$rootElement", "$$asyncCallback", "$rootScope", "$document", "$templateRequest", "$$jqLite", function(O, N, M, Y, y, H, P, W, Z, Q) {
-            function R(a, c) {
-                var b = a.data("$$ngAnimateState") || {};
-                return c && (b.running = !0, b.structural = !0, a.data("$$ngAnimateState", b)), 
-                b.disabled || b.running && b.structural;
-            }
-            function D(a) {
-                var c, b = N.defer();
-                return b.promise.$$cancelFn = function() {
-                    c && c();
-                }, P.$$postDigest(function() {
-                    c = a(function() {
-                        b.resolve();
-                    });
-                }), b.promise;
-            }
-            function I(a) {
-                return ga(a) ? (a.tempClasses && ea(a.tempClasses) && (a.tempClasses = a.tempClasses.split(/\s+/)), 
-                a) : void 0;
-            }
-            function S(a, c, b) {
-                b = b || {};
-                var d = {};
-                n(b, function(e, a) {
-                    n(a.split(" "), function(a) {
-                        d[a] = e;
-                    });
-                });
-                var h = Object.create(null);
-                n((a.attr("class") || "").split(/\s+/), function(e) {
-                    h[e] = !0;
-                });
-                var f = [], l = [];
-                return n(c && c.classes || [], function(e, a) {
-                    var b = h[a], c = d[a] || {};
-                    !1 === e ? (b || "addClass" == c.event) && l.push(a) : !0 === e && (b && "removeClass" != c.event || f.push(a));
-                }), 0 < f.length + l.length && [ f.join(" "), l.join(" ") ];
-            }
-            function T(a) {
-                if (a) {
-                    var c = [], b = {};
-                    a = a.substr(1).split("."), (Y.transitions || Y.animations) && c.push(M.get(da[""]));
-                    for (var d = 0; d < a.length; d++) {
-                        var f = a[d], k = da[f];
-                        k && !b[f] && (c.push(M.get(k)), b[f] = !0);
-                    }
-                    return c;
-                }
-            }
-            function U(a, c, b, d) {
-                function h(e, a) {
-                    var b = e[a], c = e["before" + a.charAt(0).toUpperCase() + a.substr(1)];
-                    return b || c ? ("leave" == a && (c = b, b = null), u.push({
-                        event: a,
-                        fn: b
-                    }), J.push({
-                        event: a,
-                        fn: c
-                    }), !0) : void 0;
-                }
-                function k(c, l, w) {
-                    var E = [];
-                    n(c, function(a) {
-                        a.fn && E.push(a);
-                    });
-                    var m = 0;
-                    n(E, function(c, f) {
-                        var p = function() {
-                            a: {
-                                if (l) {
-                                    if ((l[f] || t)(), ++m < E.length) break a;
-                                    l = null;
-                                }
-                                w();
-                            }
-                        };
-                        switch (c.event) {
-                          case "setClass":
-                            l.push(c.fn(a, e, A, p, d));
-                            break;
-
-                          case "animate":
-                            l.push(c.fn(a, b, d.from, d.to, p));
-                            break;
-
-                          case "addClass":
-                            l.push(c.fn(a, e || b, p, d));
-                            break;
-
-                          case "removeClass":
-                            l.push(c.fn(a, A || b, p, d));
-                            break;
-
-                          default:
-                            l.push(c.fn(a, p, d));
-                        }
-                    }), l && 0 === l.length && w();
-                }
-                var l = a[0];
-                if (l) {
-                    d && (d.to = d.to || {}, d.from = d.from || {});
-                    var e, A;
-                    aa(b) && (e = b[0], A = b[1], e ? A ? b = e + " " + A : (b = e, c = "addClass") : (b = A, 
-                    c = "removeClass"));
-                    var w = "setClass" == c, E = w || "addClass" == c || "removeClass" == c || "animate" == c, p = a.attr("class") + " " + b;
-                    if (x(p)) {
-                        var ca = t, m = [], J = [], g = t, s = [], u = [], p = (" " + p).replace(/\s+/g, ".");
-                        return n(T(p), function(a) {
-                            !h(a, c) && w && (h(a, "addClass"), h(a, "removeClass"));
-                        }), {
-                            node: l,
-                            event: c,
-                            className: b,
-                            isClassBased: E,
-                            isSetClassOperation: w,
-                            applyStyles: function() {
-                                d && a.css(f.extend(d.from || {}, d.to || {}));
-                            },
-                            before: function(a) {
-                                ca = a, k(J, m, function() {
-                                    ca = t, a();
-                                });
-                            },
-                            after: function(a) {
-                                g = a, k(u, s, function() {
-                                    g = t, a();
-                                });
-                            },
-                            cancel: function() {
-                                m && (n(m, function(a) {
-                                    (a || t)(!0);
-                                }), ca(!0)), s && (n(s, function(a) {
-                                    (a || t)(!0);
-                                }), g(!0));
-                            }
-                        };
-                    }
-                }
-            }
-            function G(a, c, b, d, h, k, l, e) {
-                function A(e) {
-                    var l = "$animate:" + e;
-                    J && J[l] && 0 < J[l].length && H(function() {
-                        b.triggerHandler(l, {
-                            event: a,
-                            className: c
-                        });
-                    });
-                }
-                function w() {
-                    A("before");
-                }
-                function E() {
-                    A("after");
-                }
-                function p() {
-                    p.hasBeenRun || (p.hasBeenRun = !0, k());
-                }
-                function g() {
-                    if (!g.hasBeenRun) {
-                        m && m.applyStyles(), g.hasBeenRun = !0, l && l.tempClasses && n(l.tempClasses, function(a) {
-                            u.removeClass(b, a);
-                        });
-                        var w = b.data("$$ngAnimateState");
-                        w && (m && m.isClassBased ? B(b, c) : (H(function() {
-                            var e = b.data("$$ngAnimateState") || {};
-                            fa == e.index && B(b, c, a);
-                        }), b.data("$$ngAnimateState", w))), A("close"), e();
-                    }
-                }
-                var m = U(b, a, c, l);
-                if (!m) return p(), w(), E(), g(), t;
-                a = m.event, c = m.className;
-                var J = f.element._data(m.node), J = J && J.events;
-                if (d || (d = h ? h.parent() : b.parent()), z(b, d)) return p(), w(), E(), g(), 
-                t;
-                d = b.data("$$ngAnimateState") || {};
-                var L = d.active || {}, s = d.totalActive || 0, q = d.last;
-                if (h = !1, s > 0) {
-                    if (s = [], m.isClassBased) "setClass" == q.event ? (s.push(q), B(b, c)) : L[c] && (v = L[c], 
-                    v.event == a ? h = !0 : (s.push(v), B(b, c))); else if ("leave" == a && L["ng-leave"]) h = !0; else {
-                        for (var v in L) s.push(L[v]);
-                        d = {}, B(b, !0);
-                    }
-                    0 < s.length && n(s, function(a) {
-                        a.cancel();
-                    });
-                }
-                if (!m.isClassBased || m.isSetClassOperation || "animate" == a || h || (h = "addClass" == a == b.hasClass(c)), 
-                h) return p(), w(), E(), A("close"), e(), t;
-                L = d.active || {}, s = d.totalActive || 0, "leave" == a && b.one("$destroy", function(a) {
-                    a = f.element(this);
-                    var e = a.data("$$ngAnimateState");
-                    e && (e = e.active["ng-leave"]) && (e.cancel(), B(a, "ng-leave"));
-                }), u.addClass(b, "ng-animate"), l && l.tempClasses && n(l.tempClasses, function(a) {
-                    u.addClass(b, a);
-                });
-                var fa = K++;
-                return s++, L[c] = m, b.data("$$ngAnimateState", {
-                    last: m,
-                    active: L,
-                    index: fa,
-                    totalActive: s
-                }), w(), m.before(function(e) {
-                    var l = b.data("$$ngAnimateState");
-                    e = e || !l || !l.active[c] || m.isClassBased && l.active[c].event != a, p(), !0 === e ? g() : (E(), 
-                    m.after(g));
-                }), m.cancel;
-            }
-            function q(a) {
-                (a = g(a)) && (a = f.isFunction(a.getElementsByClassName) ? a.getElementsByClassName("ng-animate") : a.querySelectorAll(".ng-animate"), 
-                n(a, function(a) {
-                    a = f.element(a), (a = a.data("$$ngAnimateState")) && a.active && n(a.active, function(a) {
-                        a.cancel();
-                    });
-                }));
-            }
-            function B(a, c) {
-                if (ba(a, y)) r.disabled || (r.running = !1, r.structural = !1); else if (c) {
-                    var b = a.data("$$ngAnimateState") || {}, d = !0 === c;
-                    !d && b.active && b.active[c] && (b.totalActive--, delete b.active[c]), (d || !b.totalActive) && (u.removeClass(a, "ng-animate"), 
-                    a.removeData("$$ngAnimateState"));
-                }
-            }
-            function z(a, c) {
-                if (r.disabled) return !0;
-                if (ba(a, y)) return r.running;
-                var b, d, g;
-                do {
-                    if (0 === c.length) break;
-                    var k = ba(c, y), l = k ? r : c.data("$$ngAnimateState") || {};
-                    if (l.disabled) return !0;
-                    k && (g = !0), !1 !== b && (k = c.data("$$ngAnimateChildren"), f.isDefined(k) && (b = k)), 
-                    d = d || l.running || l.last && !l.last.isClassBased;
-                } while (c = c.parent());
-                return !g || !b && d;
-            }
-            u = Q, y.data("$$ngAnimateState", r);
-            var $ = P.$watch(function() {
-                return Z.totalPendingRequests;
-            }, function(a) {
-                0 === a && ($(), P.$$postDigest(function() {
-                    P.$$postDigest(function() {
-                        r.running = !1;
-                    });
-                }));
-            }), K = 0, V = C.classNameFilter(), x = V ? function(a) {
-                return V.test(a);
-            } : function() {
-                return !0;
-            };
-            return {
-                animate: function(a, c, b, d, h) {
-                    return d = d || "ng-inline-animate", h = I(h) || {}, h.from = b ? c : null, h.to = b ? b : c, 
-                    D(function(b) {
-                        return G("animate", d, f.element(g(a)), null, null, t, h, b);
-                    });
-                },
-                enter: function(a, c, b, d) {
-                    return d = I(d), a = f.element(a), c = c && f.element(c), b = b && f.element(b), 
-                    R(a, !0), O.enter(a, c, b), D(function(h) {
-                        return G("enter", "ng-enter", f.element(g(a)), c, b, t, d, h);
-                    });
-                },
-                leave: function(a, c) {
-                    return c = I(c), a = f.element(a), q(a), R(a, !0), D(function(b) {
-                        return G("leave", "ng-leave", f.element(g(a)), null, null, function() {
-                            O.leave(a);
-                        }, c, b);
-                    });
-                },
-                move: function(a, c, b, d) {
-                    return d = I(d), a = f.element(a), c = c && f.element(c), b = b && f.element(b), 
-                    q(a), R(a, !0), O.move(a, c, b), D(function(h) {
-                        return G("move", "ng-move", f.element(g(a)), c, b, t, d, h);
-                    });
-                },
-                addClass: function(a, c, b) {
-                    return this.setClass(a, c, [], b);
-                },
-                removeClass: function(a, c, b) {
-                    return this.setClass(a, [], c, b);
-                },
-                setClass: function(a, c, b, d) {
-                    if (d = I(d), a = f.element(a), a = f.element(g(a)), R(a)) return O.$$setClassImmediately(a, c, b, d);
-                    var h, k = a.data("$$animateClasses"), l = !!k;
-                    return k || (k = {
-                        classes: {}
-                    }), h = k.classes, c = aa(c) ? c : c.split(" "), n(c, function(a) {
-                        a && a.length && (h[a] = !0);
-                    }), b = aa(b) ? b : b.split(" "), n(b, function(a) {
-                        a && a.length && (h[a] = !1);
-                    }), l ? (d && k.options && (k.options = f.extend(k.options || {}, d)), k.promise) : (a.data("$$animateClasses", k = {
-                        classes: h,
-                        options: d
-                    }), k.promise = D(function(e) {
-                        var l = a.parent(), b = g(a), c = b.parentNode;
-                        if (c && !c.$$NG_REMOVED && !b.$$NG_REMOVED) {
-                            b = a.data("$$animateClasses"), a.removeData("$$animateClasses");
-                            var c = a.data("$$ngAnimateState") || {}, d = S(a, b, c.active);
-                            return d ? G("setClass", d, a, l, null, function() {
-                                d[0] && O.$$addClassImmediately(a, d[0]), d[1] && O.$$removeClassImmediately(a, d[1]);
-                            }, b.options, e) : e();
-                        }
-                        e();
-                    }));
-                },
-                cancel: function(a) {
-                    a.$$cancelFn();
-                },
-                enabled: function(a, c) {
-                    switch (arguments.length) {
-                      case 2:
-                        if (a) B(c); else {
-                            var b = c.data("$$ngAnimateState") || {};
-                            b.disabled = !0, c.data("$$ngAnimateState", b);
-                        }
-                        break;
-
-                      case 1:
-                        r.disabled = !a;
-                        break;
-
-                      default:
-                        a = !r.disabled;
-                    }
-                    return !!a;
-                }
-            };
-        } ]), C.register("", [ "$window", "$sniffer", "$timeout", "$$animateReflow", function(r, C, M, Y) {
-            function y() {
-                b || (b = Y(function() {
-                    c = [], b = null, x = {};
-                }));
-            }
-            function H(a, e) {
-                b && b(), c.push(e), b = Y(function() {
-                    n(c, function(a) {
-                        a();
-                    }), c = [], b = null, x = {};
-                });
-            }
-            function P(a, e) {
-                var b = g(a);
-                a = f.element(b), k.push(a), b = Date.now() + e, h >= b || (M.cancel(d), h = b, 
-                d = M(function() {
-                    X(k), k = [];
-                }, e, !1));
-            }
-            function X(a) {
-                n(a, function(a) {
-                    (a = a.data("$$ngAnimateCSS3Data")) && n(a.closeAnimationFns, function(a) {
-                        a();
-                    });
-                });
-            }
-            function Z(a, e) {
-                var b = e ? x[e] : null;
-                if (!b) {
-                    var c = 0, d = 0, f = 0, g = 0;
-                    n(a, function(a) {
-                        if (1 == a.nodeType) {
-                            a = r.getComputedStyle(a) || {}, c = Math.max(Q(a[z + "Duration"]), c), d = Math.max(Q(a[z + "Delay"]), d), 
-                            g = Math.max(Q(a[K + "Delay"]), g);
-                            var e = Q(a[K + "Duration"]);
-                            e > 0 && (e *= parseInt(a[K + "IterationCount"], 10) || 1), f = Math.max(e, f);
-                        }
-                    }), b = {
-                        total: 0,
-                        transitionDelay: d,
-                        transitionDuration: c,
-                        animationDelay: g,
-                        animationDuration: f
-                    }, e && (x[e] = b);
-                }
-                return b;
-            }
-            function Q(a) {
-                var e = 0;
-                return a = ea(a) ? a.split(/\s*,\s*/) : [], n(a, function(a) {
-                    e = Math.max(parseFloat(a) || 0, e);
-                }), e;
-            }
-            function R(b, e, c, d) {
-                b = 0 <= [ "ng-enter", "ng-leave", "ng-move" ].indexOf(c);
-                var f, p = e.parent(), h = p.data("$$ngAnimateKey");
-                h || (p.data("$$ngAnimateKey", ++a), h = a), f = h + "-" + g(e).getAttribute("class");
-                var p = f + " " + c, h = x[p] ? ++x[p].total : 0, m = {};
-                if (h > 0) {
-                    var n = c + "-stagger", m = f + " " + n;
-                    (f = !x[m]) && u.addClass(e, n), m = Z(e, m), f && u.removeClass(e, n);
-                }
-                u.addClass(e, c);
-                var n = e.data("$$ngAnimateCSS3Data") || {}, k = Z(e, p);
-                return f = k.transitionDuration, k = k.animationDuration, b && 0 === f && 0 === k ? (u.removeClass(e, c), 
-                !1) : (c = d || b && f > 0, b = k > 0 && 0 < m.animationDelay && 0 === m.animationDuration, 
-                e.data("$$ngAnimateCSS3Data", {
-                    stagger: m,
-                    cacheKey: p,
-                    running: n.running || 0,
-                    itemIndex: h,
-                    blockTransition: c,
-                    closeAnimationFns: n.closeAnimationFns || []
-                }), p = g(e), c && (I(p, !0), d && e.css(d)), b && (p.style[K + "PlayState"] = "paused"), 
-                !0);
-            }
-            function D(a, e, b, c, d) {
-                function f() {
-                    e.off(D, h), u.removeClass(e, k), u.removeClass(e, t), z && M.cancel(z), G(e, b);
-                    var c, a = g(e);
-                    for (c in s) a.style.removeProperty(s[c]);
-                }
-                function h(a) {
-                    a.stopPropagation();
-                    var b = a.originalEvent || a;
-                    a = b.$manualTimeStamp || b.timeStamp || Date.now(), b = parseFloat(b.elapsedTime.toFixed(3)), 
-                    Math.max(a - H, 0) >= C && b >= x && c();
-                }
-                var m = g(e);
-                if (a = e.data("$$ngAnimateCSS3Data"), -1 != m.getAttribute("class").indexOf(b) && a) {
-                    var k = "", t = "";
-                    n(b.split(" "), function(a, b) {
-                        var e = (b > 0 ? " " : "") + a;
-                        k += e + "-active", t += e + "-pending";
-                    });
-                    var s = [], q = a.itemIndex, v = a.stagger, r = 0;
-                    if (q > 0) {
-                        r = 0, 0 < v.transitionDelay && 0 === v.transitionDuration && (r = v.transitionDelay * q);
-                        var y = 0;
-                        0 < v.animationDelay && 0 === v.animationDuration && (y = v.animationDelay * q, 
-                        s.push(B + "animation-play-state")), r = Math.round(100 * Math.max(r, y)) / 100;
-                    }
-                    r || (u.addClass(e, k), a.blockTransition && I(m, !1));
-                    var F = Z(e, a.cacheKey + " " + k), x = Math.max(F.transitionDuration, F.animationDuration);
-                    if (0 !== x) {
-                        !r && d && 0 < Object.keys(d).length && (F.transitionDuration || (e.css("transition", F.animationDuration + "s linear all"), 
-                        s.push("transition")), e.css(d));
-                        var q = Math.max(F.transitionDelay, F.animationDelay), C = 1e3 * q;
-                        0 < s.length && (v = m.getAttribute("style") || "", ";" !== v.charAt(v.length - 1) && (v += ";"), 
-                        m.setAttribute("style", v + " "));
-                        var z, H = Date.now(), D = V + " " + $, q = 1e3 * (r + 1.5 * (q + x));
-                        return r > 0 && (u.addClass(e, t), z = M(function() {
-                            z = null, 0 < F.transitionDuration && I(m, !1), 0 < F.animationDuration && (m.style[K + "PlayState"] = ""), 
-                            u.addClass(e, k), u.removeClass(e, t), d && (0 === F.transitionDuration && e.css("transition", F.animationDuration + "s linear all"), 
-                            e.css(d), s.push("transition"));
-                        }, 1e3 * r, !1)), e.on(D, h), a.closeAnimationFns.push(function() {
-                            f(), c();
-                        }), a.running++, P(e, q), f;
-                    }
-                    u.removeClass(e, k), G(e, b), c();
-                } else c();
-            }
-            function I(a, b) {
-                a.style[z + "Property"] = b ? "none" : "";
-            }
-            function S(a, b, c, d) {
-                return R(a, b, c, d) ? function(a) {
-                    a && G(b, c);
-                } : void 0;
-            }
-            function T(a, b, c, d, f) {
-                return b.data("$$ngAnimateCSS3Data") ? D(a, b, c, d, f) : (G(b, c), void d());
-            }
-            function U(a, b, c, d, f) {
-                var g = S(a, b, c, f.from);
-                if (g) {
-                    var h = g;
-                    return H(b, function() {
-                        h = T(a, b, c, d, f.to);
-                    }), function(a) {
-                        (h || t)(a);
-                    };
-                }
-                y(), d();
-            }
-            function G(a, b) {
-                u.removeClass(a, b);
-                var c = a.data("$$ngAnimateCSS3Data");
-                c && (c.running && c.running--, c.running && 0 !== c.running || a.removeData("$$ngAnimateCSS3Data"));
-            }
-            function q(a, b) {
-                var c = "";
-                return a = aa(a) ? a : a.split(/\s+/), n(a, function(a, d) {
-                    a && 0 < a.length && (c += (d > 0 ? " " : "") + a + b);
-                }), c;
-            }
-            var z, $, K, V, B = "";
-            N.ontransitionend === W && N.onwebkittransitionend !== W ? (B = "-webkit-", z = "WebkitTransition", 
-            $ = "webkitTransitionEnd transitionend") : (z = "transition", $ = "transitionend"), 
-            N.onanimationend === W && N.onwebkitanimationend !== W ? (B = "-webkit-", K = "WebkitAnimation", 
-            V = "webkitAnimationEnd animationend") : (K = "animation", V = "animationend");
-            var b, x = {}, a = 0, c = [], d = null, h = 0, k = [];
-            return {
-                animate: function(a, b, c, d, f, g) {
-                    return g = g || {}, g.from = c, g.to = d, U("animate", a, b, f, g);
-                },
-                enter: function(a, b, c) {
-                    return c = c || {}, U("enter", a, "ng-enter", b, c);
-                },
-                leave: function(a, b, c) {
-                    return c = c || {}, U("leave", a, "ng-leave", b, c);
-                },
-                move: function(a, b, c) {
-                    return c = c || {}, U("move", a, "ng-move", b, c);
-                },
-                beforeSetClass: function(a, b, c, d, f) {
-                    return f = f || {}, b = q(c, "-remove") + " " + q(b, "-add"), (f = S("setClass", a, b, f.from)) ? (H(a, d), 
-                    f) : (y(), void d());
-                },
-                beforeAddClass: function(a, b, c, d) {
-                    return d = d || {}, (b = S("addClass", a, q(b, "-add"), d.from)) ? (H(a, c), b) : (y(), 
-                    void c());
-                },
-                beforeRemoveClass: function(a, b, c, d) {
-                    return d = d || {}, (b = S("removeClass", a, q(b, "-remove"), d.from)) ? (H(a, c), 
-                    b) : (y(), void c());
-                },
-                setClass: function(a, b, c, d, f) {
-                    return f = f || {}, c = q(c, "-remove"), b = q(b, "-add"), T("setClass", a, c + " " + b, d, f.to);
-                },
-                addClass: function(a, b, c, d) {
-                    return d = d || {}, T("addClass", a, q(b, "-add"), c, d.to);
-                },
-                removeClass: function(a, b, c, d) {
-                    return d = d || {}, T("removeClass", a, q(b, "-remove"), c, d.to);
-                }
-            };
-        } ]);
-    } ]);
-}(window, window.angular), function(q, d) {
-    "use strict";
-    function v(r, k, h) {
-        return {
-            restrict: "ECA",
-            terminal: !0,
-            priority: 400,
-            transclude: "element",
-            link: function(a, f, b, c, y) {
-                function z() {
-                    l && (h.cancel(l), l = null), m && (m.$destroy(), m = null), n && (l = h.leave(n), 
-                    l.then(function() {
-                        l = null;
-                    }), n = null);
-                }
-                function x() {
-                    var b = r.current && r.current.locals;
-                    if (d.isDefined(b && b.$template)) {
-                        var b = a.$new(), c = r.current;
-                        n = y(b, function(b) {
-                            h.enter(b, null, n || f).then(function() {
-                                !d.isDefined(t) || t && !a.$eval(t) || k();
-                            }), z();
-                        }), m = c.scope = b, m.$emit("$viewContentLoaded"), m.$eval(w);
-                    } else z();
-                }
-                var m, n, l, t = b.autoscroll, w = b.onload || "";
-                a.$on("$routeChangeSuccess", x), x();
-            }
-        };
-    }
-    function A(d, k, h) {
-        return {
-            restrict: "ECA",
-            priority: -400,
-            link: function(a, f) {
-                var b = h.current, c = b.locals;
-                f.html(c.$template);
-                var y = d(f.contents());
-                b.controller && (c.$scope = a, c = k(b.controller, c), b.controllerAs && (a[b.controllerAs] = c), 
-                f.data("$ngControllerController", c), f.children().data("$ngControllerController", c)), 
-                y(a);
-            }
-        };
-    }
-    q = d.module("ngRoute", [ "ng" ]).provider("$route", function() {
-        function r(a, f) {
-            return d.extend(Object.create(a), f);
-        }
-        function k(a, d) {
-            var b = d.caseInsensitiveMatch, c = {
-                originalPath: a,
-                regexp: a
-            }, h = c.keys = [];
-            return a = a.replace(/([().])/g, "\\$1").replace(/(\/)?:(\w+)([\?\*])?/g, function(a, d, b, c) {
-                return a = "?" === c ? c : null, c = "*" === c ? c : null, h.push({
-                    name: b,
-                    optional: !!a
-                }), d = d || "", "" + (a ? "" : d) + "(?:" + (a ? d : "") + (c && "(.+?)" || "([^/]+)") + (a || "") + ")" + (a || "");
-            }).replace(/([\/$\*])/g, "\\$1"), c.regexp = new RegExp("^" + a + "$", b ? "i" : ""), 
-            c;
-        }
-        var h = {};
-        this.when = function(a, f) {
-            var b = d.copy(f);
-            if (d.isUndefined(b.reloadOnSearch) && (b.reloadOnSearch = !0), d.isUndefined(b.caseInsensitiveMatch) && (b.caseInsensitiveMatch = this.caseInsensitiveMatch), 
-            h[a] = d.extend(b, a && k(a, b)), a) {
-                var c = "/" == a[a.length - 1] ? a.substr(0, a.length - 1) : a + "/";
-                h[c] = d.extend({
-                    redirectTo: a
-                }, k(c, b));
-            }
-            return this;
-        }, this.caseInsensitiveMatch = !1, this.otherwise = function(a) {
-            return "string" == typeof a && (a = {
-                redirectTo: a
-            }), this.when(null, a), this;
-        }, this.$get = [ "$rootScope", "$location", "$routeParams", "$q", "$injector", "$templateRequest", "$sce", function(a, f, b, c, k, q, x) {
-            function m(b) {
-                var e = s.current;
-                (v = (p = l()) && e && p.$$route === e.$$route && d.equals(p.pathParams, e.pathParams) && !p.reloadOnSearch && !w) || !e && !p || a.$broadcast("$routeChangeStart", p, e).defaultPrevented && b && b.preventDefault();
-            }
-            function n() {
-                var u = s.current, e = p;
-                v ? (u.params = e.params, d.copy(u.params, b), a.$broadcast("$routeUpdate", u)) : (e || u) && (w = !1, 
-                (s.current = e) && e.redirectTo && (d.isString(e.redirectTo) ? f.path(t(e.redirectTo, e.params)).search(e.params).replace() : f.url(e.redirectTo(e.pathParams, f.path(), f.search())).replace()), 
-                c.when(e).then(function() {
-                    if (e) {
-                        var b, g, a = d.extend({}, e.resolve);
-                        return d.forEach(a, function(b, e) {
-                            a[e] = d.isString(b) ? k.get(b) : k.invoke(b, null, null, e);
-                        }), d.isDefined(b = e.template) ? d.isFunction(b) && (b = b(e.params)) : d.isDefined(g = e.templateUrl) && (d.isFunction(g) && (g = g(e.params)), 
-                        g = x.getTrustedResourceUrl(g), d.isDefined(g) && (e.loadedTemplateUrl = g, b = q(g))), 
-                        d.isDefined(b) && (a.$template = b), c.all(a);
-                    }
-                }).then(function(c) {
-                    e == s.current && (e && (e.locals = c, d.copy(e.params, b)), a.$broadcast("$routeChangeSuccess", e, u));
-                }, function(b) {
-                    e == s.current && a.$broadcast("$routeChangeError", e, u, b);
-                }));
-            }
-            function l() {
-                var a, b;
-                return d.forEach(h, function(c) {
-                    var g;
-                    if (g = !b) {
-                        var k = f.path();
-                        g = c.keys;
-                        var m = {};
-                        if (c.regexp) if (k = c.regexp.exec(k)) {
-                            for (var l = 1, n = k.length; n > l; ++l) {
-                                var p = g[l - 1], q = k[l];
-                                p && q && (m[p.name] = q);
-                            }
-                            g = m;
-                        } else g = null; else g = null;
-                        g = a = g;
-                    }
-                    g && (b = r(c, {
-                        params: d.extend({}, f.search(), a),
-                        pathParams: a
-                    }), b.$$route = c);
-                }), b || h[null] && r(h[null], {
-                    params: {},
-                    pathParams: {}
-                });
-            }
-            function t(a, b) {
-                var c = [];
-                return d.forEach((a || "").split(":"), function(a, d) {
-                    if (0 === d) c.push(a); else {
-                        var f = a.match(/(\w+)(?:[?*])?(.*)/), h = f[1];
-                        c.push(b[h]), c.push(f[2] || ""), delete b[h];
-                    }
-                }), c.join("");
-            }
-            var p, v, w = !1, s = {
-                routes: h,
-                reload: function() {
-                    w = !0, a.$evalAsync(function() {
-                        m(), n();
-                    });
-                },
-                updateParams: function(a) {
-                    if (!this.current || !this.current.$$route) throw B("norout");
-                    a = d.extend({}, this.current.params, a), f.path(t(this.current.$$route.originalPath, a)), 
-                    f.search(a);
-                }
-            };
-            return a.$on("$locationChangeStart", m), a.$on("$locationChangeSuccess", n), s;
-        } ];
-    });
-    var B = d.$$minErr("ngRoute");
-    q.provider("$routeParams", function() {
-        this.$get = function() {
-            return {};
-        };
-    }), q.directive("ngView", v), q.directive("ngView", A), v.$inject = [ "$route", "$anchorScroll", "$animate" ], 
-    A.$inject = [ "$compile", "$controller", "$route" ];
-}(window, window.angular), angular.module("pascalprecht.translate", [ "ng" ]).run([ "$translate", function(a) {
-    var b = a.storageKey(), c = a.storage(), d = function() {
-        var d = a.preferredLanguage();
-        angular.isString(d) ? a.use(d) : c.put(b, a.use());
-    };
-    c ? c.get(b) ? a.use(c.get(b))["catch"](d) : d() : angular.isString(a.preferredLanguage()) && a.use(a.preferredLanguage());
-} ]), angular.module("pascalprecht.translate").provider("$translate", [ "$STORAGE_KEY", "$windowProvider", function(a, b) {
-    var c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r = {}, s = [], t = a, u = [], v = !1, w = "translate-cloak", x = !1, y = ".", z = 0, A = "2.6.0", B = function() {
-        var a, c, d = b.$get().navigator, e = [ "language", "browserLanguage", "systemLanguage", "userLanguage" ];
-        if (angular.isArray(d.languages)) for (a = 0; a < d.languages.length; a++) if (c = d.languages[a], 
-        c && c.length) return c;
-        for (a = 0; a < e.length; a++) if (c = d[e[a]], c && c.length) return c;
-        return null;
-    };
-    B.displayName = "angular-translate/service: getFirstBrowserLanguage";
-    var C = function() {
-        return (B() || "").split("-").join("_");
-    };
-    C.displayName = "angular-translate/service: getLocale";
-    var D = function(a, b) {
-        for (var c = 0, d = a.length; d > c; c++) if (a[c] === b) return c;
-        return -1;
-    }, E = function() {
-        return this.replace(/^\s+|\s+$/g, "");
-    }, F = function(a) {
-        for (var b = [], c = angular.lowercase(a), e = 0, f = s.length; f > e; e++) b.push(angular.lowercase(s[e]));
-        if (D(b, c) > -1) return a;
-        if (d) {
-            var g;
-            for (var h in d) {
-                var i = !1, j = Object.prototype.hasOwnProperty.call(d, h) && angular.lowercase(h) === angular.lowercase(a);
-                if ("*" === h.slice(-1) && (i = h.slice(0, -1) === a.slice(0, h.length - 1)), (j || i) && (g = d[h], 
-                D(b, angular.lowercase(g)) > -1)) return g;
-            }
-        }
-        var k = a.split("_");
-        return k.length > 1 && D(b, angular.lowercase(k[0])) > -1 ? k[0] : a;
-    }, G = function(a, b) {
-        if (!a && !b) return r;
-        if (a && !b) {
-            if (angular.isString(a)) return r[a];
-        } else angular.isObject(r[a]) || (r[a] = {}), angular.extend(r[a], H(b));
-        return this;
-    };
-    this.translations = G, this.cloakClassName = function(a) {
-        return a ? (w = a, this) : w;
-    };
-    var H = function(a, b, c, d) {
-        var e, f, g, h;
-        b || (b = []), c || (c = {});
-        for (e in a) Object.prototype.hasOwnProperty.call(a, e) && (h = a[e], angular.isObject(h) ? H(h, b.concat(e), c, e) : (f = b.length ? "" + b.join(y) + y + e : e, 
-        b.length && e === d && (g = "" + b.join(y), c[g] = "@:" + f), c[f] = h));
-        return c;
-    };
-    this.addInterpolation = function(a) {
-        return u.push(a), this;
-    }, this.useMessageFormatInterpolation = function() {
-        return this.useInterpolation("$translateMessageFormatInterpolation");
-    }, this.useInterpolation = function(a) {
-        return l = a, this;
-    }, this.useSanitizeValueStrategy = function(a) {
-        return v = a, this;
-    }, this.preferredLanguage = function(a) {
-        return I(a), this;
-    };
-    var I = function(a) {
-        return a && (c = a), c;
-    };
-    this.translationNotFoundIndicator = function(a) {
-        return this.translationNotFoundIndicatorLeft(a), this.translationNotFoundIndicatorRight(a), 
-        this;
-    }, this.translationNotFoundIndicatorLeft = function(a) {
-        return a ? (o = a, this) : o;
-    }, this.translationNotFoundIndicatorRight = function(a) {
-        return a ? (p = a, this) : p;
-    }, this.fallbackLanguage = function(a) {
-        return J(a), this;
-    };
-    var J = function(a) {
-        return a ? (angular.isString(a) ? (f = !0, e = [ a ]) : angular.isArray(a) && (f = !1, 
-        e = a), angular.isString(c) && D(e, c) < 0 && e.push(c), this) : f ? e[0] : e;
-    };
-    this.use = function(a) {
-        if (a) {
-            if (!r[a] && !m) throw new Error("$translateProvider couldn't find translationTable for langKey: '" + a + "'");
-            return g = a, this;
-        }
-        return g;
-    };
-    var K = function(a) {
-        return a ? void (t = a) : j ? j + t : t;
-    };
-    this.storageKey = K, this.useUrlLoader = function(a, b) {
-        return this.useLoader("$translateUrlLoader", angular.extend({
-            url: a
-        }, b));
-    }, this.useStaticFilesLoader = function(a) {
-        return this.useLoader("$translateStaticFilesLoader", a);
-    }, this.useLoader = function(a, b) {
-        return m = a, n = b || {}, this;
-    }, this.useLocalStorage = function() {
-        return this.useStorage("$translateLocalStorage");
-    }, this.useCookieStorage = function() {
-        return this.useStorage("$translateCookieStorage");
-    }, this.useStorage = function(a) {
-        return i = a, this;
-    }, this.storagePrefix = function(a) {
-        return a ? (j = a, this) : a;
-    }, this.useMissingTranslationHandlerLog = function() {
-        return this.useMissingTranslationHandler("$translateMissingTranslationHandlerLog");
-    }, this.useMissingTranslationHandler = function(a) {
-        return k = a, this;
-    }, this.usePostCompiling = function(a) {
-        return x = !!a, this;
-    }, this.determinePreferredLanguage = function(a) {
-        var b = a && angular.isFunction(a) ? a() : C();
-        return c = s.length ? F(b) : b, this;
-    }, this.registerAvailableLanguageKeys = function(a, b) {
-        return a ? (s = a, b && (d = b), this) : s;
-    }, this.useLoaderCache = function(a) {
-        return a === !1 ? q = void 0 : a === !0 ? q = !0 : "undefined" == typeof a ? q = "$translationCache" : a && (q = a), 
-        this;
-    }, this.directivePriority = function(a) {
-        return void 0 === a ? z : (z = a, this);
-    }, this.$get = [ "$log", "$injector", "$rootScope", "$q", function(a, b, d, j) {
-        var s, y, B, C = b.get(l || "$translateDefaultInterpolation"), L = !1, M = {}, N = {}, O = function(a, b, d, f) {
-            if (angular.isArray(a)) {
-                var h = function(a) {
-                    for (var c = {}, e = [], g = function(a) {
-                        var e = j.defer(), g = function(b) {
-                            c[a] = b, e.resolve([ a, b ]);
-                        };
-                        return O(a, b, d, f).then(g, g), e.promise;
-                    }, h = 0, i = a.length; i > h; h++) e.push(g(a[h]));
-                    return j.all(e).then(function() {
-                        return c;
-                    });
-                };
-                return h(a);
-            }
-            var k = j.defer();
-            a && (a = E.apply(a));
-            var l = function() {
-                var a = c ? N[c] : N[g];
-                if (y = 0, i && !a) {
-                    var b = s.get(t);
-                    if (a = N[b], e && e.length) {
-                        var d = D(e, b);
-                        y = 0 === d ? 1 : 0, D(e, c) < 0 && e.push(c);
-                    }
-                }
-                return a;
-            }();
-            return l ? l.then(function() {
-                $(a, b, d, f).then(k.resolve, k.reject);
-            }, k.reject) : $(a, b, d, f).then(k.resolve, k.reject), k.promise;
-        }, P = function(a) {
-            return o && (a = [ o, a ].join(" ")), p && (a = [ a, p ].join(" ")), a;
-        }, Q = function(a) {
-            g = a, d.$emit("$translateChangeSuccess", {
-                language: a
-            }), i && s.put(O.storageKey(), g), C.setLocale(g), angular.forEach(M, function(a, b) {
-                M[b].setLocale(g);
-            }), d.$emit("$translateChangeEnd", {
-                language: a
-            });
-        }, R = function(a) {
-            if (!a) throw "No language key specified for loading.";
-            var c = j.defer();
-            d.$emit("$translateLoadingStart", {
-                language: a
-            }), L = !0;
-            var e = q;
-            "string" == typeof e && (e = b.get(e));
-            var f = angular.extend({}, n, {
-                key: a,
-                $http: angular.extend({}, {
-                    cache: e
-                }, n.$http)
-            });
-            return b.get(m)(f).then(function(b) {
-                var e = {};
-                d.$emit("$translateLoadingSuccess", {
-                    language: a
-                }), angular.isArray(b) ? angular.forEach(b, function(a) {
-                    angular.extend(e, H(a));
-                }) : angular.extend(e, H(b)), L = !1, c.resolve({
-                    key: a,
-                    table: e
-                }), d.$emit("$translateLoadingEnd", {
-                    language: a
-                });
-            }, function(a) {
-                d.$emit("$translateLoadingError", {
-                    language: a
-                }), c.reject(a), d.$emit("$translateLoadingEnd", {
-                    language: a
-                });
-            }), c.promise;
-        };
-        if (i && (s = b.get(i), !s.get || !s.put)) throw new Error("Couldn't use storage '" + i + "', missing get() or put() method!");
-        angular.isFunction(C.useSanitizeValueStrategy) && C.useSanitizeValueStrategy(v), 
-        u.length && angular.forEach(u, function(a) {
-            var d = b.get(a);
-            d.setLocale(c || g), angular.isFunction(d.useSanitizeValueStrategy) && d.useSanitizeValueStrategy(v), 
-            M[d.getInterpolationIdentifier()] = d;
-        });
-        var S = function(a) {
-            var b = j.defer();
-            return Object.prototype.hasOwnProperty.call(r, a) ? b.resolve(r[a]) : N[a] ? N[a].then(function(a) {
-                G(a.key, a.table), b.resolve(a.table);
-            }, b.reject) : b.reject(), b.promise;
-        }, T = function(a, b, c, d) {
-            var e = j.defer();
-            return S(a).then(function(f) {
-                if (Object.prototype.hasOwnProperty.call(f, b)) {
-                    d.setLocale(a);
-                    var h = f[b];
-                    "@:" === h.substr(0, 2) ? T(a, h.substr(2), c, d).then(e.resolve, e.reject) : e.resolve(d.interpolate(f[b], c)), 
-                    d.setLocale(g);
-                } else e.reject();
-            }, e.reject), e.promise;
-        }, U = function(a, b, c, d) {
-            var e, f = r[a];
-            if (f && Object.prototype.hasOwnProperty.call(f, b)) {
-                if (d.setLocale(a), e = d.interpolate(f[b], c), "@:" === e.substr(0, 2)) return U(a, e.substr(2), c, d);
-                d.setLocale(g);
-            }
-            return e;
-        }, V = function(a) {
-            if (k) {
-                var c = b.get(k)(a, g);
-                return void 0 !== c ? c : a;
-            }
-            return a;
-        }, W = function(a, b, c, d, f) {
-            var g = j.defer();
-            if (a < e.length) {
-                var h = e[a];
-                T(h, b, c, d).then(g.resolve, function() {
-                    W(a + 1, b, c, d, f).then(g.resolve);
-                });
-            } else g.resolve(f ? f : V(b));
-            return g.promise;
-        }, X = function(a, b, c, d) {
-            var f;
-            if (a < e.length) {
-                var g = e[a];
-                f = U(g, b, c, d), f || (f = X(a + 1, b, c, d));
-            }
-            return f;
-        }, Y = function(a, b, c, d) {
-            return W(B > 0 ? B : y, a, b, c, d);
-        }, Z = function(a, b, c) {
-            return X(B > 0 ? B : y, a, b, c);
-        }, $ = function(a, b, c, d) {
-            var f = j.defer(), h = g ? r[g] : r, i = c ? M[c] : C;
-            if (h && Object.prototype.hasOwnProperty.call(h, a)) {
-                var l = h[a];
-                "@:" === l.substr(0, 2) ? O(l.substr(2), b, c, d).then(f.resolve, f.reject) : f.resolve(i.interpolate(l, b));
-            } else {
-                var m;
-                k && !L && (m = V(a)), g && e && e.length ? Y(a, b, i, d).then(function(a) {
-                    f.resolve(a);
-                }, function(a) {
-                    f.reject(P(a));
-                }) : k && !L && m ? f.resolve(d ? d : m) : d ? f.resolve(d) : f.reject(P(a));
-            }
-            return f.promise;
-        }, _ = function(a, b, c) {
-            var d, f = g ? r[g] : r, h = c ? M[c] : C;
-            if (f && Object.prototype.hasOwnProperty.call(f, a)) {
-                var i = f[a];
-                d = "@:" === i.substr(0, 2) ? _(i.substr(2), b, c) : h.interpolate(i, b);
-            } else {
-                var j;
-                k && !L && (j = V(a)), g && e && e.length ? (y = 0, d = Z(a, b, h)) : d = k && !L && j ? j : P(a);
-            }
-            return d;
-        };
-        if (O.preferredLanguage = function(a) {
-            return a && I(a), c;
-        }, O.cloakClassName = function() {
-            return w;
-        }, O.fallbackLanguage = function(a) {
-            if (void 0 !== a && null !== a) {
-                if (J(a), m && e && e.length) for (var b = 0, c = e.length; c > b; b++) N[e[b]] || (N[e[b]] = R(e[b]));
-                O.use(O.use());
-            }
-            return f ? e[0] : e;
-        }, O.useFallbackLanguage = function(a) {
-            if (void 0 !== a && null !== a) if (a) {
-                var b = D(e, a);
-                b > -1 && (B = b);
-            } else B = 0;
-        }, O.proposedLanguage = function() {
-            return h;
-        }, O.storage = function() {
-            return s;
-        }, O.use = function(a) {
-            if (!a) return g;
-            var b = j.defer();
-            d.$emit("$translateChangeStart", {
-                language: a
-            });
-            var c = F(a);
-            return c && (a = c), r[a] || !m || N[a] ? (b.resolve(a), Q(a)) : (h = a, N[a] = R(a).then(function(c) {
-                return G(c.key, c.table), b.resolve(c.key), Q(c.key), h === a && (h = void 0), c;
-            }, function(a) {
-                h === a && (h = void 0), d.$emit("$translateChangeError", {
-                    language: a
-                }), b.reject(a), d.$emit("$translateChangeEnd", {
-                    language: a
-                });
-            })), b.promise;
-        }, O.storageKey = function() {
-            return K();
-        }, O.isPostCompilingEnabled = function() {
-            return x;
-        }, O.refresh = function(a) {
-            function b() {
-                f.resolve(), d.$emit("$translateRefreshEnd", {
-                    language: a
-                });
-            }
-            function c() {
-                f.reject(), d.$emit("$translateRefreshEnd", {
-                    language: a
-                });
-            }
-            if (!m) throw new Error("Couldn't refresh translation table, no loader registered!");
-            var f = j.defer();
-            if (d.$emit("$translateRefreshStart", {
-                language: a
-            }), a) r[a] ? R(a).then(function(c) {
-                G(c.key, c.table), a === g && Q(g), b();
-            }, c) : c(); else {
-                var h = [], i = {};
-                if (e && e.length) for (var k = 0, l = e.length; l > k; k++) h.push(R(e[k])), i[e[k]] = !0;
-                g && !i[g] && h.push(R(g)), j.all(h).then(function(a) {
-                    angular.forEach(a, function(a) {
-                        r[a.key] && delete r[a.key], G(a.key, a.table);
-                    }), g && Q(g), b();
-                });
-            }
-            return f.promise;
-        }, O.instant = function(a, b, d) {
-            if (null === a || angular.isUndefined(a)) return a;
-            if (angular.isArray(a)) {
-                for (var f = {}, h = 0, i = a.length; i > h; h++) f[a[h]] = O.instant(a[h], b, d);
-                return f;
-            }
-            if (angular.isString(a) && a.length < 1) return a;
-            a && (a = E.apply(a));
-            var j, l = [];
-            c && l.push(c), g && l.push(g), e && e.length && (l = l.concat(e));
-            for (var m = 0, n = l.length; n > m; m++) {
-                var q = l[m];
-                if (r[q] && ("undefined" != typeof r[q][a] ? j = _(a, b, d) : (o || p) && (j = P(a))), 
-                "undefined" != typeof j) break;
-            }
-            return j || "" === j || (j = C.interpolate(a, b), k && !L && (j = V(a))), j;
-        }, O.versionInfo = function() {
-            return A;
-        }, O.loaderCache = function() {
-            return q;
-        }, O.directivePriority = function() {
-            return z;
-        }, m && (angular.equals(r, {}) && O.use(O.use()), e && e.length)) for (var ab = function(a) {
-            return G(a.key, a.table), d.$emit("$translateChangeEnd", {
-                language: a.key
-            }), a;
-        }, bb = 0, cb = e.length; cb > bb; bb++) N[e[bb]] = R(e[bb]).then(ab);
-        return O;
-    } ];
-} ]), angular.module("pascalprecht.translate").factory("$translateDefaultInterpolation", [ "$interpolate", function(a) {
-    var b, c = {}, d = "default", e = null, f = {
-        escaped: function(a) {
-            var b = {};
-            for (var c in a) Object.prototype.hasOwnProperty.call(a, c) && (b[c] = angular.isNumber(a[c]) ? a[c] : angular.element("<div></div>").text(a[c]).html());
-            return b;
-        }
-    }, g = function(a) {
-        var b;
-        return b = angular.isFunction(f[e]) ? f[e](a) : a;
-    };
-    return c.setLocale = function(a) {
-        b = a;
-    }, c.getInterpolationIdentifier = function() {
-        return d;
-    }, c.useSanitizeValueStrategy = function(a) {
-        return e = a, this;
-    }, c.interpolate = function(b, c) {
-        return e && (c = g(c)), a(b)(c || {});
-    }, c;
-} ]), angular.module("pascalprecht.translate").constant("$STORAGE_KEY", "NG_TRANSLATE_LANG_KEY"), 
-angular.module("pascalprecht.translate").directive("translate", [ "$translate", "$q", "$interpolate", "$compile", "$parse", "$rootScope", function(a, b, c, d, e, f) {
-    var g = function() {
-        return this.replace(/^\s+|\s+$/g, "");
-    };
-    return {
-        restrict: "AE",
-        scope: !0,
-        priority: a.directivePriority(),
-        compile: function(b, h) {
-            var i = h.translateValues ? h.translateValues : void 0, j = h.translateInterpolation ? h.translateInterpolation : void 0, k = b[0].outerHTML.match(/translate-value-+/i), l = "^(.*)(" + c.startSymbol() + ".*" + c.endSymbol() + ")(.*)", m = "^(.*)" + c.startSymbol() + "(.*)" + c.endSymbol() + "(.*)";
-            return function(b, n, o) {
-                b.interpolateParams = {}, b.preText = "", b.postText = "";
-                var p = {}, q = function(a) {
-                    if (angular.isFunction(q._unwatchOld) && (q._unwatchOld(), q._unwatchOld = void 0), 
-                    angular.equals(a, "") || !angular.isDefined(a)) {
-                        var d = g.apply(n.text()).match(l);
-                        if (angular.isArray(d)) {
-                            b.preText = d[1], b.postText = d[3], p.translate = c(d[2])(b.$parent);
-                            var e = n.text().match(m);
-                            angular.isArray(e) && e[2] && e[2].length && (q._unwatchOld = b.$watch(e[2], function(a) {
-                                p.translate = a, w();
-                            }));
-                        } else p.translate = n.text().replace(/^\s+|\s+$/g, "");
-                    } else p.translate = a;
-                    w();
-                }, r = function(a) {
-                    o.$observe(a, function(b) {
-                        p[a] = b, w();
-                    });
-                }, s = !0;
-                o.$observe("translate", function(a) {
-                    "undefined" == typeof a ? q("") : "" === a && s || (p.translate = a, w()), s = !1;
-                });
-                for (var t in o) o.hasOwnProperty(t) && "translateAttr" === t.substr(0, 13) && r(t);
-                if (o.$observe("translateDefault", function(a) {
-                    b.defaultText = a;
-                }), i && o.$observe("translateValues", function(a) {
-                    a && b.$parent.$watch(function() {
-                        angular.extend(b.interpolateParams, e(a)(b.$parent));
-                    });
-                }), k) {
-                    var u = function(a) {
-                        o.$observe(a, function(c) {
-                            var d = angular.lowercase(a.substr(14, 1)) + a.substr(15);
-                            b.interpolateParams[d] = c;
-                        });
-                    };
-                    for (var v in o) Object.prototype.hasOwnProperty.call(o, v) && "translateValue" === v.substr(0, 14) && "translateValues" !== v && u(v);
-                }
-                var w = function() {
-                    for (var a in p) p.hasOwnProperty(a) && x(a, p[a], b, b.interpolateParams, b.defaultText);
-                }, x = function(b, c, d, e, f) {
-                    c ? a(c, e, j, f).then(function(a) {
-                        y(a, d, !0, b);
-                    }, function(a) {
-                        y(a, d, !1, b);
-                    }) : y(c, d, !1, b);
-                }, y = function(b, c, e, f) {
-                    if ("translate" === f) {
-                        e || "undefined" == typeof c.defaultText || (b = c.defaultText), n.html(c.preText + b + c.postText);
-                        var g = a.isPostCompilingEnabled(), i = "undefined" != typeof h.translateCompile, j = i && "false" !== h.translateCompile;
-                        (g && !i || j) && d(n.contents())(c);
-                    } else {
-                        e || "undefined" == typeof c.defaultText || (b = c.defaultText);
-                        var k = o.$attr[f].substr(15);
-                        n.attr(k, b);
-                    }
-                };
-                b.$watch("interpolateParams", w, !0);
-                var z = f.$on("$translateChangeSuccess", w);
-                n.text().length && q(""), w(), b.$on("$destroy", z);
-            };
-        }
-    };
-} ]), angular.module("pascalprecht.translate").directive("translateCloak", [ "$rootScope", "$translate", function(a, b) {
-    return {
-        compile: function(c) {
-            var d = function() {
-                c.addClass(b.cloakClassName());
-            }, e = function() {
-                c.removeClass(b.cloakClassName());
-            }, f = a.$on("$translateChangeEnd", function() {
-                e(), f(), f = null;
-            });
-            return d(), function(a, c, f) {
-                f.translateCloak && f.translateCloak.length && f.$observe("translateCloak", function(a) {
-                    b(a).then(e, d);
-                });
-            };
-        }
-    };
-} ]), angular.module("pascalprecht.translate").filter("translate", [ "$parse", "$translate", function(a, b) {
-    var c = function(c, d, e) {
-        return angular.isObject(d) || (d = a(d)(this)), b.instant(c, d, e);
-    };
-    return c.$stateful = !0, c;
-} ]), !function(a, b) {
+!function(a, b) {
     "object" == typeof module && "object" == typeof module.exports ? module.exports = a.document ? b(a, !0) : function(a) {
         if (!a.document) throw new Error("jQuery requires a window with a document");
         return b(a);
@@ -9357,6 +8150,1877 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
     return n.noConflict = function(b) {
         return a.$ === n && (a.$ = Lc), b && a.jQuery === n && (a.jQuery = Kc), n;
     }, typeof b === U && (a.jQuery = a.$ = n), n;
+}), function(N, f, W) {
+    "use strict";
+    f.module("ngAnimate", [ "ng" ]).directive("ngAnimateChildren", function() {
+        return function(X, C, g) {
+            g = g.ngAnimateChildren, f.isString(g) && 0 === g.length ? C.data("$$ngAnimateChildren", !0) : X.$watch(g, function(f) {
+                C.data("$$ngAnimateChildren", !!f);
+            });
+        };
+    }).factory("$$animateReflow", [ "$$rAF", "$document", function(f) {
+        return function(g) {
+            return f(function() {
+                g();
+            });
+        };
+    } ]).config([ "$provide", "$animateProvider", function(X, C) {
+        function g(f) {
+            for (var n = 0; n < f.length; n++) {
+                var g = f[n];
+                if (1 == g.nodeType) return g;
+            }
+        }
+        function ba(f, n) {
+            return g(f) == g(n);
+        }
+        var u, t = f.noop, n = f.forEach, da = C.$$selectors, aa = f.isArray, ea = f.isString, ga = f.isObject, r = {
+            running: !0
+        };
+        X.decorator("$animate", [ "$delegate", "$$q", "$injector", "$sniffer", "$rootElement", "$$asyncCallback", "$rootScope", "$document", "$templateRequest", "$$jqLite", function(O, N, M, Y, y, H, P, W, Z, Q) {
+            function R(a, c) {
+                var b = a.data("$$ngAnimateState") || {};
+                return c && (b.running = !0, b.structural = !0, a.data("$$ngAnimateState", b)), 
+                b.disabled || b.running && b.structural;
+            }
+            function D(a) {
+                var c, b = N.defer();
+                return b.promise.$$cancelFn = function() {
+                    c && c();
+                }, P.$$postDigest(function() {
+                    c = a(function() {
+                        b.resolve();
+                    });
+                }), b.promise;
+            }
+            function I(a) {
+                return ga(a) ? (a.tempClasses && ea(a.tempClasses) && (a.tempClasses = a.tempClasses.split(/\s+/)), 
+                a) : void 0;
+            }
+            function S(a, c, b) {
+                b = b || {};
+                var d = {};
+                n(b, function(e, a) {
+                    n(a.split(" "), function(a) {
+                        d[a] = e;
+                    });
+                });
+                var h = Object.create(null);
+                n((a.attr("class") || "").split(/\s+/), function(e) {
+                    h[e] = !0;
+                });
+                var f = [], l = [];
+                return n(c && c.classes || [], function(e, a) {
+                    var b = h[a], c = d[a] || {};
+                    !1 === e ? (b || "addClass" == c.event) && l.push(a) : !0 === e && (b && "removeClass" != c.event || f.push(a));
+                }), 0 < f.length + l.length && [ f.join(" "), l.join(" ") ];
+            }
+            function T(a) {
+                if (a) {
+                    var c = [], b = {};
+                    a = a.substr(1).split("."), (Y.transitions || Y.animations) && c.push(M.get(da[""]));
+                    for (var d = 0; d < a.length; d++) {
+                        var f = a[d], k = da[f];
+                        k && !b[f] && (c.push(M.get(k)), b[f] = !0);
+                    }
+                    return c;
+                }
+            }
+            function U(a, c, b, d) {
+                function h(e, a) {
+                    var b = e[a], c = e["before" + a.charAt(0).toUpperCase() + a.substr(1)];
+                    return b || c ? ("leave" == a && (c = b, b = null), u.push({
+                        event: a,
+                        fn: b
+                    }), J.push({
+                        event: a,
+                        fn: c
+                    }), !0) : void 0;
+                }
+                function k(c, l, w) {
+                    var E = [];
+                    n(c, function(a) {
+                        a.fn && E.push(a);
+                    });
+                    var m = 0;
+                    n(E, function(c, f) {
+                        var p = function() {
+                            a: {
+                                if (l) {
+                                    if ((l[f] || t)(), ++m < E.length) break a;
+                                    l = null;
+                                }
+                                w();
+                            }
+                        };
+                        switch (c.event) {
+                          case "setClass":
+                            l.push(c.fn(a, e, A, p, d));
+                            break;
+
+                          case "animate":
+                            l.push(c.fn(a, b, d.from, d.to, p));
+                            break;
+
+                          case "addClass":
+                            l.push(c.fn(a, e || b, p, d));
+                            break;
+
+                          case "removeClass":
+                            l.push(c.fn(a, A || b, p, d));
+                            break;
+
+                          default:
+                            l.push(c.fn(a, p, d));
+                        }
+                    }), l && 0 === l.length && w();
+                }
+                var l = a[0];
+                if (l) {
+                    d && (d.to = d.to || {}, d.from = d.from || {});
+                    var e, A;
+                    aa(b) && (e = b[0], A = b[1], e ? A ? b = e + " " + A : (b = e, c = "addClass") : (b = A, 
+                    c = "removeClass"));
+                    var w = "setClass" == c, E = w || "addClass" == c || "removeClass" == c || "animate" == c, p = a.attr("class") + " " + b;
+                    if (x(p)) {
+                        var ca = t, m = [], J = [], g = t, s = [], u = [], p = (" " + p).replace(/\s+/g, ".");
+                        return n(T(p), function(a) {
+                            !h(a, c) && w && (h(a, "addClass"), h(a, "removeClass"));
+                        }), {
+                            node: l,
+                            event: c,
+                            className: b,
+                            isClassBased: E,
+                            isSetClassOperation: w,
+                            applyStyles: function() {
+                                d && a.css(f.extend(d.from || {}, d.to || {}));
+                            },
+                            before: function(a) {
+                                ca = a, k(J, m, function() {
+                                    ca = t, a();
+                                });
+                            },
+                            after: function(a) {
+                                g = a, k(u, s, function() {
+                                    g = t, a();
+                                });
+                            },
+                            cancel: function() {
+                                m && (n(m, function(a) {
+                                    (a || t)(!0);
+                                }), ca(!0)), s && (n(s, function(a) {
+                                    (a || t)(!0);
+                                }), g(!0));
+                            }
+                        };
+                    }
+                }
+            }
+            function G(a, c, b, d, h, k, l, e) {
+                function A(e) {
+                    var l = "$animate:" + e;
+                    J && J[l] && 0 < J[l].length && H(function() {
+                        b.triggerHandler(l, {
+                            event: a,
+                            className: c
+                        });
+                    });
+                }
+                function w() {
+                    A("before");
+                }
+                function E() {
+                    A("after");
+                }
+                function p() {
+                    p.hasBeenRun || (p.hasBeenRun = !0, k());
+                }
+                function g() {
+                    if (!g.hasBeenRun) {
+                        m && m.applyStyles(), g.hasBeenRun = !0, l && l.tempClasses && n(l.tempClasses, function(a) {
+                            u.removeClass(b, a);
+                        });
+                        var w = b.data("$$ngAnimateState");
+                        w && (m && m.isClassBased ? B(b, c) : (H(function() {
+                            var e = b.data("$$ngAnimateState") || {};
+                            fa == e.index && B(b, c, a);
+                        }), b.data("$$ngAnimateState", w))), A("close"), e();
+                    }
+                }
+                var m = U(b, a, c, l);
+                if (!m) return p(), w(), E(), g(), t;
+                a = m.event, c = m.className;
+                var J = f.element._data(m.node), J = J && J.events;
+                if (d || (d = h ? h.parent() : b.parent()), z(b, d)) return p(), w(), E(), g(), 
+                t;
+                d = b.data("$$ngAnimateState") || {};
+                var L = d.active || {}, s = d.totalActive || 0, q = d.last;
+                if (h = !1, s > 0) {
+                    if (s = [], m.isClassBased) "setClass" == q.event ? (s.push(q), B(b, c)) : L[c] && (v = L[c], 
+                    v.event == a ? h = !0 : (s.push(v), B(b, c))); else if ("leave" == a && L["ng-leave"]) h = !0; else {
+                        for (var v in L) s.push(L[v]);
+                        d = {}, B(b, !0);
+                    }
+                    0 < s.length && n(s, function(a) {
+                        a.cancel();
+                    });
+                }
+                if (!m.isClassBased || m.isSetClassOperation || "animate" == a || h || (h = "addClass" == a == b.hasClass(c)), 
+                h) return p(), w(), E(), A("close"), e(), t;
+                L = d.active || {}, s = d.totalActive || 0, "leave" == a && b.one("$destroy", function(a) {
+                    a = f.element(this);
+                    var e = a.data("$$ngAnimateState");
+                    e && (e = e.active["ng-leave"]) && (e.cancel(), B(a, "ng-leave"));
+                }), u.addClass(b, "ng-animate"), l && l.tempClasses && n(l.tempClasses, function(a) {
+                    u.addClass(b, a);
+                });
+                var fa = K++;
+                return s++, L[c] = m, b.data("$$ngAnimateState", {
+                    last: m,
+                    active: L,
+                    index: fa,
+                    totalActive: s
+                }), w(), m.before(function(e) {
+                    var l = b.data("$$ngAnimateState");
+                    e = e || !l || !l.active[c] || m.isClassBased && l.active[c].event != a, p(), !0 === e ? g() : (E(), 
+                    m.after(g));
+                }), m.cancel;
+            }
+            function q(a) {
+                (a = g(a)) && (a = f.isFunction(a.getElementsByClassName) ? a.getElementsByClassName("ng-animate") : a.querySelectorAll(".ng-animate"), 
+                n(a, function(a) {
+                    a = f.element(a), (a = a.data("$$ngAnimateState")) && a.active && n(a.active, function(a) {
+                        a.cancel();
+                    });
+                }));
+            }
+            function B(a, c) {
+                if (ba(a, y)) r.disabled || (r.running = !1, r.structural = !1); else if (c) {
+                    var b = a.data("$$ngAnimateState") || {}, d = !0 === c;
+                    !d && b.active && b.active[c] && (b.totalActive--, delete b.active[c]), (d || !b.totalActive) && (u.removeClass(a, "ng-animate"), 
+                    a.removeData("$$ngAnimateState"));
+                }
+            }
+            function z(a, c) {
+                if (r.disabled) return !0;
+                if (ba(a, y)) return r.running;
+                var b, d, g;
+                do {
+                    if (0 === c.length) break;
+                    var k = ba(c, y), l = k ? r : c.data("$$ngAnimateState") || {};
+                    if (l.disabled) return !0;
+                    k && (g = !0), !1 !== b && (k = c.data("$$ngAnimateChildren"), f.isDefined(k) && (b = k)), 
+                    d = d || l.running || l.last && !l.last.isClassBased;
+                } while (c = c.parent());
+                return !g || !b && d;
+            }
+            u = Q, y.data("$$ngAnimateState", r);
+            var $ = P.$watch(function() {
+                return Z.totalPendingRequests;
+            }, function(a) {
+                0 === a && ($(), P.$$postDigest(function() {
+                    P.$$postDigest(function() {
+                        r.running = !1;
+                    });
+                }));
+            }), K = 0, V = C.classNameFilter(), x = V ? function(a) {
+                return V.test(a);
+            } : function() {
+                return !0;
+            };
+            return {
+                animate: function(a, c, b, d, h) {
+                    return d = d || "ng-inline-animate", h = I(h) || {}, h.from = b ? c : null, h.to = b ? b : c, 
+                    D(function(b) {
+                        return G("animate", d, f.element(g(a)), null, null, t, h, b);
+                    });
+                },
+                enter: function(a, c, b, d) {
+                    return d = I(d), a = f.element(a), c = c && f.element(c), b = b && f.element(b), 
+                    R(a, !0), O.enter(a, c, b), D(function(h) {
+                        return G("enter", "ng-enter", f.element(g(a)), c, b, t, d, h);
+                    });
+                },
+                leave: function(a, c) {
+                    return c = I(c), a = f.element(a), q(a), R(a, !0), D(function(b) {
+                        return G("leave", "ng-leave", f.element(g(a)), null, null, function() {
+                            O.leave(a);
+                        }, c, b);
+                    });
+                },
+                move: function(a, c, b, d) {
+                    return d = I(d), a = f.element(a), c = c && f.element(c), b = b && f.element(b), 
+                    q(a), R(a, !0), O.move(a, c, b), D(function(h) {
+                        return G("move", "ng-move", f.element(g(a)), c, b, t, d, h);
+                    });
+                },
+                addClass: function(a, c, b) {
+                    return this.setClass(a, c, [], b);
+                },
+                removeClass: function(a, c, b) {
+                    return this.setClass(a, [], c, b);
+                },
+                setClass: function(a, c, b, d) {
+                    if (d = I(d), a = f.element(a), a = f.element(g(a)), R(a)) return O.$$setClassImmediately(a, c, b, d);
+                    var h, k = a.data("$$animateClasses"), l = !!k;
+                    return k || (k = {
+                        classes: {}
+                    }), h = k.classes, c = aa(c) ? c : c.split(" "), n(c, function(a) {
+                        a && a.length && (h[a] = !0);
+                    }), b = aa(b) ? b : b.split(" "), n(b, function(a) {
+                        a && a.length && (h[a] = !1);
+                    }), l ? (d && k.options && (k.options = f.extend(k.options || {}, d)), k.promise) : (a.data("$$animateClasses", k = {
+                        classes: h,
+                        options: d
+                    }), k.promise = D(function(e) {
+                        var l = a.parent(), b = g(a), c = b.parentNode;
+                        if (c && !c.$$NG_REMOVED && !b.$$NG_REMOVED) {
+                            b = a.data("$$animateClasses"), a.removeData("$$animateClasses");
+                            var c = a.data("$$ngAnimateState") || {}, d = S(a, b, c.active);
+                            return d ? G("setClass", d, a, l, null, function() {
+                                d[0] && O.$$addClassImmediately(a, d[0]), d[1] && O.$$removeClassImmediately(a, d[1]);
+                            }, b.options, e) : e();
+                        }
+                        e();
+                    }));
+                },
+                cancel: function(a) {
+                    a.$$cancelFn();
+                },
+                enabled: function(a, c) {
+                    switch (arguments.length) {
+                      case 2:
+                        if (a) B(c); else {
+                            var b = c.data("$$ngAnimateState") || {};
+                            b.disabled = !0, c.data("$$ngAnimateState", b);
+                        }
+                        break;
+
+                      case 1:
+                        r.disabled = !a;
+                        break;
+
+                      default:
+                        a = !r.disabled;
+                    }
+                    return !!a;
+                }
+            };
+        } ]), C.register("", [ "$window", "$sniffer", "$timeout", "$$animateReflow", function(r, C, M, Y) {
+            function y() {
+                b || (b = Y(function() {
+                    c = [], b = null, x = {};
+                }));
+            }
+            function H(a, e) {
+                b && b(), c.push(e), b = Y(function() {
+                    n(c, function(a) {
+                        a();
+                    }), c = [], b = null, x = {};
+                });
+            }
+            function P(a, e) {
+                var b = g(a);
+                a = f.element(b), k.push(a), b = Date.now() + e, h >= b || (M.cancel(d), h = b, 
+                d = M(function() {
+                    X(k), k = [];
+                }, e, !1));
+            }
+            function X(a) {
+                n(a, function(a) {
+                    (a = a.data("$$ngAnimateCSS3Data")) && n(a.closeAnimationFns, function(a) {
+                        a();
+                    });
+                });
+            }
+            function Z(a, e) {
+                var b = e ? x[e] : null;
+                if (!b) {
+                    var c = 0, d = 0, f = 0, g = 0;
+                    n(a, function(a) {
+                        if (1 == a.nodeType) {
+                            a = r.getComputedStyle(a) || {}, c = Math.max(Q(a[z + "Duration"]), c), d = Math.max(Q(a[z + "Delay"]), d), 
+                            g = Math.max(Q(a[K + "Delay"]), g);
+                            var e = Q(a[K + "Duration"]);
+                            e > 0 && (e *= parseInt(a[K + "IterationCount"], 10) || 1), f = Math.max(e, f);
+                        }
+                    }), b = {
+                        total: 0,
+                        transitionDelay: d,
+                        transitionDuration: c,
+                        animationDelay: g,
+                        animationDuration: f
+                    }, e && (x[e] = b);
+                }
+                return b;
+            }
+            function Q(a) {
+                var e = 0;
+                return a = ea(a) ? a.split(/\s*,\s*/) : [], n(a, function(a) {
+                    e = Math.max(parseFloat(a) || 0, e);
+                }), e;
+            }
+            function R(b, e, c, d) {
+                b = 0 <= [ "ng-enter", "ng-leave", "ng-move" ].indexOf(c);
+                var f, p = e.parent(), h = p.data("$$ngAnimateKey");
+                h || (p.data("$$ngAnimateKey", ++a), h = a), f = h + "-" + g(e).getAttribute("class");
+                var p = f + " " + c, h = x[p] ? ++x[p].total : 0, m = {};
+                if (h > 0) {
+                    var n = c + "-stagger", m = f + " " + n;
+                    (f = !x[m]) && u.addClass(e, n), m = Z(e, m), f && u.removeClass(e, n);
+                }
+                u.addClass(e, c);
+                var n = e.data("$$ngAnimateCSS3Data") || {}, k = Z(e, p);
+                return f = k.transitionDuration, k = k.animationDuration, b && 0 === f && 0 === k ? (u.removeClass(e, c), 
+                !1) : (c = d || b && f > 0, b = k > 0 && 0 < m.animationDelay && 0 === m.animationDuration, 
+                e.data("$$ngAnimateCSS3Data", {
+                    stagger: m,
+                    cacheKey: p,
+                    running: n.running || 0,
+                    itemIndex: h,
+                    blockTransition: c,
+                    closeAnimationFns: n.closeAnimationFns || []
+                }), p = g(e), c && (I(p, !0), d && e.css(d)), b && (p.style[K + "PlayState"] = "paused"), 
+                !0);
+            }
+            function D(a, e, b, c, d) {
+                function f() {
+                    e.off(D, h), u.removeClass(e, k), u.removeClass(e, t), z && M.cancel(z), G(e, b);
+                    var c, a = g(e);
+                    for (c in s) a.style.removeProperty(s[c]);
+                }
+                function h(a) {
+                    a.stopPropagation();
+                    var b = a.originalEvent || a;
+                    a = b.$manualTimeStamp || b.timeStamp || Date.now(), b = parseFloat(b.elapsedTime.toFixed(3)), 
+                    Math.max(a - H, 0) >= C && b >= x && c();
+                }
+                var m = g(e);
+                if (a = e.data("$$ngAnimateCSS3Data"), -1 != m.getAttribute("class").indexOf(b) && a) {
+                    var k = "", t = "";
+                    n(b.split(" "), function(a, b) {
+                        var e = (b > 0 ? " " : "") + a;
+                        k += e + "-active", t += e + "-pending";
+                    });
+                    var s = [], q = a.itemIndex, v = a.stagger, r = 0;
+                    if (q > 0) {
+                        r = 0, 0 < v.transitionDelay && 0 === v.transitionDuration && (r = v.transitionDelay * q);
+                        var y = 0;
+                        0 < v.animationDelay && 0 === v.animationDuration && (y = v.animationDelay * q, 
+                        s.push(B + "animation-play-state")), r = Math.round(100 * Math.max(r, y)) / 100;
+                    }
+                    r || (u.addClass(e, k), a.blockTransition && I(m, !1));
+                    var F = Z(e, a.cacheKey + " " + k), x = Math.max(F.transitionDuration, F.animationDuration);
+                    if (0 !== x) {
+                        !r && d && 0 < Object.keys(d).length && (F.transitionDuration || (e.css("transition", F.animationDuration + "s linear all"), 
+                        s.push("transition")), e.css(d));
+                        var q = Math.max(F.transitionDelay, F.animationDelay), C = 1e3 * q;
+                        0 < s.length && (v = m.getAttribute("style") || "", ";" !== v.charAt(v.length - 1) && (v += ";"), 
+                        m.setAttribute("style", v + " "));
+                        var z, H = Date.now(), D = V + " " + $, q = 1e3 * (r + 1.5 * (q + x));
+                        return r > 0 && (u.addClass(e, t), z = M(function() {
+                            z = null, 0 < F.transitionDuration && I(m, !1), 0 < F.animationDuration && (m.style[K + "PlayState"] = ""), 
+                            u.addClass(e, k), u.removeClass(e, t), d && (0 === F.transitionDuration && e.css("transition", F.animationDuration + "s linear all"), 
+                            e.css(d), s.push("transition"));
+                        }, 1e3 * r, !1)), e.on(D, h), a.closeAnimationFns.push(function() {
+                            f(), c();
+                        }), a.running++, P(e, q), f;
+                    }
+                    u.removeClass(e, k), G(e, b), c();
+                } else c();
+            }
+            function I(a, b) {
+                a.style[z + "Property"] = b ? "none" : "";
+            }
+            function S(a, b, c, d) {
+                return R(a, b, c, d) ? function(a) {
+                    a && G(b, c);
+                } : void 0;
+            }
+            function T(a, b, c, d, f) {
+                return b.data("$$ngAnimateCSS3Data") ? D(a, b, c, d, f) : (G(b, c), void d());
+            }
+            function U(a, b, c, d, f) {
+                var g = S(a, b, c, f.from);
+                if (g) {
+                    var h = g;
+                    return H(b, function() {
+                        h = T(a, b, c, d, f.to);
+                    }), function(a) {
+                        (h || t)(a);
+                    };
+                }
+                y(), d();
+            }
+            function G(a, b) {
+                u.removeClass(a, b);
+                var c = a.data("$$ngAnimateCSS3Data");
+                c && (c.running && c.running--, c.running && 0 !== c.running || a.removeData("$$ngAnimateCSS3Data"));
+            }
+            function q(a, b) {
+                var c = "";
+                return a = aa(a) ? a : a.split(/\s+/), n(a, function(a, d) {
+                    a && 0 < a.length && (c += (d > 0 ? " " : "") + a + b);
+                }), c;
+            }
+            var z, $, K, V, B = "";
+            N.ontransitionend === W && N.onwebkittransitionend !== W ? (B = "-webkit-", z = "WebkitTransition", 
+            $ = "webkitTransitionEnd transitionend") : (z = "transition", $ = "transitionend"), 
+            N.onanimationend === W && N.onwebkitanimationend !== W ? (B = "-webkit-", K = "WebkitAnimation", 
+            V = "webkitAnimationEnd animationend") : (K = "animation", V = "animationend");
+            var b, x = {}, a = 0, c = [], d = null, h = 0, k = [];
+            return {
+                animate: function(a, b, c, d, f, g) {
+                    return g = g || {}, g.from = c, g.to = d, U("animate", a, b, f, g);
+                },
+                enter: function(a, b, c) {
+                    return c = c || {}, U("enter", a, "ng-enter", b, c);
+                },
+                leave: function(a, b, c) {
+                    return c = c || {}, U("leave", a, "ng-leave", b, c);
+                },
+                move: function(a, b, c) {
+                    return c = c || {}, U("move", a, "ng-move", b, c);
+                },
+                beforeSetClass: function(a, b, c, d, f) {
+                    return f = f || {}, b = q(c, "-remove") + " " + q(b, "-add"), (f = S("setClass", a, b, f.from)) ? (H(a, d), 
+                    f) : (y(), void d());
+                },
+                beforeAddClass: function(a, b, c, d) {
+                    return d = d || {}, (b = S("addClass", a, q(b, "-add"), d.from)) ? (H(a, c), b) : (y(), 
+                    void c());
+                },
+                beforeRemoveClass: function(a, b, c, d) {
+                    return d = d || {}, (b = S("removeClass", a, q(b, "-remove"), d.from)) ? (H(a, c), 
+                    b) : (y(), void c());
+                },
+                setClass: function(a, b, c, d, f) {
+                    return f = f || {}, c = q(c, "-remove"), b = q(b, "-add"), T("setClass", a, c + " " + b, d, f.to);
+                },
+                addClass: function(a, b, c, d) {
+                    return d = d || {}, T("addClass", a, q(b, "-add"), c, d.to);
+                },
+                removeClass: function(a, b, c, d) {
+                    return d = d || {}, T("removeClass", a, q(b, "-remove"), c, d.to);
+                }
+            };
+        } ]);
+    } ]);
+}(window, window.angular), function(q, d) {
+    "use strict";
+    function v(r, k, h) {
+        return {
+            restrict: "ECA",
+            terminal: !0,
+            priority: 400,
+            transclude: "element",
+            link: function(a, f, b, c, y) {
+                function z() {
+                    l && (h.cancel(l), l = null), m && (m.$destroy(), m = null), n && (l = h.leave(n), 
+                    l.then(function() {
+                        l = null;
+                    }), n = null);
+                }
+                function x() {
+                    var b = r.current && r.current.locals;
+                    if (d.isDefined(b && b.$template)) {
+                        var b = a.$new(), c = r.current;
+                        n = y(b, function(b) {
+                            h.enter(b, null, n || f).then(function() {
+                                !d.isDefined(t) || t && !a.$eval(t) || k();
+                            }), z();
+                        }), m = c.scope = b, m.$emit("$viewContentLoaded"), m.$eval(w);
+                    } else z();
+                }
+                var m, n, l, t = b.autoscroll, w = b.onload || "";
+                a.$on("$routeChangeSuccess", x), x();
+            }
+        };
+    }
+    function A(d, k, h) {
+        return {
+            restrict: "ECA",
+            priority: -400,
+            link: function(a, f) {
+                var b = h.current, c = b.locals;
+                f.html(c.$template);
+                var y = d(f.contents());
+                b.controller && (c.$scope = a, c = k(b.controller, c), b.controllerAs && (a[b.controllerAs] = c), 
+                f.data("$ngControllerController", c), f.children().data("$ngControllerController", c)), 
+                y(a);
+            }
+        };
+    }
+    q = d.module("ngRoute", [ "ng" ]).provider("$route", function() {
+        function r(a, f) {
+            return d.extend(Object.create(a), f);
+        }
+        function k(a, d) {
+            var b = d.caseInsensitiveMatch, c = {
+                originalPath: a,
+                regexp: a
+            }, h = c.keys = [];
+            return a = a.replace(/([().])/g, "\\$1").replace(/(\/)?:(\w+)([\?\*])?/g, function(a, d, b, c) {
+                return a = "?" === c ? c : null, c = "*" === c ? c : null, h.push({
+                    name: b,
+                    optional: !!a
+                }), d = d || "", "" + (a ? "" : d) + "(?:" + (a ? d : "") + (c && "(.+?)" || "([^/]+)") + (a || "") + ")" + (a || "");
+            }).replace(/([\/$\*])/g, "\\$1"), c.regexp = new RegExp("^" + a + "$", b ? "i" : ""), 
+            c;
+        }
+        var h = {};
+        this.when = function(a, f) {
+            var b = d.copy(f);
+            if (d.isUndefined(b.reloadOnSearch) && (b.reloadOnSearch = !0), d.isUndefined(b.caseInsensitiveMatch) && (b.caseInsensitiveMatch = this.caseInsensitiveMatch), 
+            h[a] = d.extend(b, a && k(a, b)), a) {
+                var c = "/" == a[a.length - 1] ? a.substr(0, a.length - 1) : a + "/";
+                h[c] = d.extend({
+                    redirectTo: a
+                }, k(c, b));
+            }
+            return this;
+        }, this.caseInsensitiveMatch = !1, this.otherwise = function(a) {
+            return "string" == typeof a && (a = {
+                redirectTo: a
+            }), this.when(null, a), this;
+        }, this.$get = [ "$rootScope", "$location", "$routeParams", "$q", "$injector", "$templateRequest", "$sce", function(a, f, b, c, k, q, x) {
+            function m(b) {
+                var e = s.current;
+                (v = (p = l()) && e && p.$$route === e.$$route && d.equals(p.pathParams, e.pathParams) && !p.reloadOnSearch && !w) || !e && !p || a.$broadcast("$routeChangeStart", p, e).defaultPrevented && b && b.preventDefault();
+            }
+            function n() {
+                var u = s.current, e = p;
+                v ? (u.params = e.params, d.copy(u.params, b), a.$broadcast("$routeUpdate", u)) : (e || u) && (w = !1, 
+                (s.current = e) && e.redirectTo && (d.isString(e.redirectTo) ? f.path(t(e.redirectTo, e.params)).search(e.params).replace() : f.url(e.redirectTo(e.pathParams, f.path(), f.search())).replace()), 
+                c.when(e).then(function() {
+                    if (e) {
+                        var b, g, a = d.extend({}, e.resolve);
+                        return d.forEach(a, function(b, e) {
+                            a[e] = d.isString(b) ? k.get(b) : k.invoke(b, null, null, e);
+                        }), d.isDefined(b = e.template) ? d.isFunction(b) && (b = b(e.params)) : d.isDefined(g = e.templateUrl) && (d.isFunction(g) && (g = g(e.params)), 
+                        g = x.getTrustedResourceUrl(g), d.isDefined(g) && (e.loadedTemplateUrl = g, b = q(g))), 
+                        d.isDefined(b) && (a.$template = b), c.all(a);
+                    }
+                }).then(function(c) {
+                    e == s.current && (e && (e.locals = c, d.copy(e.params, b)), a.$broadcast("$routeChangeSuccess", e, u));
+                }, function(b) {
+                    e == s.current && a.$broadcast("$routeChangeError", e, u, b);
+                }));
+            }
+            function l() {
+                var a, b;
+                return d.forEach(h, function(c) {
+                    var g;
+                    if (g = !b) {
+                        var k = f.path();
+                        g = c.keys;
+                        var m = {};
+                        if (c.regexp) if (k = c.regexp.exec(k)) {
+                            for (var l = 1, n = k.length; n > l; ++l) {
+                                var p = g[l - 1], q = k[l];
+                                p && q && (m[p.name] = q);
+                            }
+                            g = m;
+                        } else g = null; else g = null;
+                        g = a = g;
+                    }
+                    g && (b = r(c, {
+                        params: d.extend({}, f.search(), a),
+                        pathParams: a
+                    }), b.$$route = c);
+                }), b || h[null] && r(h[null], {
+                    params: {},
+                    pathParams: {}
+                });
+            }
+            function t(a, b) {
+                var c = [];
+                return d.forEach((a || "").split(":"), function(a, d) {
+                    if (0 === d) c.push(a); else {
+                        var f = a.match(/(\w+)(?:[?*])?(.*)/), h = f[1];
+                        c.push(b[h]), c.push(f[2] || ""), delete b[h];
+                    }
+                }), c.join("");
+            }
+            var p, v, w = !1, s = {
+                routes: h,
+                reload: function() {
+                    w = !0, a.$evalAsync(function() {
+                        m(), n();
+                    });
+                },
+                updateParams: function(a) {
+                    if (!this.current || !this.current.$$route) throw B("norout");
+                    a = d.extend({}, this.current.params, a), f.path(t(this.current.$$route.originalPath, a)), 
+                    f.search(a);
+                }
+            };
+            return a.$on("$locationChangeStart", m), a.$on("$locationChangeSuccess", n), s;
+        } ];
+    });
+    var B = d.$$minErr("ngRoute");
+    q.provider("$routeParams", function() {
+        this.$get = function() {
+            return {};
+        };
+    }), q.directive("ngView", v), q.directive("ngView", A), v.$inject = [ "$route", "$anchorScroll", "$animate" ], 
+    A.$inject = [ "$compile", "$controller", "$route" ];
+}(window, window.angular), angular.module("pascalprecht.translate", [ "ng" ]).run([ "$translate", function(a) {
+    var b = a.storageKey(), c = a.storage(), d = function() {
+        var d = a.preferredLanguage();
+        angular.isString(d) ? a.use(d) : c.put(b, a.use());
+    };
+    c ? c.get(b) ? a.use(c.get(b))["catch"](d) : d() : angular.isString(a.preferredLanguage()) && a.use(a.preferredLanguage());
+} ]), angular.module("pascalprecht.translate").provider("$translate", [ "$STORAGE_KEY", "$windowProvider", function(a, b) {
+    var c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r = {}, s = [], t = a, u = [], v = !1, w = "translate-cloak", x = !1, y = ".", z = 0, A = "2.6.0", B = function() {
+        var a, c, d = b.$get().navigator, e = [ "language", "browserLanguage", "systemLanguage", "userLanguage" ];
+        if (angular.isArray(d.languages)) for (a = 0; a < d.languages.length; a++) if (c = d.languages[a], 
+        c && c.length) return c;
+        for (a = 0; a < e.length; a++) if (c = d[e[a]], c && c.length) return c;
+        return null;
+    };
+    B.displayName = "angular-translate/service: getFirstBrowserLanguage";
+    var C = function() {
+        return (B() || "").split("-").join("_");
+    };
+    C.displayName = "angular-translate/service: getLocale";
+    var D = function(a, b) {
+        for (var c = 0, d = a.length; d > c; c++) if (a[c] === b) return c;
+        return -1;
+    }, E = function() {
+        return this.replace(/^\s+|\s+$/g, "");
+    }, F = function(a) {
+        for (var b = [], c = angular.lowercase(a), e = 0, f = s.length; f > e; e++) b.push(angular.lowercase(s[e]));
+        if (D(b, c) > -1) return a;
+        if (d) {
+            var g;
+            for (var h in d) {
+                var i = !1, j = Object.prototype.hasOwnProperty.call(d, h) && angular.lowercase(h) === angular.lowercase(a);
+                if ("*" === h.slice(-1) && (i = h.slice(0, -1) === a.slice(0, h.length - 1)), (j || i) && (g = d[h], 
+                D(b, angular.lowercase(g)) > -1)) return g;
+            }
+        }
+        var k = a.split("_");
+        return k.length > 1 && D(b, angular.lowercase(k[0])) > -1 ? k[0] : a;
+    }, G = function(a, b) {
+        if (!a && !b) return r;
+        if (a && !b) {
+            if (angular.isString(a)) return r[a];
+        } else angular.isObject(r[a]) || (r[a] = {}), angular.extend(r[a], H(b));
+        return this;
+    };
+    this.translations = G, this.cloakClassName = function(a) {
+        return a ? (w = a, this) : w;
+    };
+    var H = function(a, b, c, d) {
+        var e, f, g, h;
+        b || (b = []), c || (c = {});
+        for (e in a) Object.prototype.hasOwnProperty.call(a, e) && (h = a[e], angular.isObject(h) ? H(h, b.concat(e), c, e) : (f = b.length ? "" + b.join(y) + y + e : e, 
+        b.length && e === d && (g = "" + b.join(y), c[g] = "@:" + f), c[f] = h));
+        return c;
+    };
+    this.addInterpolation = function(a) {
+        return u.push(a), this;
+    }, this.useMessageFormatInterpolation = function() {
+        return this.useInterpolation("$translateMessageFormatInterpolation");
+    }, this.useInterpolation = function(a) {
+        return l = a, this;
+    }, this.useSanitizeValueStrategy = function(a) {
+        return v = a, this;
+    }, this.preferredLanguage = function(a) {
+        return I(a), this;
+    };
+    var I = function(a) {
+        return a && (c = a), c;
+    };
+    this.translationNotFoundIndicator = function(a) {
+        return this.translationNotFoundIndicatorLeft(a), this.translationNotFoundIndicatorRight(a), 
+        this;
+    }, this.translationNotFoundIndicatorLeft = function(a) {
+        return a ? (o = a, this) : o;
+    }, this.translationNotFoundIndicatorRight = function(a) {
+        return a ? (p = a, this) : p;
+    }, this.fallbackLanguage = function(a) {
+        return J(a), this;
+    };
+    var J = function(a) {
+        return a ? (angular.isString(a) ? (f = !0, e = [ a ]) : angular.isArray(a) && (f = !1, 
+        e = a), angular.isString(c) && D(e, c) < 0 && e.push(c), this) : f ? e[0] : e;
+    };
+    this.use = function(a) {
+        if (a) {
+            if (!r[a] && !m) throw new Error("$translateProvider couldn't find translationTable for langKey: '" + a + "'");
+            return g = a, this;
+        }
+        return g;
+    };
+    var K = function(a) {
+        return a ? void (t = a) : j ? j + t : t;
+    };
+    this.storageKey = K, this.useUrlLoader = function(a, b) {
+        return this.useLoader("$translateUrlLoader", angular.extend({
+            url: a
+        }, b));
+    }, this.useStaticFilesLoader = function(a) {
+        return this.useLoader("$translateStaticFilesLoader", a);
+    }, this.useLoader = function(a, b) {
+        return m = a, n = b || {}, this;
+    }, this.useLocalStorage = function() {
+        return this.useStorage("$translateLocalStorage");
+    }, this.useCookieStorage = function() {
+        return this.useStorage("$translateCookieStorage");
+    }, this.useStorage = function(a) {
+        return i = a, this;
+    }, this.storagePrefix = function(a) {
+        return a ? (j = a, this) : a;
+    }, this.useMissingTranslationHandlerLog = function() {
+        return this.useMissingTranslationHandler("$translateMissingTranslationHandlerLog");
+    }, this.useMissingTranslationHandler = function(a) {
+        return k = a, this;
+    }, this.usePostCompiling = function(a) {
+        return x = !!a, this;
+    }, this.determinePreferredLanguage = function(a) {
+        var b = a && angular.isFunction(a) ? a() : C();
+        return c = s.length ? F(b) : b, this;
+    }, this.registerAvailableLanguageKeys = function(a, b) {
+        return a ? (s = a, b && (d = b), this) : s;
+    }, this.useLoaderCache = function(a) {
+        return a === !1 ? q = void 0 : a === !0 ? q = !0 : "undefined" == typeof a ? q = "$translationCache" : a && (q = a), 
+        this;
+    }, this.directivePriority = function(a) {
+        return void 0 === a ? z : (z = a, this);
+    }, this.$get = [ "$log", "$injector", "$rootScope", "$q", function(a, b, d, j) {
+        var s, y, B, C = b.get(l || "$translateDefaultInterpolation"), L = !1, M = {}, N = {}, O = function(a, b, d, f) {
+            if (angular.isArray(a)) {
+                var h = function(a) {
+                    for (var c = {}, e = [], g = function(a) {
+                        var e = j.defer(), g = function(b) {
+                            c[a] = b, e.resolve([ a, b ]);
+                        };
+                        return O(a, b, d, f).then(g, g), e.promise;
+                    }, h = 0, i = a.length; i > h; h++) e.push(g(a[h]));
+                    return j.all(e).then(function() {
+                        return c;
+                    });
+                };
+                return h(a);
+            }
+            var k = j.defer();
+            a && (a = E.apply(a));
+            var l = function() {
+                var a = c ? N[c] : N[g];
+                if (y = 0, i && !a) {
+                    var b = s.get(t);
+                    if (a = N[b], e && e.length) {
+                        var d = D(e, b);
+                        y = 0 === d ? 1 : 0, D(e, c) < 0 && e.push(c);
+                    }
+                }
+                return a;
+            }();
+            return l ? l.then(function() {
+                $(a, b, d, f).then(k.resolve, k.reject);
+            }, k.reject) : $(a, b, d, f).then(k.resolve, k.reject), k.promise;
+        }, P = function(a) {
+            return o && (a = [ o, a ].join(" ")), p && (a = [ a, p ].join(" ")), a;
+        }, Q = function(a) {
+            g = a, d.$emit("$translateChangeSuccess", {
+                language: a
+            }), i && s.put(O.storageKey(), g), C.setLocale(g), angular.forEach(M, function(a, b) {
+                M[b].setLocale(g);
+            }), d.$emit("$translateChangeEnd", {
+                language: a
+            });
+        }, R = function(a) {
+            if (!a) throw "No language key specified for loading.";
+            var c = j.defer();
+            d.$emit("$translateLoadingStart", {
+                language: a
+            }), L = !0;
+            var e = q;
+            "string" == typeof e && (e = b.get(e));
+            var f = angular.extend({}, n, {
+                key: a,
+                $http: angular.extend({}, {
+                    cache: e
+                }, n.$http)
+            });
+            return b.get(m)(f).then(function(b) {
+                var e = {};
+                d.$emit("$translateLoadingSuccess", {
+                    language: a
+                }), angular.isArray(b) ? angular.forEach(b, function(a) {
+                    angular.extend(e, H(a));
+                }) : angular.extend(e, H(b)), L = !1, c.resolve({
+                    key: a,
+                    table: e
+                }), d.$emit("$translateLoadingEnd", {
+                    language: a
+                });
+            }, function(a) {
+                d.$emit("$translateLoadingError", {
+                    language: a
+                }), c.reject(a), d.$emit("$translateLoadingEnd", {
+                    language: a
+                });
+            }), c.promise;
+        };
+        if (i && (s = b.get(i), !s.get || !s.put)) throw new Error("Couldn't use storage '" + i + "', missing get() or put() method!");
+        angular.isFunction(C.useSanitizeValueStrategy) && C.useSanitizeValueStrategy(v), 
+        u.length && angular.forEach(u, function(a) {
+            var d = b.get(a);
+            d.setLocale(c || g), angular.isFunction(d.useSanitizeValueStrategy) && d.useSanitizeValueStrategy(v), 
+            M[d.getInterpolationIdentifier()] = d;
+        });
+        var S = function(a) {
+            var b = j.defer();
+            return Object.prototype.hasOwnProperty.call(r, a) ? b.resolve(r[a]) : N[a] ? N[a].then(function(a) {
+                G(a.key, a.table), b.resolve(a.table);
+            }, b.reject) : b.reject(), b.promise;
+        }, T = function(a, b, c, d) {
+            var e = j.defer();
+            return S(a).then(function(f) {
+                if (Object.prototype.hasOwnProperty.call(f, b)) {
+                    d.setLocale(a);
+                    var h = f[b];
+                    "@:" === h.substr(0, 2) ? T(a, h.substr(2), c, d).then(e.resolve, e.reject) : e.resolve(d.interpolate(f[b], c)), 
+                    d.setLocale(g);
+                } else e.reject();
+            }, e.reject), e.promise;
+        }, U = function(a, b, c, d) {
+            var e, f = r[a];
+            if (f && Object.prototype.hasOwnProperty.call(f, b)) {
+                if (d.setLocale(a), e = d.interpolate(f[b], c), "@:" === e.substr(0, 2)) return U(a, e.substr(2), c, d);
+                d.setLocale(g);
+            }
+            return e;
+        }, V = function(a) {
+            if (k) {
+                var c = b.get(k)(a, g);
+                return void 0 !== c ? c : a;
+            }
+            return a;
+        }, W = function(a, b, c, d, f) {
+            var g = j.defer();
+            if (a < e.length) {
+                var h = e[a];
+                T(h, b, c, d).then(g.resolve, function() {
+                    W(a + 1, b, c, d, f).then(g.resolve);
+                });
+            } else g.resolve(f ? f : V(b));
+            return g.promise;
+        }, X = function(a, b, c, d) {
+            var f;
+            if (a < e.length) {
+                var g = e[a];
+                f = U(g, b, c, d), f || (f = X(a + 1, b, c, d));
+            }
+            return f;
+        }, Y = function(a, b, c, d) {
+            return W(B > 0 ? B : y, a, b, c, d);
+        }, Z = function(a, b, c) {
+            return X(B > 0 ? B : y, a, b, c);
+        }, $ = function(a, b, c, d) {
+            var f = j.defer(), h = g ? r[g] : r, i = c ? M[c] : C;
+            if (h && Object.prototype.hasOwnProperty.call(h, a)) {
+                var l = h[a];
+                "@:" === l.substr(0, 2) ? O(l.substr(2), b, c, d).then(f.resolve, f.reject) : f.resolve(i.interpolate(l, b));
+            } else {
+                var m;
+                k && !L && (m = V(a)), g && e && e.length ? Y(a, b, i, d).then(function(a) {
+                    f.resolve(a);
+                }, function(a) {
+                    f.reject(P(a));
+                }) : k && !L && m ? f.resolve(d ? d : m) : d ? f.resolve(d) : f.reject(P(a));
+            }
+            return f.promise;
+        }, _ = function(a, b, c) {
+            var d, f = g ? r[g] : r, h = c ? M[c] : C;
+            if (f && Object.prototype.hasOwnProperty.call(f, a)) {
+                var i = f[a];
+                d = "@:" === i.substr(0, 2) ? _(i.substr(2), b, c) : h.interpolate(i, b);
+            } else {
+                var j;
+                k && !L && (j = V(a)), g && e && e.length ? (y = 0, d = Z(a, b, h)) : d = k && !L && j ? j : P(a);
+            }
+            return d;
+        };
+        if (O.preferredLanguage = function(a) {
+            return a && I(a), c;
+        }, O.cloakClassName = function() {
+            return w;
+        }, O.fallbackLanguage = function(a) {
+            if (void 0 !== a && null !== a) {
+                if (J(a), m && e && e.length) for (var b = 0, c = e.length; c > b; b++) N[e[b]] || (N[e[b]] = R(e[b]));
+                O.use(O.use());
+            }
+            return f ? e[0] : e;
+        }, O.useFallbackLanguage = function(a) {
+            if (void 0 !== a && null !== a) if (a) {
+                var b = D(e, a);
+                b > -1 && (B = b);
+            } else B = 0;
+        }, O.proposedLanguage = function() {
+            return h;
+        }, O.storage = function() {
+            return s;
+        }, O.use = function(a) {
+            if (!a) return g;
+            var b = j.defer();
+            d.$emit("$translateChangeStart", {
+                language: a
+            });
+            var c = F(a);
+            return c && (a = c), r[a] || !m || N[a] ? (b.resolve(a), Q(a)) : (h = a, N[a] = R(a).then(function(c) {
+                return G(c.key, c.table), b.resolve(c.key), Q(c.key), h === a && (h = void 0), c;
+            }, function(a) {
+                h === a && (h = void 0), d.$emit("$translateChangeError", {
+                    language: a
+                }), b.reject(a), d.$emit("$translateChangeEnd", {
+                    language: a
+                });
+            })), b.promise;
+        }, O.storageKey = function() {
+            return K();
+        }, O.isPostCompilingEnabled = function() {
+            return x;
+        }, O.refresh = function(a) {
+            function b() {
+                f.resolve(), d.$emit("$translateRefreshEnd", {
+                    language: a
+                });
+            }
+            function c() {
+                f.reject(), d.$emit("$translateRefreshEnd", {
+                    language: a
+                });
+            }
+            if (!m) throw new Error("Couldn't refresh translation table, no loader registered!");
+            var f = j.defer();
+            if (d.$emit("$translateRefreshStart", {
+                language: a
+            }), a) r[a] ? R(a).then(function(c) {
+                G(c.key, c.table), a === g && Q(g), b();
+            }, c) : c(); else {
+                var h = [], i = {};
+                if (e && e.length) for (var k = 0, l = e.length; l > k; k++) h.push(R(e[k])), i[e[k]] = !0;
+                g && !i[g] && h.push(R(g)), j.all(h).then(function(a) {
+                    angular.forEach(a, function(a) {
+                        r[a.key] && delete r[a.key], G(a.key, a.table);
+                    }), g && Q(g), b();
+                });
+            }
+            return f.promise;
+        }, O.instant = function(a, b, d) {
+            if (null === a || angular.isUndefined(a)) return a;
+            if (angular.isArray(a)) {
+                for (var f = {}, h = 0, i = a.length; i > h; h++) f[a[h]] = O.instant(a[h], b, d);
+                return f;
+            }
+            if (angular.isString(a) && a.length < 1) return a;
+            a && (a = E.apply(a));
+            var j, l = [];
+            c && l.push(c), g && l.push(g), e && e.length && (l = l.concat(e));
+            for (var m = 0, n = l.length; n > m; m++) {
+                var q = l[m];
+                if (r[q] && ("undefined" != typeof r[q][a] ? j = _(a, b, d) : (o || p) && (j = P(a))), 
+                "undefined" != typeof j) break;
+            }
+            return j || "" === j || (j = C.interpolate(a, b), k && !L && (j = V(a))), j;
+        }, O.versionInfo = function() {
+            return A;
+        }, O.loaderCache = function() {
+            return q;
+        }, O.directivePriority = function() {
+            return z;
+        }, m && (angular.equals(r, {}) && O.use(O.use()), e && e.length)) for (var ab = function(a) {
+            return G(a.key, a.table), d.$emit("$translateChangeEnd", {
+                language: a.key
+            }), a;
+        }, bb = 0, cb = e.length; cb > bb; bb++) N[e[bb]] = R(e[bb]).then(ab);
+        return O;
+    } ];
+} ]), angular.module("pascalprecht.translate").factory("$translateDefaultInterpolation", [ "$interpolate", function(a) {
+    var b, c = {}, d = "default", e = null, f = {
+        escaped: function(a) {
+            var b = {};
+            for (var c in a) Object.prototype.hasOwnProperty.call(a, c) && (b[c] = angular.isNumber(a[c]) ? a[c] : angular.element("<div></div>").text(a[c]).html());
+            return b;
+        }
+    }, g = function(a) {
+        var b;
+        return b = angular.isFunction(f[e]) ? f[e](a) : a;
+    };
+    return c.setLocale = function(a) {
+        b = a;
+    }, c.getInterpolationIdentifier = function() {
+        return d;
+    }, c.useSanitizeValueStrategy = function(a) {
+        return e = a, this;
+    }, c.interpolate = function(b, c) {
+        return e && (c = g(c)), a(b)(c || {});
+    }, c;
+} ]), angular.module("pascalprecht.translate").constant("$STORAGE_KEY", "NG_TRANSLATE_LANG_KEY"), 
+angular.module("pascalprecht.translate").directive("translate", [ "$translate", "$q", "$interpolate", "$compile", "$parse", "$rootScope", function(a, b, c, d, e, f) {
+    var g = function() {
+        return this.replace(/^\s+|\s+$/g, "");
+    };
+    return {
+        restrict: "AE",
+        scope: !0,
+        priority: a.directivePriority(),
+        compile: function(b, h) {
+            var i = h.translateValues ? h.translateValues : void 0, j = h.translateInterpolation ? h.translateInterpolation : void 0, k = b[0].outerHTML.match(/translate-value-+/i), l = "^(.*)(" + c.startSymbol() + ".*" + c.endSymbol() + ")(.*)", m = "^(.*)" + c.startSymbol() + "(.*)" + c.endSymbol() + "(.*)";
+            return function(b, n, o) {
+                b.interpolateParams = {}, b.preText = "", b.postText = "";
+                var p = {}, q = function(a) {
+                    if (angular.isFunction(q._unwatchOld) && (q._unwatchOld(), q._unwatchOld = void 0), 
+                    angular.equals(a, "") || !angular.isDefined(a)) {
+                        var d = g.apply(n.text()).match(l);
+                        if (angular.isArray(d)) {
+                            b.preText = d[1], b.postText = d[3], p.translate = c(d[2])(b.$parent);
+                            var e = n.text().match(m);
+                            angular.isArray(e) && e[2] && e[2].length && (q._unwatchOld = b.$watch(e[2], function(a) {
+                                p.translate = a, w();
+                            }));
+                        } else p.translate = n.text().replace(/^\s+|\s+$/g, "");
+                    } else p.translate = a;
+                    w();
+                }, r = function(a) {
+                    o.$observe(a, function(b) {
+                        p[a] = b, w();
+                    });
+                }, s = !0;
+                o.$observe("translate", function(a) {
+                    "undefined" == typeof a ? q("") : "" === a && s || (p.translate = a, w()), s = !1;
+                });
+                for (var t in o) o.hasOwnProperty(t) && "translateAttr" === t.substr(0, 13) && r(t);
+                if (o.$observe("translateDefault", function(a) {
+                    b.defaultText = a;
+                }), i && o.$observe("translateValues", function(a) {
+                    a && b.$parent.$watch(function() {
+                        angular.extend(b.interpolateParams, e(a)(b.$parent));
+                    });
+                }), k) {
+                    var u = function(a) {
+                        o.$observe(a, function(c) {
+                            var d = angular.lowercase(a.substr(14, 1)) + a.substr(15);
+                            b.interpolateParams[d] = c;
+                        });
+                    };
+                    for (var v in o) Object.prototype.hasOwnProperty.call(o, v) && "translateValue" === v.substr(0, 14) && "translateValues" !== v && u(v);
+                }
+                var w = function() {
+                    for (var a in p) p.hasOwnProperty(a) && x(a, p[a], b, b.interpolateParams, b.defaultText);
+                }, x = function(b, c, d, e, f) {
+                    c ? a(c, e, j, f).then(function(a) {
+                        y(a, d, !0, b);
+                    }, function(a) {
+                        y(a, d, !1, b);
+                    }) : y(c, d, !1, b);
+                }, y = function(b, c, e, f) {
+                    if ("translate" === f) {
+                        e || "undefined" == typeof c.defaultText || (b = c.defaultText), n.html(c.preText + b + c.postText);
+                        var g = a.isPostCompilingEnabled(), i = "undefined" != typeof h.translateCompile, j = i && "false" !== h.translateCompile;
+                        (g && !i || j) && d(n.contents())(c);
+                    } else {
+                        e || "undefined" == typeof c.defaultText || (b = c.defaultText);
+                        var k = o.$attr[f].substr(15);
+                        n.attr(k, b);
+                    }
+                };
+                b.$watch("interpolateParams", w, !0);
+                var z = f.$on("$translateChangeSuccess", w);
+                n.text().length && q(""), w(), b.$on("$destroy", z);
+            };
+        }
+    };
+} ]), angular.module("pascalprecht.translate").directive("translateCloak", [ "$rootScope", "$translate", function(a, b) {
+    return {
+        compile: function(c) {
+            var d = function() {
+                c.addClass(b.cloakClassName());
+            }, e = function() {
+                c.removeClass(b.cloakClassName());
+            }, f = a.$on("$translateChangeEnd", function() {
+                e(), f(), f = null;
+            });
+            return d(), function(a, c, f) {
+                f.translateCloak && f.translateCloak.length && f.$observe("translateCloak", function(a) {
+                    b(a).then(e, d);
+                });
+            };
+        }
+    };
+} ]), angular.module("pascalprecht.translate").filter("translate", [ "$parse", "$translate", function(a, b) {
+    var c = function(c, d, e) {
+        return angular.isObject(d) || (d = a(d)(this)), b.instant(c, d, e);
+    };
+    return c.$stateful = !0, c;
+} ]), !function(a) {
+    "use strict";
+    "function" == typeof define && define.amd ? define([ "jquery" ], a) : "undefined" != typeof exports ? module.exports = a(require("jquery")) : a(jQuery);
+}(function(a) {
+    "use strict";
+    var b = window.Slick || {};
+    b = function() {
+        function c(c, d) {
+            var f, g, h, e = this;
+            if (e.defaults = {
+                accessibility: !0,
+                adaptiveHeight: !1,
+                appendArrows: a(c),
+                appendDots: a(c),
+                arrows: !0,
+                asNavFor: null,
+                prevArrow: '<button type="button" data-role="none" class="slick-prev">Previous</button>',
+                nextArrow: '<button type="button" data-role="none" class="slick-next">Next</button>',
+                autoplay: !1,
+                autoplaySpeed: 3e3,
+                centerMode: !1,
+                centerPadding: "50px",
+                cssEase: "ease",
+                customPaging: function(a, b) {
+                    return '<button type="button" data-role="none">' + (b + 1) + "</button>";
+                },
+                dots: !1,
+                dotsClass: "slick-dots",
+                draggable: !0,
+                easing: "linear",
+                edgeFriction: .35,
+                fade: !1,
+                focusOnSelect: !1,
+                infinite: !0,
+                initialSlide: 0,
+                lazyLoad: "ondemand",
+                mobileFirst: !1,
+                pauseOnHover: !0,
+                pauseOnDotsHover: !1,
+                respondTo: "window",
+                responsive: null,
+                rtl: !1,
+                slide: "",
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                speed: 500,
+                swipe: !0,
+                swipeToSlide: !1,
+                touchMove: !0,
+                touchThreshold: 5,
+                useCSS: !0,
+                variableWidth: !1,
+                vertical: !1,
+                waitForAnimate: !0
+            }, e.initials = {
+                animating: !1,
+                dragging: !1,
+                autoPlayTimer: null,
+                currentDirection: 0,
+                currentLeft: null,
+                currentSlide: 0,
+                direction: 1,
+                $dots: null,
+                listWidth: null,
+                listHeight: null,
+                loadIndex: 0,
+                $nextArrow: null,
+                $prevArrow: null,
+                slideCount: null,
+                slideWidth: null,
+                $slideTrack: null,
+                $slides: null,
+                sliding: !1,
+                slideOffset: 0,
+                swipeLeft: null,
+                $list: null,
+                touchObject: {},
+                transformsEnabled: !1
+            }, a.extend(e, e.initials), e.activeBreakpoint = null, e.animType = null, e.animProp = null, 
+            e.breakpoints = [], e.breakpointSettings = [], e.cssTransitions = !1, e.hidden = "hidden", 
+            e.paused = !1, e.positionProp = null, e.respondTo = null, e.shouldClick = !0, e.$slider = a(c), 
+            e.$slidesCache = null, e.transformType = null, e.transitionType = null, e.visibilityChange = "visibilitychange", 
+            e.windowWidth = 0, e.windowTimer = null, f = a(c).data("slick") || {}, e.options = a.extend({}, e.defaults, f, d), 
+            e.currentSlide = e.options.initialSlide, e.originalSettings = e.options, g = e.options.responsive || null, 
+            g && g.length > -1) {
+                e.respondTo = e.options.respondTo || "window";
+                for (h in g) g.hasOwnProperty(h) && (e.breakpoints.push(g[h].breakpoint), e.breakpointSettings[g[h].breakpoint] = g[h].settings);
+                e.breakpoints.sort(function(a, b) {
+                    return e.options.mobileFirst === !0 ? a - b : b - a;
+                });
+            }
+            "undefined" != typeof document.mozHidden ? (e.hidden = "mozHidden", e.visibilityChange = "mozvisibilitychange") : "undefined" != typeof document.msHidden ? (e.hidden = "msHidden", 
+            e.visibilityChange = "msvisibilitychange") : "undefined" != typeof document.webkitHidden && (e.hidden = "webkitHidden", 
+            e.visibilityChange = "webkitvisibilitychange"), e.autoPlay = a.proxy(e.autoPlay, e), 
+            e.autoPlayClear = a.proxy(e.autoPlayClear, e), e.changeSlide = a.proxy(e.changeSlide, e), 
+            e.clickHandler = a.proxy(e.clickHandler, e), e.selectHandler = a.proxy(e.selectHandler, e), 
+            e.setPosition = a.proxy(e.setPosition, e), e.swipeHandler = a.proxy(e.swipeHandler, e), 
+            e.dragHandler = a.proxy(e.dragHandler, e), e.keyHandler = a.proxy(e.keyHandler, e), 
+            e.autoPlayIterator = a.proxy(e.autoPlayIterator, e), e.instanceUid = b++, e.htmlExpr = /^(?:\s*(<[\w\W]+>)[^>]*)$/, 
+            e.init(), e.checkResponsive(!0);
+        }
+        var b = 0;
+        return c;
+    }(), b.prototype.addSlide = b.prototype.slickAdd = function(b, c, d) {
+        var e = this;
+        if ("boolean" == typeof c) d = c, c = null; else if (0 > c || c >= e.slideCount) return !1;
+        e.unload(), "number" == typeof c ? 0 === c && 0 === e.$slides.length ? a(b).appendTo(e.$slideTrack) : d ? a(b).insertBefore(e.$slides.eq(c)) : a(b).insertAfter(e.$slides.eq(c)) : d === !0 ? a(b).prependTo(e.$slideTrack) : a(b).appendTo(e.$slideTrack), 
+        e.$slides = e.$slideTrack.children(this.options.slide), e.$slideTrack.children(this.options.slide).detach(), 
+        e.$slideTrack.append(e.$slides), e.$slides.each(function(b, c) {
+            a(c).attr("data-slick-index", b);
+        }), e.$slidesCache = e.$slides, e.reinit();
+    }, b.prototype.animateHeight = function() {
+        var a = this;
+        if (1 === a.options.slidesToShow && a.options.adaptiveHeight === !0 && a.options.vertical === !1) {
+            var b = a.$slides.eq(a.currentSlide).outerHeight(!0);
+            a.$list.animate({
+                height: b
+            }, a.options.speed);
+        }
+    }, b.prototype.animateSlide = function(b, c) {
+        var d = {}, e = this;
+        e.animateHeight(), e.options.rtl === !0 && e.options.vertical === !1 && (b = -b), 
+        e.transformsEnabled === !1 ? e.options.vertical === !1 ? e.$slideTrack.animate({
+            left: b
+        }, e.options.speed, e.options.easing, c) : e.$slideTrack.animate({
+            top: b
+        }, e.options.speed, e.options.easing, c) : e.cssTransitions === !1 ? (e.options.rtl === !0 && (e.currentLeft = -e.currentLeft), 
+        a({
+            animStart: e.currentLeft
+        }).animate({
+            animStart: b
+        }, {
+            duration: e.options.speed,
+            easing: e.options.easing,
+            step: function(a) {
+                a = Math.ceil(a), e.options.vertical === !1 ? (d[e.animType] = "translate(" + a + "px, 0px)", 
+                e.$slideTrack.css(d)) : (d[e.animType] = "translate(0px," + a + "px)", e.$slideTrack.css(d));
+            },
+            complete: function() {
+                c && c.call();
+            }
+        })) : (e.applyTransition(), b = Math.ceil(b), d[e.animType] = e.options.vertical === !1 ? "translate3d(" + b + "px, 0px, 0px)" : "translate3d(0px," + b + "px, 0px)", 
+        e.$slideTrack.css(d), c && setTimeout(function() {
+            e.disableTransition(), c.call();
+        }, e.options.speed));
+    }, b.prototype.asNavFor = function(b) {
+        var c = this, d = null !== c.options.asNavFor ? a(c.options.asNavFor).slick("getSlick") : null;
+        null !== d && d.slideHandler(b, !0);
+    }, b.prototype.applyTransition = function(a) {
+        var b = this, c = {};
+        c[b.transitionType] = b.options.fade === !1 ? b.transformType + " " + b.options.speed + "ms " + b.options.cssEase : "opacity " + b.options.speed + "ms " + b.options.cssEase, 
+        b.options.fade === !1 ? b.$slideTrack.css(c) : b.$slides.eq(a).css(c);
+    }, b.prototype.autoPlay = function() {
+        var a = this;
+        a.autoPlayTimer && clearInterval(a.autoPlayTimer), a.slideCount > a.options.slidesToShow && a.paused !== !0 && (a.autoPlayTimer = setInterval(a.autoPlayIterator, a.options.autoplaySpeed));
+    }, b.prototype.autoPlayClear = function() {
+        var a = this;
+        a.autoPlayTimer && clearInterval(a.autoPlayTimer);
+    }, b.prototype.autoPlayIterator = function() {
+        var a = this;
+        a.options.infinite === !1 ? 1 === a.direction ? (a.currentSlide + 1 === a.slideCount - 1 && (a.direction = 0), 
+        a.slideHandler(a.currentSlide + a.options.slidesToScroll)) : (0 === a.currentSlide - 1 && (a.direction = 1), 
+        a.slideHandler(a.currentSlide - a.options.slidesToScroll)) : a.slideHandler(a.currentSlide + a.options.slidesToScroll);
+    }, b.prototype.buildArrows = function() {
+        var b = this;
+        b.options.arrows === !0 && b.slideCount > b.options.slidesToShow && (b.$prevArrow = a(b.options.prevArrow), 
+        b.$nextArrow = a(b.options.nextArrow), b.htmlExpr.test(b.options.prevArrow) && b.$prevArrow.appendTo(b.options.appendArrows), 
+        b.htmlExpr.test(b.options.nextArrow) && b.$nextArrow.appendTo(b.options.appendArrows), 
+        b.options.infinite !== !0 && b.$prevArrow.addClass("slick-disabled"));
+    }, b.prototype.buildDots = function() {
+        var c, d, b = this;
+        if (b.options.dots === !0 && b.slideCount > b.options.slidesToShow) {
+            for (d = '<ul class="' + b.options.dotsClass + '">', c = 0; c <= b.getDotCount(); c += 1) d += "<li>" + b.options.customPaging.call(this, b, c) + "</li>";
+            d += "</ul>", b.$dots = a(d).appendTo(b.options.appendDots), b.$dots.find("li").first().addClass("slick-active");
+        }
+    }, b.prototype.buildOut = function() {
+        var b = this;
+        b.$slides = b.$slider.children(b.options.slide + ":not(.slick-cloned)").addClass("slick-slide"), 
+        b.slideCount = b.$slides.length, b.$slides.each(function(b, c) {
+            a(c).attr("data-slick-index", b);
+        }), b.$slidesCache = b.$slides, b.$slider.addClass("slick-slider"), b.$slideTrack = 0 === b.slideCount ? a('<div class="slick-track"/>').appendTo(b.$slider) : b.$slides.wrapAll('<div class="slick-track"/>').parent(), 
+        b.$list = b.$slideTrack.wrap('<div class="slick-list"/>').parent(), b.$slideTrack.css("opacity", 0), 
+        (b.options.centerMode === !0 || b.options.swipeToSlide === !0) && (b.options.slidesToScroll = 1), 
+        a("img[data-lazy]", b.$slider).not("[src]").addClass("slick-loading"), b.setupInfinite(), 
+        b.buildArrows(), b.buildDots(), b.updateDots(), b.options.accessibility === !0 && b.$list.prop("tabIndex", 0), 
+        b.setSlideClasses("number" == typeof this.currentSlide ? this.currentSlide : 0), 
+        b.options.draggable === !0 && b.$list.addClass("draggable");
+    }, b.prototype.checkResponsive = function(b) {
+        var d, e, f, c = this, g = c.$slider.width(), h = window.innerWidth || a(window).width();
+        if ("window" === c.respondTo ? f = h : "slider" === c.respondTo ? f = g : "min" === c.respondTo && (f = Math.min(h, g)), 
+        c.originalSettings.responsive && c.originalSettings.responsive.length > -1 && null !== c.originalSettings.responsive) {
+            e = null;
+            for (d in c.breakpoints) c.breakpoints.hasOwnProperty(d) && (c.originalSettings.mobileFirst === !1 ? f < c.breakpoints[d] && (e = c.breakpoints[d]) : f > c.breakpoints[d] && (e = c.breakpoints[d]));
+            null !== e ? null !== c.activeBreakpoint ? e !== c.activeBreakpoint && (c.activeBreakpoint = e, 
+            "unslick" === c.breakpointSettings[e] ? c.unslick() : (c.options = a.extend({}, c.originalSettings, c.breakpointSettings[e]), 
+            b === !0 && (c.currentSlide = c.options.initialSlide), c.refresh())) : (c.activeBreakpoint = e, 
+            "unslick" === c.breakpointSettings[e] ? c.unslick() : (c.options = a.extend({}, c.originalSettings, c.breakpointSettings[e]), 
+            b === !0 && (c.currentSlide = c.options.initialSlide), c.refresh())) : null !== c.activeBreakpoint && (c.activeBreakpoint = null, 
+            c.options = c.originalSettings, b === !0 && (c.currentSlide = c.options.initialSlide), 
+            c.refresh());
+        }
+    }, b.prototype.changeSlide = function(b, c) {
+        var f, g, h, d = this, e = a(b.target);
+        switch (e.is("a") && b.preventDefault(), h = 0 !== d.slideCount % d.options.slidesToScroll, 
+        f = h ? 0 : (d.slideCount - d.currentSlide) % d.options.slidesToScroll, b.data.message) {
+          case "previous":
+            g = 0 === f ? d.options.slidesToScroll : d.options.slidesToShow - f, d.slideCount > d.options.slidesToShow && d.slideHandler(d.currentSlide - g, !1, c);
+            break;
+
+          case "next":
+            g = 0 === f ? d.options.slidesToScroll : f, d.slideCount > d.options.slidesToShow && d.slideHandler(d.currentSlide + g, !1, c);
+            break;
+
+          case "index":
+            var i = 0 === b.data.index ? 0 : b.data.index || a(b.target).parent().index() * d.options.slidesToScroll;
+            d.slideHandler(d.checkNavigable(i), !1, c);
+            break;
+
+          default:
+            return;
+        }
+    }, b.prototype.checkNavigable = function(a) {
+        var c, d, b = this;
+        if (c = b.getNavigableIndexes(), d = 0, a > c[c.length - 1]) a = c[c.length - 1]; else for (var e in c) {
+            if (a < c[e]) {
+                a = d;
+                break;
+            }
+            d = c[e];
+        }
+        return a;
+    }, b.prototype.clickHandler = function(a) {
+        var b = this;
+        b.shouldClick === !1 && (a.stopImmediatePropagation(), a.stopPropagation(), a.preventDefault());
+    }, b.prototype.destroy = function() {
+        var b = this;
+        b.autoPlayClear(), b.touchObject = {}, a(".slick-cloned", b.$slider).remove(), b.$dots && b.$dots.remove(), 
+        b.$prevArrow && "object" != typeof b.options.prevArrow && b.$prevArrow.remove(), 
+        b.$nextArrow && "object" != typeof b.options.nextArrow && b.$nextArrow.remove(), 
+        b.$slides.removeClass("slick-slide slick-active slick-center slick-visible").removeAttr("data-slick-index").css({
+            position: "",
+            left: "",
+            top: "",
+            zIndex: "",
+            opacity: "",
+            width: ""
+        }), b.$slider.removeClass("slick-slider"), b.$slider.removeClass("slick-initialized"), 
+        b.$list.off(".slick"), a(window).off(".slick-" + b.instanceUid), a(document).off(".slick-" + b.instanceUid), 
+        b.$slider.html(b.$slides);
+    }, b.prototype.disableTransition = function(a) {
+        var b = this, c = {};
+        c[b.transitionType] = "", b.options.fade === !1 ? b.$slideTrack.css(c) : b.$slides.eq(a).css(c);
+    }, b.prototype.fadeSlide = function(a, b) {
+        var c = this;
+        c.cssTransitions === !1 ? (c.$slides.eq(a).css({
+            zIndex: 1e3
+        }), c.$slides.eq(a).animate({
+            opacity: 1
+        }, c.options.speed, c.options.easing, b)) : (c.applyTransition(a), c.$slides.eq(a).css({
+            opacity: 1,
+            zIndex: 1e3
+        }), b && setTimeout(function() {
+            c.disableTransition(a), b.call();
+        }, c.options.speed));
+    }, b.prototype.filterSlides = b.prototype.slickFilter = function(a) {
+        var b = this;
+        null !== a && (b.unload(), b.$slideTrack.children(this.options.slide).detach(), 
+        b.$slidesCache.filter(a).appendTo(b.$slideTrack), b.reinit());
+    }, b.prototype.getCurrent = b.prototype.slickCurrentSlide = function() {
+        var a = this;
+        return a.currentSlide;
+    }, b.prototype.getDotCount = function() {
+        var a = this, b = 0, c = 0, d = 0;
+        if (a.options.infinite === !0) d = Math.ceil(a.slideCount / a.options.slidesToScroll); else if (a.options.centerMode === !0) d = a.slideCount; else for (;b < a.slideCount; ) ++d, 
+        b = c + a.options.slidesToShow, c += a.options.slidesToScroll <= a.options.slidesToShow ? a.options.slidesToScroll : a.options.slidesToShow;
+        return d - 1;
+    }, b.prototype.getLeft = function(a) {
+        var c, d, f, b = this, e = 0;
+        return b.slideOffset = 0, d = b.$slides.first().outerHeight(), b.options.infinite === !0 ? (b.slideCount > b.options.slidesToShow && (b.slideOffset = -1 * b.slideWidth * b.options.slidesToShow, 
+        e = -1 * d * b.options.slidesToShow), 0 !== b.slideCount % b.options.slidesToScroll && a + b.options.slidesToScroll > b.slideCount && b.slideCount > b.options.slidesToShow && (a > b.slideCount ? (b.slideOffset = -1 * (b.options.slidesToShow - (a - b.slideCount)) * b.slideWidth, 
+        e = -1 * (b.options.slidesToShow - (a - b.slideCount)) * d) : (b.slideOffset = -1 * b.slideCount % b.options.slidesToScroll * b.slideWidth, 
+        e = -1 * b.slideCount % b.options.slidesToScroll * d))) : a + b.options.slidesToShow > b.slideCount && (b.slideOffset = (a + b.options.slidesToShow - b.slideCount) * b.slideWidth, 
+        e = (a + b.options.slidesToShow - b.slideCount) * d), b.slideCount <= b.options.slidesToShow && (b.slideOffset = 0, 
+        e = 0), b.options.centerMode === !0 && b.options.infinite === !0 ? b.slideOffset += b.slideWidth * Math.floor(b.options.slidesToShow / 2) - b.slideWidth : b.options.centerMode === !0 && (b.slideOffset = 0, 
+        b.slideOffset += b.slideWidth * Math.floor(b.options.slidesToShow / 2)), c = b.options.vertical === !1 ? -1 * a * b.slideWidth + b.slideOffset : -1 * a * d + e, 
+        b.options.variableWidth === !0 && (f = b.$slideTrack.children(".slick-slide").eq(b.slideCount <= b.options.slidesToShow || b.options.infinite === !1 ? a : a + b.options.slidesToShow), 
+        c = f[0] ? -1 * f[0].offsetLeft : 0, b.options.centerMode === !0 && (f = b.$slideTrack.children(".slick-slide").eq(b.options.infinite === !1 ? a : a + b.options.slidesToShow + 1), 
+        c = f[0] ? -1 * f[0].offsetLeft : 0, c += (b.$list.width() - f.outerWidth()) / 2)), 
+        c;
+    }, b.prototype.getOption = b.prototype.slickGetOption = function(a) {
+        var b = this;
+        return b.options[a];
+    }, b.prototype.getNavigableIndexes = function() {
+        var e, a = this, b = 0, c = 0, d = [];
+        for (a.options.infinite === !1 ? (e = a.slideCount - a.options.slidesToShow + 1, 
+        a.options.centerMode === !0 && (e = a.slideCount)) : (b = -1 * a.slideCount, c = -1 * a.slideCount, 
+        e = 2 * a.slideCount); e > b; ) d.push(b), b = c + a.options.slidesToScroll, c += a.options.slidesToScroll <= a.options.slidesToShow ? a.options.slidesToScroll : a.options.slidesToShow;
+        return d;
+    }, b.prototype.getSlick = function() {
+        return this;
+    }, b.prototype.getSlideCount = function() {
+        var c, d, e, b = this;
+        return e = b.options.centerMode === !0 ? b.slideWidth * Math.floor(b.options.slidesToShow / 2) : 0, 
+        b.options.swipeToSlide === !0 ? (b.$slideTrack.find(".slick-slide").each(function(c, f) {
+            return f.offsetLeft - e + a(f).outerWidth() / 2 > -1 * b.swipeLeft ? (d = f, !1) : void 0;
+        }), c = Math.abs(a(d).attr("data-slick-index") - b.currentSlide) || 1) : b.options.slidesToScroll;
+    }, b.prototype.goTo = b.prototype.slickGoTo = function(a, b) {
+        var c = this;
+        c.changeSlide({
+            data: {
+                message: "index",
+                index: parseInt(a)
+            }
+        }, b);
+    }, b.prototype.init = function() {
+        var b = this;
+        a(b.$slider).hasClass("slick-initialized") || (a(b.$slider).addClass("slick-initialized"), 
+        b.buildOut(), b.setProps(), b.startLoad(), b.loadSlider(), b.initializeEvents(), 
+        b.updateArrows(), b.updateDots()), b.$slider.trigger("init", [ b ]);
+    }, b.prototype.initArrowEvents = function() {
+        var a = this;
+        a.options.arrows === !0 && a.slideCount > a.options.slidesToShow && (a.$prevArrow.on("click.slick", {
+            message: "previous"
+        }, a.changeSlide), a.$nextArrow.on("click.slick", {
+            message: "next"
+        }, a.changeSlide));
+    }, b.prototype.initDotEvents = function() {
+        var b = this;
+        b.options.dots === !0 && b.slideCount > b.options.slidesToShow && a("li", b.$dots).on("click.slick", {
+            message: "index"
+        }, b.changeSlide), b.options.dots === !0 && b.options.pauseOnDotsHover === !0 && b.options.autoplay === !0 && a("li", b.$dots).on("mouseenter.slick", function() {
+            b.paused = !0, b.autoPlayClear();
+        }).on("mouseleave.slick", function() {
+            b.paused = !1, b.autoPlay();
+        });
+    }, b.prototype.initializeEvents = function() {
+        var b = this;
+        b.initArrowEvents(), b.initDotEvents(), b.$list.on("touchstart.slick mousedown.slick", {
+            action: "start"
+        }, b.swipeHandler), b.$list.on("touchmove.slick mousemove.slick", {
+            action: "move"
+        }, b.swipeHandler), b.$list.on("touchend.slick mouseup.slick", {
+            action: "end"
+        }, b.swipeHandler), b.$list.on("touchcancel.slick mouseleave.slick", {
+            action: "end"
+        }, b.swipeHandler), b.$list.on("click.slick", b.clickHandler), b.options.autoplay === !0 && (a(document).on(b.visibilityChange, function() {
+            b.visibility();
+        }), b.options.pauseOnHover === !0 && (b.$list.on("mouseenter.slick", function() {
+            b.paused = !0, b.autoPlayClear();
+        }), b.$list.on("mouseleave.slick", function() {
+            b.paused = !1, b.autoPlay();
+        }))), b.options.accessibility === !0 && b.$list.on("keydown.slick", b.keyHandler), 
+        b.options.focusOnSelect === !0 && a(b.$slideTrack).children().on("click.slick", b.selectHandler), 
+        a(window).on("orientationchange.slick.slick-" + b.instanceUid, function() {
+            b.checkResponsive(), b.setPosition();
+        }), a(window).on("resize.slick.slick-" + b.instanceUid, function() {
+            a(window).width() !== b.windowWidth && (clearTimeout(b.windowDelay), b.windowDelay = window.setTimeout(function() {
+                b.windowWidth = a(window).width(), b.checkResponsive(), b.setPosition();
+            }, 50));
+        }), a("*[draggable!=true]", b.$slideTrack).on("dragstart", function(a) {
+            a.preventDefault();
+        }), a(window).on("load.slick.slick-" + b.instanceUid, b.setPosition), a(document).on("ready.slick.slick-" + b.instanceUid, b.setPosition);
+    }, b.prototype.initUI = function() {
+        var a = this;
+        a.options.arrows === !0 && a.slideCount > a.options.slidesToShow && (a.$prevArrow.show(), 
+        a.$nextArrow.show()), a.options.dots === !0 && a.slideCount > a.options.slidesToShow && a.$dots.show(), 
+        a.options.autoplay === !0 && a.autoPlay();
+    }, b.prototype.keyHandler = function(a) {
+        var b = this;
+        37 === a.keyCode && b.options.accessibility === !0 ? b.changeSlide({
+            data: {
+                message: "previous"
+            }
+        }) : 39 === a.keyCode && b.options.accessibility === !0 && b.changeSlide({
+            data: {
+                message: "next"
+            }
+        });
+    }, b.prototype.lazyLoad = function() {
+        function g(b) {
+            a("img[data-lazy]", b).each(function() {
+                var b = a(this), c = a(this).attr("data-lazy");
+                b.load(function() {
+                    b.animate({
+                        opacity: 1
+                    }, 200);
+                }).css({
+                    opacity: 0
+                }).attr("src", c).removeAttr("data-lazy").removeClass("slick-loading");
+            });
+        }
+        var c, d, e, f, b = this;
+        b.options.centerMode === !0 ? b.options.infinite === !0 ? (e = b.currentSlide + (b.options.slidesToShow / 2 + 1), 
+        f = e + b.options.slidesToShow + 2) : (e = Math.max(0, b.currentSlide - (b.options.slidesToShow / 2 + 1)), 
+        f = 2 + (b.options.slidesToShow / 2 + 1) + b.currentSlide) : (e = b.options.infinite ? b.options.slidesToShow + b.currentSlide : b.currentSlide, 
+        f = e + b.options.slidesToShow, b.options.fade === !0 && (e > 0 && e--, f <= b.slideCount && f++)), 
+        c = b.$slider.find(".slick-slide").slice(e, f), g(c), b.slideCount <= b.options.slidesToShow ? (d = b.$slider.find(".slick-slide"), 
+        g(d)) : b.currentSlide >= b.slideCount - b.options.slidesToShow ? (d = b.$slider.find(".slick-cloned").slice(0, b.options.slidesToShow), 
+        g(d)) : 0 === b.currentSlide && (d = b.$slider.find(".slick-cloned").slice(-1 * b.options.slidesToShow), 
+        g(d));
+    }, b.prototype.loadSlider = function() {
+        var a = this;
+        a.setPosition(), a.$slideTrack.css({
+            opacity: 1
+        }), a.$slider.removeClass("slick-loading"), a.initUI(), "progressive" === a.options.lazyLoad && a.progressiveLazyLoad();
+    }, b.prototype.next = b.prototype.slickNext = function() {
+        var a = this;
+        a.changeSlide({
+            data: {
+                message: "next"
+            }
+        });
+    }, b.prototype.pause = b.prototype.slickPause = function() {
+        var a = this;
+        a.autoPlayClear(), a.paused = !0;
+    }, b.prototype.play = b.prototype.slickPlay = function() {
+        var a = this;
+        a.paused = !1, a.autoPlay();
+    }, b.prototype.postSlide = function(a) {
+        var b = this;
+        b.$slider.trigger("afterChange", [ b, a ]), b.animating = !1, b.setPosition(), b.swipeLeft = null, 
+        b.options.autoplay === !0 && b.paused === !1 && b.autoPlay();
+    }, b.prototype.prev = b.prototype.slickPrev = function() {
+        var a = this;
+        a.changeSlide({
+            data: {
+                message: "previous"
+            }
+        });
+    }, b.prototype.progressiveLazyLoad = function() {
+        var c, d, b = this;
+        c = a("img[data-lazy]", b.$slider).length, c > 0 && (d = a("img[data-lazy]", b.$slider).first(), 
+        d.attr("src", d.attr("data-lazy")).removeClass("slick-loading").load(function() {
+            d.removeAttr("data-lazy"), b.progressiveLazyLoad();
+        }).error(function() {
+            d.removeAttr("data-lazy"), b.progressiveLazyLoad();
+        }));
+    }, b.prototype.refresh = function() {
+        var b = this, c = b.currentSlide;
+        b.destroy(), a.extend(b, b.initials), b.init(), b.changeSlide({
+            data: {
+                message: "index",
+                index: c
+            }
+        }, !0);
+    }, b.prototype.reinit = function() {
+        var b = this;
+        b.$slides = b.$slideTrack.children(b.options.slide).addClass("slick-slide"), b.slideCount = b.$slides.length, 
+        b.currentSlide >= b.slideCount && 0 !== b.currentSlide && (b.currentSlide = b.currentSlide - b.options.slidesToScroll), 
+        b.slideCount <= b.options.slidesToShow && (b.currentSlide = 0), b.setProps(), b.setupInfinite(), 
+        b.buildArrows(), b.updateArrows(), b.initArrowEvents(), b.buildDots(), b.updateDots(), 
+        b.initDotEvents(), b.options.focusOnSelect === !0 && a(b.$slideTrack).children().on("click.slick", b.selectHandler), 
+        b.setSlideClasses(0), b.setPosition(), b.$slider.trigger("reInit", [ b ]);
+    }, b.prototype.removeSlide = b.prototype.slickRemove = function(a, b, c) {
+        var d = this;
+        return "boolean" == typeof a ? (b = a, a = b === !0 ? 0 : d.slideCount - 1) : a = b === !0 ? --a : a, 
+        d.slideCount < 1 || 0 > a || a > d.slideCount - 1 ? !1 : (d.unload(), c === !0 ? d.$slideTrack.children().remove() : d.$slideTrack.children(this.options.slide).eq(a).remove(), 
+        d.$slides = d.$slideTrack.children(this.options.slide), d.$slideTrack.children(this.options.slide).detach(), 
+        d.$slideTrack.append(d.$slides), d.$slidesCache = d.$slides, void d.reinit());
+    }, b.prototype.setCSS = function(a) {
+        var d, e, b = this, c = {};
+        b.options.rtl === !0 && (a = -a), d = "left" == b.positionProp ? Math.ceil(a) + "px" : "0px", 
+        e = "top" == b.positionProp ? Math.ceil(a) + "px" : "0px", c[b.positionProp] = a, 
+        b.transformsEnabled === !1 ? b.$slideTrack.css(c) : (c = {}, b.cssTransitions === !1 ? (c[b.animType] = "translate(" + d + ", " + e + ")", 
+        b.$slideTrack.css(c)) : (c[b.animType] = "translate3d(" + d + ", " + e + ", 0px)", 
+        b.$slideTrack.css(c)));
+    }, b.prototype.setDimensions = function() {
+        var a = this;
+        if (a.options.vertical === !1 ? a.options.centerMode === !0 && a.$list.css({
+            padding: "0px " + a.options.centerPadding
+        }) : (a.$list.height(a.$slides.first().outerHeight(!0) * a.options.slidesToShow), 
+        a.options.centerMode === !0 && a.$list.css({
+            padding: a.options.centerPadding + " 0px"
+        })), a.listWidth = a.$list.width(), a.listHeight = a.$list.height(), a.options.vertical === !1 && a.options.variableWidth === !1) a.slideWidth = Math.ceil(a.listWidth / a.options.slidesToShow), 
+        a.$slideTrack.width(Math.ceil(a.slideWidth * a.$slideTrack.children(".slick-slide").length)); else if (a.options.variableWidth === !0) {
+            var b = 0;
+            a.slideWidth = Math.ceil(a.listWidth / a.options.slidesToShow), a.$slideTrack.children(".slick-slide").each(function() {
+                b += a.listWidth;
+            }), a.$slideTrack.width(Math.ceil(b) + 1);
+        } else a.slideWidth = Math.ceil(a.listWidth), a.$slideTrack.height(Math.ceil(a.$slides.first().outerHeight(!0) * a.$slideTrack.children(".slick-slide").length));
+        var c = a.$slides.first().outerWidth(!0) - a.$slides.first().width();
+        a.options.variableWidth === !1 && a.$slideTrack.children(".slick-slide").width(a.slideWidth - c);
+    }, b.prototype.setFade = function() {
+        var c, b = this;
+        b.$slides.each(function(d, e) {
+            c = -1 * b.slideWidth * d, a(e).css(b.options.rtl === !0 ? {
+                position: "relative",
+                right: c,
+                top: 0,
+                zIndex: 800,
+                opacity: 0
+            } : {
+                position: "relative",
+                left: c,
+                top: 0,
+                zIndex: 800,
+                opacity: 0
+            });
+        }), b.$slides.eq(b.currentSlide).css({
+            zIndex: 900,
+            opacity: 1
+        });
+    }, b.prototype.setHeight = function() {
+        var a = this;
+        if (1 === a.options.slidesToShow && a.options.adaptiveHeight === !0 && a.options.vertical === !1) {
+            var b = a.$slides.eq(a.currentSlide).outerHeight(!0);
+            a.$list.css("height", b);
+        }
+    }, b.prototype.setOption = b.prototype.slickSetOption = function(a, b, c) {
+        var d = this;
+        d.options[a] = b, c === !0 && (d.unload(), d.reinit());
+    }, b.prototype.setPosition = function() {
+        var a = this;
+        a.setDimensions(), a.setHeight(), a.options.fade === !1 ? a.setCSS(a.getLeft(a.currentSlide)) : a.setFade(), 
+        a.$slider.trigger("setPosition", [ a ]);
+    }, b.prototype.setProps = function() {
+        var a = this, b = document.body.style;
+        a.positionProp = a.options.vertical === !0 ? "top" : "left", "top" === a.positionProp ? a.$slider.addClass("slick-vertical") : a.$slider.removeClass("slick-vertical"), 
+        (void 0 !== b.WebkitTransition || void 0 !== b.MozTransition || void 0 !== b.msTransition) && a.options.useCSS === !0 && (a.cssTransitions = !0), 
+        void 0 !== b.OTransform && (a.animType = "OTransform", a.transformType = "-o-transform", 
+        a.transitionType = "OTransition", void 0 === b.perspectiveProperty && void 0 === b.webkitPerspective && (a.animType = !1)), 
+        void 0 !== b.MozTransform && (a.animType = "MozTransform", a.transformType = "-moz-transform", 
+        a.transitionType = "MozTransition", void 0 === b.perspectiveProperty && void 0 === b.MozPerspective && (a.animType = !1)), 
+        void 0 !== b.webkitTransform && (a.animType = "webkitTransform", a.transformType = "-webkit-transform", 
+        a.transitionType = "webkitTransition", void 0 === b.perspectiveProperty && void 0 === b.webkitPerspective && (a.animType = !1)), 
+        void 0 !== b.msTransform && (a.animType = "msTransform", a.transformType = "-ms-transform", 
+        a.transitionType = "msTransition", void 0 === b.msTransform && (a.animType = !1)), 
+        void 0 !== b.transform && a.animType !== !1 && (a.animType = "transform", a.transformType = "transform", 
+        a.transitionType = "transition"), a.transformsEnabled = null !== a.animType && a.animType !== !1;
+    }, b.prototype.setSlideClasses = function(a) {
+        var c, d, e, f, b = this;
+        b.$slider.find(".slick-slide").removeClass("slick-active").removeClass("slick-center"), 
+        d = b.$slider.find(".slick-slide"), b.options.centerMode === !0 ? (c = Math.floor(b.options.slidesToShow / 2), 
+        b.options.infinite === !0 && (a >= c && a <= b.slideCount - 1 - c ? b.$slides.slice(a - c, a + c + 1).addClass("slick-active") : (e = b.options.slidesToShow + a, 
+        d.slice(e - c + 1, e + c + 2).addClass("slick-active")), 0 === a ? d.eq(d.length - 1 - b.options.slidesToShow).addClass("slick-center") : a === b.slideCount - 1 && d.eq(b.options.slidesToShow).addClass("slick-center")), 
+        b.$slides.eq(a).addClass("slick-center")) : a >= 0 && a <= b.slideCount - b.options.slidesToShow ? b.$slides.slice(a, a + b.options.slidesToShow).addClass("slick-active") : d.length <= b.options.slidesToShow ? d.addClass("slick-active") : (f = b.slideCount % b.options.slidesToShow, 
+        e = b.options.infinite === !0 ? b.options.slidesToShow + a : a, b.options.slidesToShow == b.options.slidesToScroll && b.slideCount - a < b.options.slidesToShow ? d.slice(e - (b.options.slidesToShow - f), e + f).addClass("slick-active") : d.slice(e, e + b.options.slidesToShow).addClass("slick-active")), 
+        "ondemand" === b.options.lazyLoad && b.lazyLoad();
+    }, b.prototype.setupInfinite = function() {
+        var c, d, e, b = this;
+        if (b.options.fade === !0 && (b.options.centerMode = !1), b.options.infinite === !0 && b.options.fade === !1 && (d = null, 
+        b.slideCount > b.options.slidesToShow)) {
+            for (e = b.options.centerMode === !0 ? b.options.slidesToShow + 1 : b.options.slidesToShow, 
+            c = b.slideCount; c > b.slideCount - e; c -= 1) d = c - 1, a(b.$slides[d]).clone(!0).attr("id", "").attr("data-slick-index", d - b.slideCount).prependTo(b.$slideTrack).addClass("slick-cloned");
+            for (c = 0; e > c; c += 1) d = c, a(b.$slides[d]).clone(!0).attr("id", "").attr("data-slick-index", d + b.slideCount).appendTo(b.$slideTrack).addClass("slick-cloned");
+            b.$slideTrack.find(".slick-cloned").find("[id]").each(function() {
+                a(this).attr("id", "");
+            });
+        }
+    }, b.prototype.selectHandler = function(b) {
+        var c = this, d = parseInt(a(b.target).parents(".slick-slide").attr("data-slick-index"));
+        return d || (d = 0), c.slideCount <= c.options.slidesToShow ? (c.$slider.find(".slick-slide").removeClass("slick-active"), 
+        c.$slides.eq(d).addClass("slick-active"), c.options.centerMode === !0 && (c.$slider.find(".slick-slide").removeClass("slick-center"), 
+        c.$slides.eq(d).addClass("slick-center")), void c.asNavFor(d)) : void c.slideHandler(d);
+    }, b.prototype.slideHandler = function(a, b, c) {
+        var d, e, f, g, h = null, i = this;
+        return b = b || !1, i.animating === !0 && i.options.waitForAnimate === !0 || i.options.fade === !0 && i.currentSlide === a || i.slideCount <= i.options.slidesToShow ? void 0 : (b === !1 && i.asNavFor(a), 
+        d = a, h = i.getLeft(d), g = i.getLeft(i.currentSlide), i.currentLeft = null === i.swipeLeft ? g : i.swipeLeft, 
+        i.options.infinite === !1 && i.options.centerMode === !1 && (0 > a || a > i.getDotCount() * i.options.slidesToScroll) ? void (i.options.fade === !1 && (d = i.currentSlide, 
+        c !== !0 ? i.animateSlide(g, function() {
+            i.postSlide(d);
+        }) : i.postSlide(d))) : i.options.infinite === !1 && i.options.centerMode === !0 && (0 > a || a > i.slideCount - i.options.slidesToScroll) ? void (i.options.fade === !1 && (d = i.currentSlide, 
+        c !== !0 ? i.animateSlide(g, function() {
+            i.postSlide(d);
+        }) : i.postSlide(d))) : (i.options.autoplay === !0 && clearInterval(i.autoPlayTimer), 
+        e = 0 > d ? 0 !== i.slideCount % i.options.slidesToScroll ? i.slideCount - i.slideCount % i.options.slidesToScroll : i.slideCount + d : d >= i.slideCount ? 0 !== i.slideCount % i.options.slidesToScroll ? 0 : d - i.slideCount : d, 
+        i.animating = !0, i.$slider.trigger("beforeChange", [ i, i.currentSlide, e ]), f = i.currentSlide, 
+        i.currentSlide = e, i.setSlideClasses(i.currentSlide), i.updateDots(), i.updateArrows(), 
+        i.options.fade === !0 ? (c !== !0 ? i.fadeSlide(e, function() {
+            i.postSlide(e);
+        }) : i.postSlide(e), void i.animateHeight()) : void (c !== !0 ? i.animateSlide(h, function() {
+            i.postSlide(e);
+        }) : i.postSlide(e))));
+    }, b.prototype.startLoad = function() {
+        var a = this;
+        a.options.arrows === !0 && a.slideCount > a.options.slidesToShow && (a.$prevArrow.hide(), 
+        a.$nextArrow.hide()), a.options.dots === !0 && a.slideCount > a.options.slidesToShow && a.$dots.hide(), 
+        a.$slider.addClass("slick-loading");
+    }, b.prototype.swipeDirection = function() {
+        var a, b, c, d, e = this;
+        return a = e.touchObject.startX - e.touchObject.curX, b = e.touchObject.startY - e.touchObject.curY, 
+        c = Math.atan2(b, a), d = Math.round(180 * c / Math.PI), 0 > d && (d = 360 - Math.abs(d)), 
+        45 >= d && d >= 0 ? e.options.rtl === !1 ? "left" : "right" : 360 >= d && d >= 315 ? e.options.rtl === !1 ? "left" : "right" : d >= 135 && 225 >= d ? e.options.rtl === !1 ? "right" : "left" : "vertical";
+    }, b.prototype.swipeEnd = function() {
+        var c, b = this;
+        if (b.dragging = !1, b.shouldClick = b.touchObject.swipeLength > 10 ? !1 : !0, void 0 === b.touchObject.curX) return !1;
+        if (b.touchObject.edgeHit === !0 && b.$slider.trigger("edge", [ b, b.swipeDirection() ]), 
+        b.touchObject.swipeLength >= b.touchObject.minSwipe) switch (b.swipeDirection()) {
+          case "left":
+            c = b.options.swipeToSlide ? b.checkNavigable(b.currentSlide + b.getSlideCount()) : b.currentSlide + b.getSlideCount(), 
+            b.slideHandler(c), b.currentDirection = 0, b.touchObject = {}, b.$slider.trigger("swipe", [ b, "left" ]);
+            break;
+
+          case "right":
+            c = b.options.swipeToSlide ? b.checkNavigable(b.currentSlide - b.getSlideCount()) : b.currentSlide - b.getSlideCount(), 
+            b.slideHandler(c), b.currentDirection = 1, b.touchObject = {}, b.$slider.trigger("swipe", [ b, "right" ]);
+        } else b.touchObject.startX !== b.touchObject.curX && (b.slideHandler(b.currentSlide), 
+        b.touchObject = {});
+    }, b.prototype.swipeHandler = function(a) {
+        var b = this;
+        if (!(b.options.swipe === !1 || "ontouchend" in document && b.options.swipe === !1 || b.options.draggable === !1 && -1 !== a.type.indexOf("mouse"))) switch (b.touchObject.fingerCount = a.originalEvent && void 0 !== a.originalEvent.touches ? a.originalEvent.touches.length : 1, 
+        b.touchObject.minSwipe = b.listWidth / b.options.touchThreshold, a.data.action) {
+          case "start":
+            b.swipeStart(a);
+            break;
+
+          case "move":
+            b.swipeMove(a);
+            break;
+
+          case "end":
+            b.swipeEnd(a);
+        }
+    }, b.prototype.swipeMove = function(a) {
+        var d, e, f, g, h, b = this;
+        return h = void 0 !== a.originalEvent ? a.originalEvent.touches : null, !b.dragging || h && 1 !== h.length ? !1 : (d = b.getLeft(b.currentSlide), 
+        b.touchObject.curX = void 0 !== h ? h[0].pageX : a.clientX, b.touchObject.curY = void 0 !== h ? h[0].pageY : a.clientY, 
+        b.touchObject.swipeLength = Math.round(Math.sqrt(Math.pow(b.touchObject.curX - b.touchObject.startX, 2))), 
+        e = b.swipeDirection(), "vertical" !== e ? (void 0 !== a.originalEvent && b.touchObject.swipeLength > 4 && a.preventDefault(), 
+        g = (b.options.rtl === !1 ? 1 : -1) * (b.touchObject.curX > b.touchObject.startX ? 1 : -1), 
+        f = b.touchObject.swipeLength, b.touchObject.edgeHit = !1, b.options.infinite === !1 && (0 === b.currentSlide && "right" === e || b.currentSlide >= b.getDotCount() && "left" === e) && (f = b.touchObject.swipeLength * b.options.edgeFriction, 
+        b.touchObject.edgeHit = !0), b.swipeLeft = b.options.vertical === !1 ? d + f * g : d + f * (b.$list.height() / b.listWidth) * g, 
+        b.options.fade === !0 || b.options.touchMove === !1 ? !1 : b.animating === !0 ? (b.swipeLeft = null, 
+        !1) : void b.setCSS(b.swipeLeft)) : void 0);
+    }, b.prototype.swipeStart = function(a) {
+        var c, b = this;
+        return 1 !== b.touchObject.fingerCount || b.slideCount <= b.options.slidesToShow ? (b.touchObject = {}, 
+        !1) : (void 0 !== a.originalEvent && void 0 !== a.originalEvent.touches && (c = a.originalEvent.touches[0]), 
+        b.touchObject.startX = b.touchObject.curX = void 0 !== c ? c.pageX : a.clientX, 
+        b.touchObject.startY = b.touchObject.curY = void 0 !== c ? c.pageY : a.clientY, 
+        void (b.dragging = !0));
+    }, b.prototype.unfilterSlides = b.prototype.slickUnfilter = function() {
+        var a = this;
+        null !== a.$slidesCache && (a.unload(), a.$slideTrack.children(this.options.slide).detach(), 
+        a.$slidesCache.appendTo(a.$slideTrack), a.reinit());
+    }, b.prototype.unload = function() {
+        var b = this;
+        a(".slick-cloned", b.$slider).remove(), b.$dots && b.$dots.remove(), b.$prevArrow && "object" != typeof b.options.prevArrow && b.$prevArrow.remove(), 
+        b.$nextArrow && "object" != typeof b.options.nextArrow && b.$nextArrow.remove(), 
+        b.$slides.removeClass("slick-slide slick-active slick-visible").css("width", "");
+    }, b.prototype.unslick = function() {
+        var a = this;
+        a.destroy();
+    }, b.prototype.updateArrows = function() {
+        var b, a = this;
+        b = Math.floor(a.options.slidesToShow / 2), a.options.arrows === !0 && a.options.infinite !== !0 && a.slideCount > a.options.slidesToShow && (a.$prevArrow.removeClass("slick-disabled"), 
+        a.$nextArrow.removeClass("slick-disabled"), 0 === a.currentSlide ? (a.$prevArrow.addClass("slick-disabled"), 
+        a.$nextArrow.removeClass("slick-disabled")) : a.currentSlide >= a.slideCount - a.options.slidesToShow && a.options.centerMode === !1 ? (a.$nextArrow.addClass("slick-disabled"), 
+        a.$prevArrow.removeClass("slick-disabled")) : a.currentSlide >= a.slideCount - 1 && a.options.centerMode === !0 && (a.$nextArrow.addClass("slick-disabled"), 
+        a.$prevArrow.removeClass("slick-disabled")));
+    }, b.prototype.updateDots = function() {
+        var a = this;
+        null !== a.$dots && (a.$dots.find("li").removeClass("slick-active"), a.$dots.find("li").eq(Math.floor(a.currentSlide / a.options.slidesToScroll)).addClass("slick-active"));
+    }, b.prototype.visibility = function() {
+        var a = this;
+        document[a.hidden] ? (a.paused = !0, a.autoPlayClear()) : (a.paused = !1, a.autoPlay());
+    }, a.fn.slick = function() {
+        var g, a = this, c = arguments[0], d = Array.prototype.slice.call(arguments, 1), e = a.length, f = 0;
+        for (f; e > f; f++) if ("object" == typeof c || "undefined" == typeof c ? a[f].slick = new b(a[f], c) : g = a[f].slick[c].apply(a[f].slick, d), 
+        "undefined" != typeof g) return g;
+        return a;
+    }, a(function() {
+        a("[data-slick]").slick();
+    });
 }), jQuery.easing.jswing = jQuery.easing.swing, jQuery.extend(jQuery.easing, {
     def: "easeOutQuad",
     swing: function(a, b, c, d, e) {

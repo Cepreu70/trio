@@ -18,6 +18,7 @@
     "materialize": "latest",
     "underscore": "latest",
     "jquery": "latest",
-    "font-awesome": "latest"
+    "font-awesome": "latest",
+    "slick.js": "~1.4.1"
   }
 }
