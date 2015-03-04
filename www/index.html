@@ -17,10 +17,92 @@
 <div id="appCtrl" ng-controller="appCtrl as app">
     <div ng-view class="page {{ app.pageClass }} {{ app.firstLaunch ? 'first-launch' : '' }}" ></div>
 </div>
+<div class="footer">
 
+    <!-- Define all of the tiles: -->
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+    <div class="box double">
+        <div class="boxInner" id="myMap">
+        </div>
+    </div>
+    <div class="box double" style="background-image: url('img/tempGallery.jpg');">
+        <div class="boxInner">
+        </div>
+    </div>
+</div>
 </body>
 
 <!-- SCRIPTS -->
 <script src="vendor.js"></script>
+
+<!--OTHER -->
+<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+
+<!--App -->
 <script src="app.js"></script>
+
+<script>
+
+    ymaps.ready(init);
+
+    function init () {
+        // Создание экземпляра карты и его привязка к контейнеру с
+        myMap = new ymaps.Map('myMap', {
+            // При инициализации карты обязательно нужно указать
+            // её центр и коэффициент масштабирования.
+            center: [51.142390, 71.403672 ],
+            zoom: 17,
+            behaviors: ['drag', 'scrollZoom'],
+            type: 'yandex#map'
+        });
+
+        // Создаем метку.
+        var placemark = new ymaps.Placemark([51.142444, 71.403345], {
+            balloonContent: '<img src="img/trioMapPhoto.jpg" style="width: 300px;" />'
+        }, {
+            // Отключаем кнопку закрытия балуна.
+            balloonCloseButton: false,
+            // Балун будем открывать и закрывать кликом по иконке метки.
+            hideIconOnBalloonOpen: false,
+            iconImageHref: 'img/ya-baloon.png',
+            iconImageOffset: [-17,-45]
+        });
+        myMap.geoObjects.add(placemark);
+    }
+
+</script>
+
+
+
 </html>

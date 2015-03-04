@@ -55,3 +55,80 @@
     }
   }
 }
+
+.footer{
+  .box {
+    float: left;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    &.double{
+      width: 50%;
+      padding-bottom: 25%;
+      overflow: hidden;
+
+      .boxInner{
+        opacity: 1;
+        background-color: transparent;
+      }
+    }
+    &:hover{
+      .boxInner{
+        opacity: 1;
+      }
+    }
+  }
+  .boxInner {
+    position: absolute;
+    background-color: rgba(0,0,0,0.4);
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transform: translateZ(0);
+    transition: opacity $animation-time;
+  }
+  .ymaps-layers-pane{
+    filter: grayscale(100%);
+  }
+  .ymaps-copyrights-pane{
+    display: none;
+  }
+  @media only screen and (max-width : 480px) {
+    /* Smartphone view: 1 tile */
+    .box {
+      width: 100%;
+      padding-bottom: 100%;
+    }
+  }
+  @media only screen and (max-width : 650px) and (min-width : 481px) {
+    /* Tablet view: 2 tiles */
+    .box {
+      width: 50%;
+      padding-bottom: 50%;
+    }
+  }
+  @media only screen and (max-width : 1050px) and (min-width : 651px) {
+    /* Small desktop / ipad view: 3 tiles */
+    .box {
+      width: 33.3%;
+      padding-bottom: 33.3%;
+    }
+  }
+  @media only screen and (max-width : 1290px) and (min-width : 1051px) {
+    /* Medium desktop: 4 tiles */
+    .box {
+      width: 25%;
+      padding-bottom: 25%;
+    }
+  }
+  @media only screen and (max-width : 4000px) and (min-width : 1290px) {
+    /* Medium desktop: 4 tiles */
+    .box {
+      width: 25%;
+      padding-bottom: 25%;
+    }
+  }
+}

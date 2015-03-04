@@ -29,6 +29,7 @@ var app;
                 this.$route = $route;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
+
             }])
 
 })(window.angular);
