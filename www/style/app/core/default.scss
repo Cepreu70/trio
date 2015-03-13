@@ -27,20 +27,22 @@ div, span, img, a, p{
 ============================================================================= */
 
 @keyframes enter_page {
-  0% { opacity:0; }
-  100% { opacity:1; }
+  0% { opacity:0; top: 0; }
+  100% { opacity:1; top: 0; }
 }
 @keyframes leave_page {
-  0% { opacity:1;}
+  0% { opacity:1; }
   100% { opacity: 0; }
 }
 
 .page{
   &.ng-enter{
     animation: enter_page 1s linear;
+    top: 0;
   }
   &.ng-leave{
     animation: leave_page 1s linear;
+    position: absolute;
   }
   display:block;
   width:100%;

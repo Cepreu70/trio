@@ -15,48 +15,13 @@
     <p class="logo-trio"></p>
 </div>
 <div id="appCtrl" ng-controller="appCtrl as app">
-    <div ng-view class="page {{ app.pageClass }} {{ app.firstLaunch ? 'first-launch' : '' }}" ></div>
+    <div ng-view class="page {{ app.pageClass }}" ></div>
 </div>
 <div class="footer">
-
-    <!-- Define all of the tiles: -->
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
+    <div class="responsive-box">
+        <div class="boxInner" id="myMap"></div>
     </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box" style="background-image: url('img/tempGallery.jpg');">
-        <div class="boxInner">
-        </div>
-    </div>
-    <div class="box double">
-        <div class="boxInner" id="myMap">
-        </div>
-    </div>
-    <div class="box double" style="background-image: url('img/tempGallery.jpg');">
+    <div class="responsive-box" style="background-image: url('img/footer-bg.jpg');">
         <div class="boxInner">
         </div>
     </div>

@@ -25,11 +25,44 @@ var app;
         .controller('appCtrl', ['$route', '$routeParams', '$location',
             function($scope, $route, $routeParams, $location) {
                 $scope.pageClass = 'page-home';
-                $scope.firstLaunch = true;
                 this.$route = $route;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
 
             }])
 
+        // filter for limit of maxCount object in repeat array
+        .filter('maxCount', [function(){
+            return function(obj, limit){
+                var keys = Object.keys(obj);
+                if(keys.length < 1){
+                    return [];
+                }
+
+                var ret = new Object,
+                    count = 0;
+                angular.forEach(keys, function(key, arrayIndex){
+                    if(count >= limit){
+                        return false;
+                    }
+                    ret[key] = obj[key];
+                    count++;
+                });
+                return ret;
+            };
+        }])
+
+        // filter for randomize order elements in array for repeat
+        .filter('shuffle', function() {
+            var shuffledArr = [],
+                shuffledLength = 0;
+            return function(arr) {
+                var o = arr.slice(0, arr.length);
+                if (shuffledLength == arr.length) return shuffledArr;
+                for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+                shuffledArr = o;
+                shuffledLength = o.length;
+                return o;
+            };
+        });
 })(window.angular);

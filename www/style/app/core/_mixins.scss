@@ -32,3 +32,10 @@ $break-large: 992px;
     }
   }
 }
+
+@mixin response($min, $max) {
+
+    @media only screen and (min-width: $min + 1) and (max-width: $max - 1) {
+      @content;
+    }
+}

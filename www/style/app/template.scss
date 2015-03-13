@@ -55,40 +55,153 @@
     }
   }
 }
-
-.footer{
-  .box {
+.gallery{
+  text-align: left;
+  .responsive-box {
     float: left;
     position: relative;
     width: 25%;
     padding-bottom: 25%;
     background-size: cover;
     background-repeat: no-repeat;
-    &.double{
-      width: 50%;
-      padding-bottom: 25%;
-      overflow: hidden;
-
-      .boxInner{
-        opacity: 1;
-        background-color: transparent;
-      }
-    }
     &:hover{
       .boxInner{
         opacity: 1;
       }
     }
+
+    .boxInner {
+      position: absolute;
+      background-color: rgba(0,0,0,0.75);
+      overflow: hidden;
+      height: 100%;
+      width: 100%;
+      opacity: 0;
+      transform: translateZ(0);
+      transition: opacity $animation-time;
+      color: white;
+      text-decoration: none;
+      padding: 22px;
+      .name{
+        font-size: 22px;
+        font-weight: 900;
+        @include response(1700px, 4560px){
+          font-size: 32px;
+        }
+        @include response(1450px, 1700px){
+          font-size: 24px;
+        }
+        @include response(1100px, 1450px){
+          font-size: 20px;
+        }
+        @include response(600px, 1100px){
+          font-size: 18px;
+        }
+        @include response(480px, 600px){
+          font-size: 17px;
+        }
+      }
+      .description{
+        font-size: 14px;
+        font-weight: 400;
+        @include response(1700px, 4560px){
+          font-size: 18px;
+        }
+        @include response(1450px, 1700px){
+          font-size: 16px;
+        }
+        @include response(1100px, 1450px){
+          font-size: 13px;
+        }
+        @include response(700px, 1100px){
+          font-size: 13px;
+        }
+        @include response(480px, 600px){
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .btn-floating{
+    left: 50%;
+    margin-left: -27.75px;
+    border-radius: 27.75px;
+    top: 20px;
+    position: absolute;
+    white-space: nowrap;
+    transition: width $animation-time;
+    &:hover {
+      width: 200px;
+      img{
+        left: -5px;
+      }
+      span{
+        max-width: 160px;
+        opacity: 1;
+      }
+    }
+    font-weight: 900;
+    span{
+
+      max-width: 1px;
+      opacity: 0;
+      transition: opacity $animation-time, max-width $animation-time;
+      display: inline-block;
+      padding: 0;
+    }
+    img{
+      left: 3px;
+      transition: left $animation-time;
+      top: 5px;
+      display: inline;
+    }
+  }
+  @media only screen and (max-width : 480px) {
+    /* Smartphone view: 1 tile */
+    .responsive-box {
+      width: 100%;
+      padding-bottom: 100%;
+    }
+  }
+  @media only screen and (max-width : 650px) and (min-width : 481px) {
+    /* Tablet view: 2 tiles */
+    .responsive-box {
+      width: 50%;
+      padding-bottom: 50%;
+    }
+  }
+  @media only screen and (max-width : 1050px) and (min-width : 651px) {
+    /* Small desktop / ipad view: 3 tiles */
+    .responsive-box {
+      width: 33.3%;
+      padding-bottom: 33.3%;
+    }
+  }
+  @media only screen and (max-width : 1290px) and (min-width : 1051px) {
+    /* Medium desktop: 4 tiles */
+    .responsive-box {
+      width: 25%;
+      padding-bottom: 25%;
+    }
+  }
+}
+.footer{
+  .responsive-box {
+    float: left;
+    position: relative;
+    width: 50%;
+    padding-bottom: 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
   }
   .boxInner {
     position: absolute;
-    background-color: rgba(0,0,0,0.4);
     overflow: hidden;
     height: 100%;
     width: 100%;
-    opacity: 0;
     transform: translateZ(0);
-    transition: opacity $animation-time;
+    background: transparent;
   }
   .ymaps-layers-pane{
     filter: grayscale(100%);
@@ -98,29 +211,22 @@
   }
   @media only screen and (max-width : 480px) {
     /* Smartphone view: 1 tile */
-    .box {
+    .responsive-box {
       width: 100%;
       padding-bottom: 100%;
     }
   }
   @media only screen and (max-width : 650px) and (min-width : 481px) {
-    /* Tablet view: 2 tiles */
-    .box {
-      width: 50%;
+    /* Tablet view: 1 tiles */
+    .responsive-box {
+      width: 100%;
       padding-bottom: 50%;
     }
   }
-  @media only screen and (max-width : 1050px) and (min-width : 651px) {
-    /* Small desktop / ipad view: 3 tiles */
-    .box {
-      width: 33.3%;
-      padding-bottom: 33.3%;
-    }
-  }
   @media only screen and (max-width : 1290px) and (min-width : 1051px) {
-    /* Medium desktop: 4 tiles */
-    .box {
-      width: 25%;
+    /* Medium desktop: 2 tiles */
+    .responsive-box {
+      width: 50%;
       padding-bottom: 25%;
     }
   }
