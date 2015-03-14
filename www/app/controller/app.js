@@ -1,5 +1,5 @@
 var app;
-(function(angular) {
+(function() {
 
     'use strict';
 
@@ -28,6 +28,17 @@ var app;
                 this.$route = $route;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
+
+                this.init = function(){
+                    var $header = $(".header"),
+                        $clone = $header.before($header.clone().addClass("sticky z-depth-1"));
+
+                    $(window).on("scroll", function() {
+                        var fromTop = $(window).scrollTop();
+                        $("body").toggleClass("down", (fromTop > 100));
+                    });
+                };
+                this.init();
 
             }])
 
@@ -65,4 +76,4 @@ var app;
                 return o;
             };
         });
-})(window.angular);
+})();

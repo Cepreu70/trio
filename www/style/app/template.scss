@@ -1,28 +1,52 @@
 @import 'core/init';
 
+body.down {
+  .header.sticky {
+    transform: translateY(0px);
+    .header-btn{
+      &:hover{
+        background-color: #F3C82F;
+        color: white;
+      }
+    }
+  }
+}
+.not-full-width {
+  max-width: 1305px;
+  margin: 0 auto;
+}
 .header{
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  position: fixed;
-  z-index: 1000;
+  position: absolute;
+  z-index: 200;
   color: #ffffff;
+  &.sticky{
+    z-index: 1000;
+    position: fixed;
+    transform: translateY(-200px);
+    transition: 0.4s transform;
+    background-color: white;
+    color: #2a2a2a;
+  }
   .header-btn{
     top: 0;
     margin: 30px;
     padding: 10px 30px;
     border-radius: 50px;
-    border: 2px solid white;
+    border: 2px solid;
+    border-color: inherit;
     text-align: center;
     vertical-align: middle;
     color: inherit;
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color $animation-time, color $animation-time;
+    transition: background-color $animation-time, color $animation-time, border $animation-time;
     &:hover{
-      background-color: #fff;
-      border-color: white;
+      background-color: #F3C82F;
+      border-color: transparent;
       color: #232219;
     }
     &.left{
@@ -62,11 +86,17 @@
     position: relative;
     width: 25%;
     padding-bottom: 25%;
-    background-size: cover;
+    background-size: 100% 100%;
+    background-position: center;
     background-repeat: no-repeat;
+    transition: all $animation-time;
     &:hover{
+      background-size: 104% 104%;
       .boxInner{
         opacity: 1;
+        .name{
+          margin-top: 0;
+        }
       }
     }
 
@@ -83,8 +113,10 @@
       text-decoration: none;
       padding: 22px;
       .name{
+        margin-top: -20px;
         font-size: 22px;
         font-weight: 900;
+        transition: margin $animation-time;
         @include response(1700px, 4560px){
           font-size: 32px;
         }
@@ -202,6 +234,64 @@
     width: 100%;
     transform: translateZ(0);
     background: transparent;
+    .about-information{
+      padding: 40px;
+      color: #ffffff;
+      font-size: 28px;
+      text-align: left;
+      .social-icon{
+        margin: 28px 6px;
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        text-align: center;
+        color: white;
+        border-radius: 50%;
+        border: 1px solid white;
+        line-height: 38px;
+        font-size: 16px;
+        transition: $animation-time;
+        &:hover{
+          background-color: white;
+          color: #333333;
+        }
+        @include response(1100px, 4560px){
+          margin: 28px 6px;
+          width: 40px;
+          height: 40px;
+          font-size: 16px;
+        }
+        @include response(600px, 1100px){
+          margin: 10px 5px;
+          width: 30px;
+          height: 30px;
+          font-size: 14px;
+          line-height: 27px;
+        }
+        @include response(100px, 600px){
+          margin: 18px 4px;
+          width: 25px;
+          height: 25px;
+          font-size: 11px;
+          line-height: 23px;
+        }
+      }
+      @include response(1700px, 4560px){
+        font-size: 28px;
+      }
+      @include response(1450px, 1700px){
+        font-size: 18px;
+      }
+      @include response(1100px, 1450px){
+        font-size: 17px;
+      }
+      @include response(600px, 1100px){
+        font-size: 13px;
+      }
+      @include response(100px, 600px){
+        font-size: 14px;
+      }
+    }
   }
   .ymaps-layers-pane{
     filter: grayscale(100%);

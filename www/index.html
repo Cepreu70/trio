@@ -10,8 +10,8 @@
 <!-- apply our angular app -->
 <body ng-app="ngApp">
 <div class="header">
-    <p class="header-btn left">меню</p>
-    <p class="header-btn right">Связаться</p>
+    <p class="waves-effect waves-light header-btn left">меню</p>
+    <p class="waves-effect waves-light header-btn right">Связаться</p>
     <p class="logo-trio"></p>
 </div>
 <div id="appCtrl" ng-controller="appCtrl as app">
@@ -22,7 +22,17 @@
         <div class="boxInner" id="myMap"></div>
     </div>
     <div class="responsive-box" style="background-image: url('img/footer-bg.jpg');">
-        <div class="boxInner">
+        <div class="boxInner valign-wrapper">
+            <div class="about-information">
+                АСТАНА, КОМСОМОЛЬСКИЙ РАЙОН, УЛ. АЙША БИБИ, 9 <br>
+                +7 (7172) 478 413
+                <br>
+                <a class="social-icon" href="#"><i class="fa fa-vk"></i></a>
+                <a class="social-icon" href="#"><i class="fa fa-twitter"></i></a>
+                <a class="social-icon" href="#"><i class="fa fa-facebook"></i></a>
+                <br>
+                DOIT@TRIO.KZ
+            </div>
         </div>
     </div>
 </div>
@@ -48,7 +58,7 @@
             // её центр и коэффициент масштабирования.
             center: [51.142390, 71.403672 ],
             zoom: 17,
-            behaviors: ['drag', 'scrollZoom'],
+            behaviors: ['drag'],
             type: 'yandex#map'
         });
 

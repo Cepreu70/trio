@@ -2,7 +2,7 @@ var getScope = function(nameCtrl) {
     return angular.element(document.getElementById(nameCtrl)).scope();
 }, app;
 
-!function(angular) {
+!function() {
     "use strict";
     app = angular.module("ngApp", [ "ngRoute", "ngAnimate" ]).config([ "$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
         $routeProvider.when("/", {
@@ -17,7 +17,16 @@ var getScope = function(nameCtrl) {
         }), $locationProvider.html5Mode(!0);
     } ]).controller("appCtrl", [ "$route", "$routeParams", "$location", function($scope, $route, $routeParams, $location) {
         $scope.pageClass = "page-home", this.$route = $route, this.$location = $location, 
-        this.$routeParams = $routeParams;
+        this.$routeParams = $routeParams, this.init = function() {
+            {
+                var $header = $(".header");
+                $header.before($header.clone().addClass("sticky z-depth-1"));
+            }
+            $(window).on("scroll", function() {
+                var fromTop = $(window).scrollTop();
+                $("body").toggleClass("down", fromTop > 100);
+            });
+        }, this.init();
     } ]).filter("maxCount", [ function() {
         return function(obj, limit) {
             var keys = Object.keys(obj);
@@ -37,7 +46,7 @@ var getScope = function(nameCtrl) {
             return shuffledArr = o, shuffledLength = o.length, o;
         };
     });
-}(window.angular), function() {
+}(), function() {
     "use strict";
     app.controller("galleryController", [ "$routeParams", function($scope, $routeParams) {
         this.init = function() {

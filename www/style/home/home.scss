@@ -10,7 +10,8 @@
       height: auto;
     }
     img{
-
+      transform: translateZ(0);
+      display: block;
     }
   }
   .content{
