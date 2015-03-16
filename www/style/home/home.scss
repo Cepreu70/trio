@@ -36,27 +36,37 @@
           font-weight: 900;
           font-size: 20pt;
           width: 100%;
+          z-index: 2;
         }
         .row-style{
           margin-bottom: 0px;
           .col-style-left{
-            background: green;
+            z-index: 1;
             .img-left-slid{
               position: relative;
-              max-width: 80%;
+              max-width: 100%;
               margin-top: 130px;
               width: 1920px;
+              margin-bottom: 45px;
+            }
+            .cross{
+              position: absolute;
+              max-width: 130%;
+              margin-top: 70px;
+              width: 1920px;
               margin-bottom: 130px;
+              left: -12%;
+              top: 0;
             }
           }
           .col-style-right{
-            background: #ffff00;
+
             .img-left-slid{
               position: relative;
-              max-width: 80%;
+              max-width: 110%;
               margin-top: 130px;
               width: 1920px;
-              margin-bottom: 130px;
+              margin-bottom: 35px;
             }
             .block-text{
               position: absolute;
@@ -83,6 +93,12 @@
                       font-family: CoreSans;
                       font-weight: 500;
                       font-size: 20px;
+                      display: inline-block;
+                      width: 400px;
+                      left: 12%;
+                      line-height: 25px;
+                      margin-bottom: 10px;
+                      margin-top: 10px;
                     }
                   }
                 }
