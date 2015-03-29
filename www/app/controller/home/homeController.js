@@ -1,7 +1,9 @@
 (function() {
     'use strict';
     app.controller('homeController', ['$routeParams', function($scope, $routeParams) {
-        getScope('appCtrl').app.pageClass = 'page-home';
+        var $appScope = getScope('appCtrl');
+        $appScope.template.closeMenu();
+        $appScope.app.pageClass = 'page-home';
 
         this.name = "homeController";
         this.params = $routeParams;

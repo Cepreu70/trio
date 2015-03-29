@@ -13472,11 +13472,19 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
 }(jQuery), function($) {
     $(document).ready(function() {
         var time = 0;
-        showStaggeredList = function(selector) {
+        hideStaggeredList = function(selector) {
             $(selector).find("li").velocity({
+                opacity: "0",
                 translateX: "-100px"
             }, {
                 duration: 0
+            });
+        }, showStaggeredList = function(selector) {
+            time = 0, $(selector).find("li").velocity({
+                translateX: "-100px"
+            }, {
+                duration: 0,
+                queue: !1
             }), $(selector).find("li").each(function() {
                 $(this).velocity({
                     opacity: "1",
@@ -13484,7 +13492,8 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
                 }, {
                     duration: 800,
                     delay: time,
-                    easing: [ 60, 10 ]
+                    easing: [ 60, 10 ],
+                    queue: !1
                 }), time += 120;
             });
         };

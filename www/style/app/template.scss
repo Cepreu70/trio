@@ -1,13 +1,52 @@
 @import 'core/init';
 
-body.down {
-  .header.sticky {
-    transform: translateY(0px);
-    .header-btn{
-      &:hover{
-        background-color: #F3C82F;
+body {
+  &.down{
+    .header-modal{
+      opacity: 0;
+    }
+    .header-modal.sticky{
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    .header.sticky {
+      transform: translateY(0px);
+      .header-btn{
+        &:hover{
+          background-color: #F3C82F;
+          color: white;
+        }
+      }
+    }
+  }
+
+  &.has-menu, &.has-contact{
+    .header{
+      .header-btn{
+        opacity: 0;
+      }
+      .logo-trio{
+        opacity: 0;
+      }
+    }
+  }
+
+  &.has-contact{
+    .modal-contact{
+      .header-modal{
+        color: #333;
+      }
+      z-index: 2000;
+      opacity: 1;
+    }
+  }
+  &.has-menu{
+    .modal-menu{
+      .header-modal{
         color: white;
       }
+      z-index: 2000;
+      opacity: 1;
     }
   }
 }
@@ -15,20 +54,48 @@ body.down {
   max-width: 1305px;
   margin: 0 auto;
 }
-.header{
+
+.header, .header-modal{
   width: 100%;
   margin: 0 auto;
   padding: 0;
   position: absolute;
   z-index: 200;
   color: #ffffff;
+  transition: opacity $animation-time;
   &.sticky{
     z-index: 1000;
+    opacity: 1;
     position: fixed;
     transform: translateY(-200px);
     transition: 0.4s transform;
     background-color: white;
     color: #2a2a2a;
+    .header-btn{
+      margin: 20px;
+      font-size: 18px;
+      padding: 8px 20px;
+
+      .trio-sign-top, .trio-close{
+        font-size: 16px;
+        position: relative;
+        margin-right: 10px;
+      }
+
+      &.left{
+        margin-left: 28px;
+      }
+      &.right{
+        margin-right: 28px;
+      }
+    }
+    .logo-trio{
+      margin-top: 26px;
+      width: 150px;
+    }
+    &.header-modal{
+      background-color: transparent;
+    }
   }
   .header-btn{
     top: 0;
@@ -43,7 +110,14 @@ body.down {
     font-size: 20px;
     font-weight: 500;
     cursor: pointer;
-    transition: background-color $animation-time, color $animation-time, border $animation-time;
+    transition: background-color $animation-time, color $animation-time, border $animation-time, opacity $animation-time;
+
+    .trio-sign-top, .trio-close{
+      font-size: 19px;
+      position: relative;
+      margin-right: 10px;
+    }
+
     &:hover{
       background-color: #F3C82F;
       border-color: transparent;
@@ -61,10 +135,12 @@ body.down {
 
   .logo-trio{
     width: 170px;
-    height: 40px;
+    height: auto;
     margin: 0 auto;
     margin-top: 40px;
-    background: url("img/logo.png");
+    display: block;
+
+    transition: opacity $animation-time;
   }
 
   &.fixed{
@@ -79,6 +155,7 @@ body.down {
     }
   }
 }
+
 .gallery{
   text-align: left;
   .responsive-box {
@@ -161,32 +238,24 @@ body.down {
     top: 20px;
     position: absolute;
     white-space: nowrap;
-    transition: width $animation-time;
+    transition: width $animation-time, color $animation-time;
+    color: #333;
+    i{
+      position: absolute;
+      color: inherit;
+      width: auto;
+      left: 14px;
+    }
     &:hover {
-      width: 200px;
-      img{
-        left: -5px;
-      }
-      span{
-        max-width: 160px;
-        opacity: 1;
-      }
+      width: 170px;
+      color: white;
+    }
+    span{
+      margin-left: 60px;
+      margin-right: 60px;
     }
     font-weight: 900;
-    span{
 
-      max-width: 1px;
-      opacity: 0;
-      transition: opacity $animation-time, max-width $animation-time;
-      display: inline-block;
-      padding: 0;
-    }
-    img{
-      left: 3px;
-      transition: left $animation-time;
-      top: 5px;
-      display: inline;
-    }
   }
   @media only screen and (max-width : 480px) {
     /* Smartphone view: 1 tile */
@@ -217,6 +286,43 @@ body.down {
     }
   }
 }
+.social-icon{
+  margin: 28px 6px;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  text-align: center;
+  color: white;
+  border-radius: 50%;
+  border: 1px solid white;
+  line-height: 38px;
+  font-size: 16px;
+  transition: $animation-time;
+  &:hover{
+    background-color: white;
+    color: #333333;
+  }
+  @include response(1100px, 4560px){
+    margin: 28px 6px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  @include response(600px, 1100px){
+    margin: 10px 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    line-height: 27px;
+  }
+  @include response(100px, 600px){
+    margin: 18px 4px;
+    width: 25px;
+    height: 25px;
+    font-size: 11px;
+    line-height: 23px;
+  }
+}
 .footer{
   .responsive-box {
     float: left;
@@ -239,43 +345,6 @@ body.down {
       color: #ffffff;
       font-size: 28px;
       text-align: left;
-      .social-icon{
-        margin: 28px 6px;
-        width: 40px;
-        height: 40px;
-        display: inline-block;
-        text-align: center;
-        color: white;
-        border-radius: 50%;
-        border: 1px solid white;
-        line-height: 38px;
-        font-size: 16px;
-        transition: $animation-time;
-        &:hover{
-          background-color: white;
-          color: #333333;
-        }
-        @include response(1100px, 4560px){
-          margin: 28px 6px;
-          width: 40px;
-          height: 40px;
-          font-size: 16px;
-        }
-        @include response(600px, 1100px){
-          margin: 10px 5px;
-          width: 30px;
-          height: 30px;
-          font-size: 14px;
-          line-height: 27px;
-        }
-        @include response(100px, 600px){
-          margin: 18px 4px;
-          width: 25px;
-          height: 25px;
-          font-size: 11px;
-          line-height: 23px;
-        }
-      }
       @include response(1700px, 4560px){
         font-size: 28px;
       }
@@ -319,5 +388,186 @@ body.down {
       width: 50%;
       padding-bottom: 25%;
     }
+  }
+}
+.modal-menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  right: 0;
+  height: 100%;
+  overflow-y: auto;
+  color: white;
+  opacity: 0;
+  transition: opacity $animation-time*2, z-index $animation-time*2;
+  background: #30243e;
+  background: linear-gradient(135deg, rgba(48, 36, 62, 0.92) 0%, rgba(140, 157, 169, 0.92) 46%, rgba(212, 220, 212, 0.93) 100%);
+
+  #menu-list{
+    li{
+
+      .trio-sign-top{
+        top: -15px;
+        position: relative;
+        margin-right: 50px;
+        &::before{
+          position: absolute;
+          top: 0;
+          left: 0;
+          transition: transform $animation-time * 2;
+          transform: rotate(0deg);
+        }
+
+      }
+      a.menu-link{
+        transition: padding $animation-time * 2;
+        color: white;
+        font-size: 20px;
+        .menu-caption{
+          font-size: 54px;
+          font-weight: 900;
+        }
+      }
+      &:hover{
+        a.menu-link{
+          padding-left: 20px;
+          i{
+            &::before{
+              transform: rotate(90deg);
+            }
+          }
+        }
+
+      }
+
+      &.menu-about{
+        padding-left: 50px;
+      }
+    }
+  }
+
+  .vertical-container {
+    display: table;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .vertical-content {
+      text-align: left;
+      vertical-align: top;
+      padding: 80px;
+      padding-top: 140px;
+      display: table-cell;
+    }
+  }
+  z-index: -100;
+}
+
+.modal-contact{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  right: 0;
+  height: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity $animation-time*2, z-index $animation-time*2;
+  background-color: rgba(255, 255, 255, 0.94);
+  z-index: -100;
+  .vertical-container{
+    display: table;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    .vertical-content{
+      text-align: center;
+      vertical-align: middle;
+      padding: 120px;
+      display: table-cell;
+    }
+  }
+
+  //form colors
+
+  /* label color */
+  .input-field label {
+    color: #000;
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  .input-field input{
+    font-size: 19px;
+    font-weight: 500;
+  }
+
+  /* label focus color */
+  .input-field input:focus + label {
+    color: #2d19aa !important;
+    font-size: 14px;
+  }
+  /* label underline focus color */
+  .input-field input:focus {
+    border-bottom: 1px solid #2d19aa;
+    box-shadow: 0 1px 0 0 #2d19aa;
+  }
+  /* valid color */
+  .input-field input.valid {
+    border-bottom: 1px solid #2d19aa;
+    box-shadow: 0 1px 0 0 #2d19aa;
+
+    & + label {
+      font-size: 14px !important;
+    }
+  }
+  /* invalid color */
+  .input-field input.invalid {
+    border-bottom: 1px solid #c05b27;
+    box-shadow: 0 1px 0 0 #c05b27;
+
+    & + label {
+      font-size: 14px !important;
+    }
+  }
+
+
+  .input-field textarea{
+    font-size: 19px !important;
+    font-weight: 500;
+  }
+
+  /* label focus color */
+  .input-field textarea:focus + label {
+    color: #2d19aa !important;
+    font-size: 14px;
+  }
+  /* label underline focus color */
+  .input-field textarea:focus {
+    border-bottom: 1px solid #2d19aa;
+    box-shadow: 0 1px 0 0 #2d19aa;
+  }
+  /* valid color */
+  .input-field textarea.valid {
+    border-bottom: 1px solid #2d19aa;
+    box-shadow: 0 1px 0 0 #2d19aa;
+
+    & + label {
+      font-size: 14px !important;
+    }
+  }
+  /* invalid color */
+  .input-field textarea.invalid {
+    border-bottom: 1px solid #c05b27;
+    box-shadow: 0 1px 0 0 #c05b27;
+
+    & + label {
+      font-size: 14px !important;
+    }
+  }
+
+
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #2d19aa;
   }
 }

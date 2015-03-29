@@ -3,8 +3,12 @@
     app.controller('galleryController', ['$routeParams', function($scope, $routeParams) {
 
         this.init = function(){
-            getScope('appCtrl').app.pageClass = 'page-gallery';
+            var $appScope = getScope('appCtrl');
+            $appScope.template.closeMenu();
+            $appScope.app.pageClass = 'page-gallery';
+
             window.scrollTo(0,0);
+
         };
 
         this.previews = [

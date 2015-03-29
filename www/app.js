@@ -18,10 +18,6 @@ var getScope = function(nameCtrl) {
     } ]).controller("appCtrl", [ "$route", "$routeParams", "$location", function($scope, $route, $routeParams, $location) {
         $scope.pageClass = "page-home", this.$route = $route, this.$location = $location, 
         this.$routeParams = $routeParams, this.init = function() {
-            {
-                var $header = $(".header");
-                $header.before($header.clone().addClass("sticky z-depth-1"));
-            }
             $(window).on("scroll", function() {
                 var fromTop = $(window).scrollTop();
                 $("body").toggleClass("down", fromTop > 100);
@@ -50,7 +46,8 @@ var getScope = function(nameCtrl) {
     "use strict";
     app.controller("galleryController", [ "$routeParams", function($scope, $routeParams) {
         this.init = function() {
-            getScope("appCtrl").app.pageClass = "page-gallery", window.scrollTo(0, 0);
+            var $appScope = getScope("appCtrl");
+            $appScope.template.closeMenu(), $appScope.app.pageClass = "page-gallery", window.scrollTo(0, 0);
         }, this.previews = [ {
             name: "САЙТ SMART-ASTANA",
             description: "Типо описание для сайта будет тут, пока так пусть будет",
@@ -98,15 +95,32 @@ var getScope = function(nameCtrl) {
 }(), function() {
     "use strict";
     app.controller("homeController", [ "$routeParams", function($scope, $routeParams) {
-        getScope("appCtrl").app.pageClass = "page-home", this.name = "homeController", this.params = $routeParams, 
-        $(document).ready(function() {
+        var $appScope = getScope("appCtrl");
+        $appScope.template.closeMenu(), $appScope.app.pageClass = "page-home", this.name = "homeController", 
+        this.params = $routeParams, $(document).ready(function() {
             $(".parallax").parallax();
         });
     } ]);
 }(), function() {
     "use strict";
     app.controller("portfolioController", [ "$routeParams", function($scope, $routeParams) {
-        getScope("appCtrl").app.pageClass = "page-portfolio", this.name = "portfolioController", 
+        var $appScope = getScope("appCtrl");
+        $appScope.template.closeMenu(), $appScope.app.pageClass = "page-portfolio", this.name = "portfolioController", 
         this.params = $routeParams;
     } ]);
+}(), function() {
+    "use strict";
+    app.controller("templateController", function() {
+        this.getContact = function() {
+            $("body").removeClass("has-menu"), setTimeout(function() {
+                $("body").toggleClass("has-contact");
+            }, 200);
+        }, this.getMenu = function() {
+            $("body").removeClass("has-contact"), setTimeout(function() {
+                $("body").toggleClass("has-menu"), $("body").hasClass("has-menu") ? showStaggeredList("#menu-list") : hideStaggeredList("#menu-list");
+            }, 200);
+        }, this.closeMenu = function() {
+            $("body").removeClass("has-contact"), $("body").removeClass("has-menu"), hideStaggeredList("#menu-list");
+        };
+    });
 }();

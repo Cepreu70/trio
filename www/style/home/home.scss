@@ -1,31 +1,31 @@
 @import '../app/core/init';
 
-.page-home{
+.page-home {
   .parallax-container {
     height: 960px;
-    @include respond-to(md){
+    @include respond-to(md) {
       height: auto;
     }
-    @include respond-to(sm){
+    @include respond-to(sm) {
       height: auto;
     }
-    img{
+    img {
       transform: translateZ(0);
       display: block;
     }
   }
-  .content{
+  .content {
     height: auto;
     background-color: white;
     width: 100%;
     background: red;
-    .key-moments-block{
+    .key-moments-block {
       width: 100%;
       background: blue;
-      .key-moments-slide{
+      .key-moments-slide {
         width: 100%;
         background: #eac12e;
-        .heading{
+        .heading {
           position: absolute;
           top: 0px;
           text-align: left;
@@ -38,29 +38,29 @@
           width: 100%;
           z-index: 2;
         }
-        .row-style{
+        .row-style {
           margin-bottom: 0px;
-          .col-style-left{
+          .col-style-left {
             z-index: 1;
-            .block-text{
+            .block-text {
               position: absolute;
               top: 0;
               left: 0;
               width: 100%;
               height: 100%;
-              .text-block{
+              .text-block {
                 display: table;
                 width: 100%;
                 height: 100%;
-                .bla{
+                .bla {
                   display: table-cell;
                   width: 100%;
                   height: 100%;
                   text-align: center;
                   vertical-align: middle;
-                  .bla1{
+                  .bla1 {
                     width: 80%;
-                    .key-text{
+                    .key-text {
                       position: relative;
                       text-align: left;
                       color: #fff;
@@ -73,63 +73,68 @@
                       line-height: 25px;
                       margin-bottom: 10px;
                       margin-top: 10px;
-            .img-left-slid{
-              position: relative;
-              max-width: 100%;
-              margin-top: 130px;
-              width: 1920px;
-              margin-bottom: 45px;
-            }
-            .cross{
-              position: absolute;
-              max-width: 130%;
-              margin-top: 70px;
-              width: 1920px;
-              margin-bottom: 130px;
-              left: -12%;
-              top: 0;
-            }
-          }
-          .col-style-right{
+                      .img-left-slid {
+                        position: relative;
+                        max-width: 100%;
+                        margin-top: 130px;
+                        width: 1920px;
+                        margin-bottom: 45px;
+                      }
+                      .cross {
+                        position: absolute;
+                        max-width: 130%;
+                        margin-top: 70px;
+                        width: 1920px;
+                        margin-bottom: 130px;
+                        left: -12%;
+                        top: 0;
+                      }
+                    }
+                    .col-style-right {
 
-            .img-left-slid{
-              position: relative;
-              max-width: 100%;
-              margin-top: 130px;
-              width: 1920px;
-              margin-bottom: 35px;
-            }
-            .block-text{
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              .text-block{
-                display: table;
-                width: 100%;
-                height: 100%;
-                .bla{
-                  display: table-cell;
-                  width: 100%;
-                  height: 100%;
-                  text-align: center;
-                  vertical-align: middle;
-                  .bla1{
-                    width: 80%;
-                    .key-text{
-                      position: relative;
-                      text-align: left;
-                      color: #fff;
-                      font-family: CoreSans;
-                      font-weight: 500;
-                      font-size: 20px;
-                      display: inline-block;
-                      width: 80%;
-                      left: 12%;
-                      line-height: 25px;
-                      margin-bottom: 10px;
-                      margin-top: 10px;
+                      .img-left-slid {
+                        position: relative;
+                        max-width: 100%;
+                        margin-top: 130px;
+                        width: 1920px;
+                        margin-bottom: 35px;
+                      }
+                      .block-text {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        .text-block {
+                          display: table;
+                          width: 100%;
+                          height: 100%;
+                          .bla {
+                            display: table-cell;
+                            width: 100%;
+                            height: 100%;
+                            text-align: center;
+                            vertical-align: middle;
+                            .bla1 {
+                              width: 80%;
+                              .key-text {
+                                position: relative;
+                                text-align: left;
+                                color: #fff;
+                                font-family: CoreSans;
+                                font-weight: 500;
+                                font-size: 20px;
+                                display: inline-block;
+                                width: 80%;
+                                left: 12%;
+                                line-height: 25px;
+                                margin-bottom: 10px;
+                                margin-top: 10px;
+                              }
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                 }

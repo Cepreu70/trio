@@ -8,34 +8,188 @@
 </head>
 
 <!-- apply our angular app -->
-<body ng-app="ngApp">
-<div class="header">
-    <p class="waves-effect waves-light header-btn left">меню</p>
-    <p class="waves-effect waves-light header-btn right">Связаться</p>
-    <p class="logo-trio"></p>
-</div>
-<div id="appCtrl" ng-controller="appCtrl as app">
-    <div ng-view class="page {{ app.pageClass }}" ></div>
-</div>
-<div class="footer">
-    <div class="responsive-box">
-        <div class="boxInner" id="myMap"></div>
+<body ng-app="ngApp" ng-controller="templateController as template">
+
+    <!-- HEADER -->
+    <div class="header">
+        <p class="waves-effect waves-light header-btn left"  ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
+        <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();">Связаться</p>
+        <img class="logo-trio" src="img/trio-logo.svg">
     </div>
-    <div class="responsive-box" style="background-image: url('img/footer-bg.jpg');">
-        <div class="boxInner valign-wrapper">
-            <div class="about-information">
-                АСТАНА, КОМСОМОЛЬСКИЙ РАЙОН, УЛ. АЙША БИБИ, 9 <br>
-                +7 (7172) 478 413
-                <br>
-                <a class="social-icon" href="#"><i class="fa fa-vk"></i></a>
-                <a class="social-icon" href="#"><i class="fa fa-twitter"></i></a>
-                <a class="social-icon" href="#"><i class="fa fa-facebook"></i></a>
-                <br>
-                DOIT@TRIO.KZ
+
+    <div class="header sticky z-depth-1">
+        <p class="waves-effect waves-light header-btn left"  ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
+        <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();">Связаться</p>
+        <img class="logo-trio" src="img/trio-logo.svg">
+    </div>
+
+    <!-- PAGE TEMPLATE -->
+    <div id="appCtrl" ng-controller="appCtrl as app">
+        <div ng-view class="page {{ app.pageClass }}" ></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <div class="responsive-box">
+            <div class="boxInner" id="myMap"></div>
+        </div>
+        <div class="responsive-box" style="background-image: url('img/footer-bg.jpg');">
+            <div class="boxInner valign-wrapper">
+                <div class="about-information">
+                    АСТАНА, КОМСОМОЛЬСКИЙ РАЙОН, УЛ. АЙША БИБИ, 9 <br>
+                    +7 (7172) 478 413
+                    <br>
+                    <a class="social-icon" href="#"><i class="fa fa-vk"></i></a>
+                    <a class="social-icon" href="#"><i class="fa fa-twitter"></i></a>
+                    <a class="social-icon" href="#"><i class="fa fa-facebook"></i></a>
+                    <br>
+                    DOIT@TRIO.KZ
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- MODAL Меню -->
+    <div class="modal-menu">
+        <div class="header-modal">
+            <p class="waves-effect waves-light header-btn left" ng-click="template.getMenu();"><i class="trio-close"></i> меню</p>
+            <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();">Связаться</p>
+            <img class="logo-trio" src="img/trio-logo.svg">
+        </div>
+        <div class="header-modal sticky">
+            <p class="waves-effect waves-light header-btn left" ng-click="template.getMenu();"><i class="trio-close"></i> меню</p>
+            <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();">Связаться</p>
+            <img class="logo-trio" src="img/trio-logo.svg">
+        </div>
+
+        <div class="vertical-container">
+            <div class="vertical-content">
+                <ul id="menu-list">
+
+                    <li>
+                        <a class="menu-link" href="/">
+                            <i class="trio-sign-top"></i>
+                            <span class="menu-caption"> Главная </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-link" href="/about">
+                            <i class="trio-sign-top"></i>
+                            <span class="menu-caption"> О нас </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-link" href="/gallery">
+                            <i class="trio-sign-top"></i>
+                            <span class="menu-caption"> Работы </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-link" href="/services">
+                            <i class="trio-sign-top"></i>
+                            <span class="menu-caption"> Услуги </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-link" href="/blog">
+                            <i class="trio-sign-top"></i>
+                            <span class="menu-caption"> Блог </span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="menu-link" href="/contacts">
+                            <i class="trio-sign-top"></i>
+                            <span class="menu-caption"> Контакты </span>
+                        </a>
+
+                    </li>
+
+                    <li class="menu-about">
+                        <br>
+                        АСТАНА, КОМСОМОЛЬСКИЙ РАЙОН, <br>
+                        УЛ. АЙША БИБИ 9<br>
+                        +7 (7172) 478 413<br>
+                        <a class="social-icon" href="#"><i class="fa fa-vk"></i></a>
+                        <a class="social-icon" href="#"><i class="fa fa-twitter"></i></a>
+                        <a class="social-icon" href="#"><i class="fa fa-facebook"></i></a>
+                        <br>
+                        DOIT@TRIO.KZ
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MODAL СВЯЗАТЬСЯ -->
+    <div class="modal-contact">
+
+        <div class="header-modal">
+            <p class="waves-effect waves-light header-btn left" ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
+            <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();"><i class="trio-close"></i> Связаться</p>
+            <img class="logo-trio" src="img/trio-logo.svg">
+        </div>
+
+        <div class="header-modal sticky">
+            <p class="waves-effect waves-light header-btn left" ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
+            <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();"><i class="trio-close"></i> Связаться</p>
+            <img class="logo-trio" src="img/trio-logo.svg">
+        </div>
+        <div class="vertical-container">
+            <div class="vertical-content">
+                <div class="not-full-width">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="first_name" type="text" class="validate">
+                                <label for="first_name">Имя</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="last_name" type="text" class="validate">
+                                <label for="last_name">Фамилия</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="company" type="text" class="validate">
+                                <label for="company">Компания</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="topic" type="text" class="validate">
+                                <label for="topic"> Тема </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea id="text-message" class="materialize-textarea"></textarea>
+                                <label for="text-message"> Текст сообщения </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="telephone" type="text" class="validate">
+                                <label for="telephone"> Телефон </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="email" type="email" class="validate">
+                                <label for="email">Email</label>
+                            </div>
+                        </div>
+                        <a class="waves-effect waves-light btn yellow darken-2"> Отправить </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <!-- SCRIPTS -->

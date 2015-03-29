@@ -29,16 +29,16 @@ var app;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
 
-                this.init = function(){
-                    var $header = $(".header"),
-                        $clone = $header.before($header.clone().addClass("sticky z-depth-1"));
 
+                // Sticky menu
+                this.init = function(){
                     $(window).on("scroll", function() {
                         var fromTop = $(window).scrollTop();
                         $("body").toggleClass("down", (fromTop > 100));
                     });
                 };
                 this.init();
+
 
             }])
 

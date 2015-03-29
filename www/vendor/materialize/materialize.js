@@ -2976,19 +2976,27 @@ $(document).ready(function(){
 
     var time = 0;
 
+
+      hideStaggeredList = function(selector) {
+          $(selector).find('li').velocity(
+              { opacity: "0", translateX: "-100px"},
+              { duration: 0 });
+
+      }
     // Horizontal staggered list
     showStaggeredList = function(selector) {
+        time = 0;
       $(selector).find('li').velocity(
           { translateX: "-100px"},
-          { duration: 0 });
+          { duration: 0 , queue: false});
 
       $(selector).find('li').each(function() {
         $(this).velocity(
           { opacity: "1", translateX: "0"},
-          { duration: 800, delay: time, easing: [60, 10] });
+          { duration: 800, delay: time, easing: [60, 10], queue: false });
         time += 120;
       });
-    }
+    };
 
     // Hardcoded .staggered-list scrollFire
     var staggeredListOptions = [];
