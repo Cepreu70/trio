@@ -5,11 +5,13 @@
         $appScope.template.closeMenu();
         $appScope.app.pageClass = 'page-home';
 
+
+
         this.name = "homeController";
         this.params = $routeParams;
 
         $(document).ready(function(){
-            $('.parallax').parallax();
+
         });
     }])
 })();

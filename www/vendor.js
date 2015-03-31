@@ -1145,7 +1145,7 @@ function toast(message, displayLength, className, completeCallback) {
                 (f || l) && (h.push(r, f, l), p = !0, n = n || f), f = null;
                 return p ? g : null;
             }
-            function I(a, b, c) {
+            function I(a, b, c, d) {
                 return function(d, e, f, g, h) {
                     return d || (d = a.$new(!1, h), d.$$transcluded = !0), b(d, e, {
                         parentBoundTranscludeFn: c,
@@ -1591,7 +1591,7 @@ function toast(message, displayLength, className, completeCallback) {
     }
     function He() {
         this.$get = [ "$log", function(b) {
-            return function() {
+            return function(a, c) {
                 b.error.apply(b, arguments);
             };
         } ];
@@ -1737,7 +1737,7 @@ function toast(message, displayLength, className, completeCallback) {
             var q = f("$http"), t = [];
             return s(c, function(a) {
                 t.unshift(x(a) ? l.get(a) : l.invoke(a));
-            }), k.pendingRequests = [], function() {
+            }), k.pendingRequests = [], function(a) {
                 s(arguments, function(a) {
                     k[a] = function(b, c) {
                         return k(w(c || {}, {
@@ -1746,7 +1746,7 @@ function toast(message, displayLength, className, completeCallback) {
                         }));
                     };
                 });
-            }("get", "delete", "head", "jsonp"), function() {
+            }("get", "delete", "head", "jsonp"), function(a) {
                 s(arguments, function(a) {
                     k[a] = function(b, c, d) {
                         return k(w(d || {}, {
@@ -2025,7 +2025,7 @@ function toast(message, displayLength, className, completeCallback) {
         }, this.$$compose = function() {
             var c = Qb(this.$$search), e = this.$$hash ? "#" + rb(this.$$hash) : "";
             this.$$url = bc(this.$$path) + (c ? "?" + c : "") + e, this.$$absUrl = b + (this.$$url ? a + this.$$url : "");
-        }, this.$$parseLinkUrl = function(a) {
+        }, this.$$parseLinkUrl = function(a, c) {
             return Ha(b) == Ha(a) ? (this.$$parse(a), !0) : !1;
         };
     }
@@ -2286,7 +2286,7 @@ function toast(message, displayLength, className, completeCallback) {
                 var e;
                 return e = a.$watch(function(a) {
                     return d(a);
-                }, function() {
+                }, function(a, c, d) {
                     G(b) && b.apply(this, arguments), e();
                 }, c);
             }
@@ -2702,7 +2702,7 @@ function toast(message, displayLength, className, completeCallback) {
                         -1 !== d && (c[d] = null, m(e, 1, a));
                     };
                 },
-                $emit: function(a) {
+                $emit: function(a, b) {
                     var d, k, m, c = [], e = this, g = !1, h = {
                         name: a,
                         targetScope: e,
@@ -2725,7 +2725,7 @@ function toast(message, displayLength, className, completeCallback) {
                     } while (e);
                     return h.currentScope = null, h;
                 },
-                $broadcast: function(a) {
+                $broadcast: function(a, b) {
                     var c = this, d = this, e = {
                         name: a,
                         targetScope: this,
@@ -2801,7 +2801,7 @@ function toast(message, displayLength, className, completeCallback) {
                     return this.$$unwrapTrustedValue().toString();
                 }, b;
             }
-            var f = function() {
+            var f = function(a) {
                 throw Ca("unsafe");
             };
             c.has("$sanitize") && (f = c.get("$sanitize"));
@@ -3163,7 +3163,7 @@ function toast(message, displayLength, className, completeCallback) {
     }
     function Ff() {
         return function(b, a) {
-            return V(b) && (b = b.toString()), E(b) || x(b) ? (a = 1/0 === Math.abs(Number(a)) ? Number(a) : $(a)) ? a > 0 ? b.slice(0, a) : b.slice(a) : x(b) ? "" : [] : b;
+            return V(b) && (b = b.toString()), E(b) || x(b) ? (a = 1 / 0 === Math.abs(Number(a)) ? Number(a) : $(a)) ? a > 0 ? b.slice(0, a) : b.slice(a) : x(b) ? "" : [] : b;
         };
     }
     function md(b) {
@@ -3284,7 +3284,7 @@ function toast(message, displayLength, className, completeCallback) {
         var g = R(a[0].type);
         if (!e.android) {
             var h = !1;
-            a.on("compositionstart", function() {
+            a.on("compositionstart", function(a) {
                 h = !0;
             }), a.on("compositionend", function() {
                 h = !1, l();
@@ -3339,7 +3339,7 @@ function toast(message, displayLength, className, completeCallback) {
                     c < a.length && (f[a[c]] = +b);
                 }), new Date(f.yyyy, f.MM - 1, f.dd, f.HH, f.mm, f.ss || 0, 1e3 * f.sss || 0);
             }
-            return 0/0;
+            return 0 / 0;
         };
     }
     function kb(b, a, c, d) {
@@ -3443,7 +3443,7 @@ function toast(message, displayLength, className, completeCallback) {
                         m = qa(b);
                     }
                     var m;
-                    f.$watch(h[b], k, !0), h.$observe("class", function() {
+                    f.$watch(h[b], k, !0), h.$observe("class", function(a) {
                         k(f.$eval(h[b]));
                     }), "ngClass" !== b && f.$watch("$index", function(c, d) {
                         var g = 1 & c;
@@ -3838,7 +3838,7 @@ function toast(message, displayLength, className, completeCallback) {
                 enter: function(a, c, d, e) {
                     return k(a, e), d ? d.after(a) : c.prepend(a), l();
                 },
-                leave: function(a) {
+                leave: function(a, c) {
                     return a.remove(), l();
                 },
                 move: function(a, c, d, e) {
@@ -4502,7 +4502,7 @@ function toast(message, displayLength, className, completeCallback) {
                     new Date(e, 0, k.getDate() + f, d, g, h, l);
                 }
             }
-            return 0/0;
+            return 0 / 0;
         }, "yyyy-Www"),
         month: kb("month", Bd, Nb(Bd, [ "yyyy", "MM" ]), "yyyy-MM"),
         number: function(a, c, d, e, f, g) {
@@ -4784,7 +4784,7 @@ function toast(message, displayLength, className, completeCallback) {
                 t = function(a) {
                     var d = p(a);
                     return G(d) && (d = c(a)), d;
-                }, r = function(a) {
+                }, r = function(a, c) {
                     G(p(a)) ? g(a, {
                         $$$p: n.$modelValue
                     }) : q(a, n.$modelValue);
@@ -4839,7 +4839,7 @@ function toast(message, displayLength, className, completeCallback) {
                     if (!k || !G(k.then)) throw Ob("$asyncValidators", k);
                     g(h, u), d.push(k.then(function() {
                         g(h, !0);
-                    }, function() {
+                    }, function(a) {
                         e = !1, g(h, !1);
                     }));
                 }), d.length ? k.all(d).then(function() {
@@ -4927,7 +4927,7 @@ function toast(message, displayLength, className, completeCallback) {
                         var h = g[0];
                         h.$options && h.$options.updateOn && e.on(h.$options.updateOn, function(a) {
                             h.$$debounceViewValueCommit(a && a.type);
-                        }), e.on("blur", function() {
+                        }), e.on("blur", function(e) {
                             h.$touched || (a.$$phase ? c.$evalAsync(h.$setTouched) : c.$apply(h.$setTouched));
                         });
                     }
@@ -8158,7 +8158,7 @@ function toast(message, displayLength, className, completeCallback) {
                 C.data("$$ngAnimateChildren", !!f);
             });
         };
-    }).factory("$$animateReflow", [ "$$rAF", "$document", function(f) {
+    }).factory("$$animateReflow", [ "$$rAF", "$document", function(f, C) {
         return function(g) {
             return f(function() {
                 g();
@@ -8417,7 +8417,7 @@ function toast(message, displayLength, className, completeCallback) {
             u = Q, y.data("$$ngAnimateState", r);
             var $ = P.$watch(function() {
                 return Z.totalPendingRequests;
-            }, function(a) {
+            }, function(a, c) {
                 0 === a && ($(), P.$$postDigest(function() {
                     P.$$postDigest(function() {
                         r.running = !1;
@@ -8706,7 +8706,7 @@ function toast(message, displayLength, className, completeCallback) {
             };
         } ]);
     } ]);
-}(window, window.angular), function(q, d) {
+}(window, window.angular), function(q, d, C) {
     "use strict";
     function v(r, k, h) {
         return {
@@ -8809,7 +8809,7 @@ function toast(message, displayLength, className, completeCallback) {
             }
             function l() {
                 var a, b;
-                return d.forEach(h, function(c) {
+                return d.forEach(h, function(c, h) {
                     var g;
                     if (g = !b) {
                         var k = f.path();
@@ -10916,7 +10916,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
                 return f ? k.promise || null : d;
             }
             function s() {
-                function e() {
+                function e(e) {
                     function f(e, t) {
                         var r = a, n = a, i = a;
                         return g.isArray(e) ? (r = e[0], !g.isArray(e[1]) && /^[\d-]/.test(e[1]) || g.isFunction(e[1]) || x.RegEx.isHex.test(e[1]) ? i = e[1] : (g.isString(e[1]) && !x.RegEx.isHex.test(e[1]) || g.isArray(e[1])) && (n = t ? e[1] : u(e[1], s.duration), 
@@ -12147,9 +12147,9 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
             var origin = $(this), activates = $("#" + origin.attr("data-activates"));
             updateOptions(), activates.parent().is($("body")) || (activates.detach(), $("body").append(activates));
             var dropdownRealHeight = activates.height();
-            if (options.hover) origin.on("mouseover", function() {
+            if (options.hover) origin.on("mouseover", function(e) {
                 placeDropdown();
-            }), activates.on("mouseleave", function() {
+            }), activates.on("mouseleave", function(e) {
                 hideDropdown();
             }); else {
                 origin.click(function(e) {
@@ -12372,7 +12372,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
 }(jQuery), function($) {
     $.fn.parallax = function() {
         var window_width = $(window).width();
-        return this.each(function() {
+        return this.each(function(i) {
             var $this = $(this);
             $this.addClass("parallax");
             var updateParallax = function() {
@@ -12774,7 +12774,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
                 var panning = !1, menuOut = !1;
                 $(".drag-target").hammer({
                     prevent_default: !1
-                }).bind("tap", function() {
+                }).bind("tap", function(e) {
                     $("#sidenav-overlay").trigger("click");
                 }).bind("pan", function(e) {
                     if ("touch" === e.gesture.pointerType) {
@@ -13269,7 +13269,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
                 $(this).css("background-image", "url(" + $(this).attr("src") + ")"), $(this).attr("src", "");
             }), options.indicators) {
                 var $indicators = $('<ul class="indicators"></ul>');
-                $slides.each(function() {
+                $slides.each(function(index) {
                     var $indicator = $('<li class="indicator-item"></li>');
                     $indicator.click(function() {
                         var $parent = $slider.parent(), curr_index = $parent.find($(this)).index();
@@ -13410,7 +13410,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
         $.fn.pushpin = function(options) {
             var defaults = {
                 top: 0,
-                bottom: 1/0,
+                bottom: 1 / 0,
                 offset: 0
             };
             return options = $.extend(defaults, options), $index = 0, this.each(function() {
@@ -13435,7 +13435,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
     });
 }(jQuery), function($) {
     $(document).ready(function() {
-        jQuery.fn.reverse = [].reverse, $(".fixed-action-btn").each(function() {
+        jQuery.fn.reverse = [].reverse, $(".fixed-action-btn").each(function(i) {
             var $this = $(this);
             $this.find("ul a.btn-floating").velocity({
                 scaleY: ".4",
@@ -13878,7 +13878,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
         return this.item[type];
     }, DatePicker.prototype.create = function(type, value, options) {
         var isInfiniteValue, calendar = this;
-        return value = void 0 === value ? type : value, value == -1/0 || 1/0 == value ? isInfiniteValue = value : $.isPlainObject(value) && _.isInteger(value.pick) ? value = value.obj : $.isArray(value) ? (value = new Date(value[0], value[1], value[2]), 
+        return value = void 0 === value ? type : value, value == -(1 / 0) || value == 1 / 0 ? isInfiniteValue = value : $.isPlainObject(value) && _.isInteger(value.pick) ? value = value.obj : $.isArray(value) ? (value = new Date(value[0], value[1], value[2]), 
         value = _.isDate(value) ? value : calendar.create().obj) : value = _.isInteger(value) || _.isDate(value) ? calendar.normalize(new Date(value), options) : calendar.now(type, value, options), 
         {
             year: isInfiniteValue || value.getFullYear(),
@@ -13923,7 +13923,7 @@ angular.module("pascalprecht.translate").directive("translate", [ "$translate", 
         var calendar = this;
         return value ? "string" == typeof value ? value = calendar.parse(type, value) : _.isInteger(value) && (value = calendar.now(type, value, {
             rel: value
-        })) : value = "min" == type ? -1/0 : 1/0, value;
+        })) : value = "min" == type ? -(1 / 0) : 1 / 0, value;
     }, DatePicker.prototype.viewset = function(type, dateObject) {
         return this.create([ dateObject.year, dateObject.month, 1 ]);
     }, DatePicker.prototype.validate = function(type, dateObject, options) {

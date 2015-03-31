@@ -28,7 +28,7 @@ var getScope = function(nameCtrl) {
             var keys = Object.keys(obj);
             if (keys.length < 1) return [];
             var ret = new Object(), count = 0;
-            return angular.forEach(keys, function(key) {
+            return angular.forEach(keys, function(key, arrayIndex) {
                 return count >= limit ? !1 : (ret[key] = obj[key], void count++);
             }), ret;
         };
@@ -97,9 +97,7 @@ var getScope = function(nameCtrl) {
     app.controller("homeController", [ "$routeParams", function($scope, $routeParams) {
         var $appScope = getScope("appCtrl");
         $appScope.template.closeMenu(), $appScope.app.pageClass = "page-home", this.name = "homeController", 
-        this.params = $routeParams, $(document).ready(function() {
-            $(".parallax").parallax();
-        });
+        this.params = $routeParams, $(document).ready(function() {});
     } ]);
 }(), function() {
     "use strict";
@@ -110,7 +108,7 @@ var getScope = function(nameCtrl) {
     } ]);
 }(), function() {
     "use strict";
-    app.controller("templateController", function() {
+    app.controller("templateController", function($scope) {
         this.getContact = function() {
             $("body").removeClass("has-menu"), setTimeout(function() {
                 $("body").toggleClass("has-contact");
