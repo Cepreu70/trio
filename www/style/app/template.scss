@@ -21,6 +21,7 @@ body {
   }
 
   &.has-menu, &.has-contact{
+    overflow: hidden;
     .header{
       .header-btn{
         opacity: 0;
