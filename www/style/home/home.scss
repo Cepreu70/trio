@@ -30,10 +30,35 @@
     background: red;
     .key-moments-block {
       width: 100%;
-      background: blue;
       .key-moments-slide {
         width: 100%;
         background: #eac12e;
+        .not-full-width{
+          max-width: 1305px;
+          margin: 0 auto;
+          .row-style {
+            margin-bottom: 0px;
+            .col-style-left {
+              z-index: 1;
+              .img-left-slid {
+                position: relative;
+                max-width: 100%;
+                margin-top: 130px;
+                width: 1920px;
+                margin-bottom: 45px;
+              }
+              .cross {
+                position: absolute;
+                max-width: 130%;
+                margin-top: 70px;
+                width: 1920px;
+                margin-bottom: 130px;
+                left: -12%;
+                top: 0;
+              }
+            }
+          }
+        }
         .heading {
           position: absolute;
           top: 0px;
@@ -47,10 +72,8 @@
           width: 100%;
           z-index: 2;
         }
-        .row-style {
-          margin-bottom: 0px;
-          .col-style-left {
-            z-index: 1;
+
+
             .block-text {
               position: absolute;
               top: 0;
@@ -82,22 +105,7 @@
                       line-height: 25px;
                       margin-bottom: 10px;
                       margin-top: 10px;
-                      .img-left-slid {
-                        position: relative;
-                        max-width: 100%;
-                        margin-top: 130px;
-                        width: 1920px;
-                        margin-bottom: 45px;
-                      }
-                      .cross {
-                        position: absolute;
-                        max-width: 130%;
-                        margin-top: 70px;
-                        width: 1920px;
-                        margin-bottom: 130px;
-                        left: -12%;
-                        top: 0;
-                      }
+
                     }
                     .col-style-right {
 
@@ -152,6 +160,4 @@
           }
         }
       }
-    }
-  }
-}
+
