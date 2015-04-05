@@ -19,4 +19,31 @@
       }
     }
   }
+  .menu{
+    background-color: #eac12e;
+
+    a{
+      font-size: 18px;
+      color: #2e2e2e;
+      padding: 35px;
+      display: inline-block;
+      top: 0;
+      &.left-page{
+        position: absolute;
+        text-align: left;
+        float: left;
+        left: 0;
+      }
+      &.current-page{
+        width: 100%;
+        text-align: center;
+      }
+      &.next-page{
+        position: absolute;
+        text-align: right;
+        float: right;
+        right: 0;
+      }
+    }
+  }
 }

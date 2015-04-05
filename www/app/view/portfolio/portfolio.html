@@ -1,7 +1,18 @@
 <div ng-controller="portfolioController as portfolio">
     <div class="heading">
         <a href="gallery">Все работы</a>
-        <a ng-repeat="category in portfolio.categories" ng-href="gallery/?category={{category.id}}">{{category.name}}</a>
+        <a ng-repeat="category in portfolio.categories" ng-href="gallery/?category={{category.id}}"
+           ng-class="{'active':(portfolio.currentPreview.categories.indexOf(category.id) > -1)}">{{category.name}}</a>
     </div>
+    <div class="menu">
+        <div class="not-full-width">
+            <a class="current-page waves-effect waves-light" ng-href="portfolio/?page={{portfolio.currentPreview.pageUrl}}"><i class="trio-sign-top"></i>{{ portfolio.currentPreview.name }}</a>
+            <a class="left-page waves-effect waves-light" ng-href="portfolio/?page={{portfolio.previousPreview.pageUrl}}"><i class="trio-sign-left"></i>{{ portfolio.previousPreview.name }}</a>
+            <a class="next-page waves-effect waves-light" ng-href="portfolio/?page={{portfolio.nextPreview.pageUrl}}">{{ portfolio.nextPreview.name }} <i class="trio-sign-right"></i></a>
+        </div>
+
+    </div>
+
+
     <div ng-include src="'app/view/portfolio/' + portfolio.pageName + '.html'" class="portfolio-inner-page {{portfolio.pageName}}"></div>
 </div>
