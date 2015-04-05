@@ -1,12 +1,13 @@
 (function() {
     'use strict';
     app.controller('templateController', function($scope) {
+        this.headerStyle = 'normal';
         this.getContact = function(){
             $("body").removeClass("has-menu");
 
             setTimeout(function(){
                 $("body").toggleClass("has-contact");
-            }, 200);
+            }, 100);
 
         };
         this.getMenu = function(){
@@ -19,7 +20,7 @@
                 }else{
                     hideStaggeredList('#menu-list');
                 }
-            }, 200);
+            }, 100);
         };
         this.closeMenu = function(){
             $("body").removeClass("has-contact");

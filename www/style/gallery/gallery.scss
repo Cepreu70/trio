@@ -1,3 +1,22 @@
 .page-gallery{
-  background:#ffa6bb; color:#9e0000;
+  .types{
+    background-color: white;
+    padding-top: 110px;
+    text-align: left;
+    a{
+      cursor: pointer;
+      padding: 10px;
+      margin: 20px;
+      color: #2e2e2e;
+      display: inline-block;
+      &:hover{
+        text-decoration: underline;
+      }
+      &.active{
+        color: #1b1b1b;
+        text-decoration: underline;
+        font-weight: 500;
+      }
+    }
+  }
 }

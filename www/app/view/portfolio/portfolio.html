@@ -1,5 +1,7 @@
-<h1>Angular Animations Shenanigans</h1>
-<h2>Portfolio</h2>
-
-<a href="gallery" class="waves-effect waves-light btn">gallery</a>
-<a href="/" class="waves-effect waves-light btn">Home</a>
+<div ng-controller="portfolioController as portfolio">
+    <div class="heading">
+        <a href="gallery">Все работы</a>
+        <a ng-repeat="category in portfolio.categories" ng-href="gallery/?category={{category.id}}">{{category.name}}</a>
+    </div>
+    <div ng-include src="'app/view/portfolio/' + portfolio.pageName + '.html'" class="portfolio-inner-page {{portfolio.pageName}}"></div>
+</div>

@@ -51,9 +51,14 @@ body {
     }
   }
 }
+
 .not-full-width {
   max-width: 1305px;
   margin: 0 auto;
+}
+
+#appCtrl{
+  min-height: 70%;
 }
 
 .header, .header-modal{
@@ -64,6 +69,9 @@ body {
   z-index: 200;
   color: #ffffff;
   transition: opacity $animation-time;
+  &.black-header{
+    color: #2a2a2a;
+  }
   &.sticky{
     z-index: 1000;
     opacity: 1;
@@ -159,6 +167,9 @@ body {
 
 .gallery{
   text-align: left;
+  background-color: white;
+  display: table;
+  min-width: 100%;
   .responsive-box {
     float: left;
     position: relative;
@@ -325,6 +336,8 @@ body {
   }
 }
 .footer{
+  display: table;
+  width: 100%;
   .responsive-box {
     float: left;
     position: relative;

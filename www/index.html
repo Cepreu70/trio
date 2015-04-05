@@ -11,16 +11,16 @@
 <body ng-app="ngApp" ng-controller="templateController as template">
 
     <!-- HEADER -->
-    <div class="header">
+    <div class="header {{template.headerStyle}}">
         <p class="waves-effect waves-light header-btn left"  ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
         <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();">Связаться</p>
-        <img class="logo-trio" src="img/trio-logo.svg">
+        <a href="/"> <img class="logo-trio" src="img/trio-logo.svg"> </a>
     </div>
 
     <div class="header sticky z-depth-1">
         <p class="waves-effect waves-light header-btn left"  ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
         <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();">Связаться</p>
-        <img class="logo-trio" src="img/trio-logo.svg">
+        <a href="/"> <img class="logo-trio" src="img/trio-logo.svg"> </a>
     </div>
 
     <!-- PAGE TEMPLATE -->
@@ -132,13 +132,13 @@
         <div class="header-modal">
             <p class="waves-effect waves-light header-btn left" ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
             <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();"><i class="trio-close"></i> Связаться</p>
-            <img class="logo-trio" src="img/trio-logo.svg">
+            <a href="/"> <img class="logo-trio" src="img/trio-logo.svg"> </a>
         </div>
 
         <div class="header-modal sticky">
             <p class="waves-effect waves-light header-btn left" ng-click="template.getMenu();"><i class="trio-sign-top"></i> меню</p>
             <p class="waves-effect waves-light header-btn right" ng-click="template.getContact();"><i class="trio-close"></i> Связаться</p>
-            <img class="logo-trio" src="img/trio-logo.svg">
+            <a href="/">  <img class="logo-trio" src="img/trio-logo.svg"> </a>
         </div>
         <div class="vertical-container">
             <div class="vertical-content">
