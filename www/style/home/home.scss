@@ -163,5 +163,51 @@
         }
       }
     }
+    .development-process-phases{
+      width: 100%;
+      background: #fff;
+      .not-full-width{
+        max-width: 1305px;
+        margin: 0 auto;
+        padding-top: 100px;
+        padding-bottom: 50px;
+        .row-style{
+          margin-bottom: 0px;
+          overflow: hidden;
+          .col-style-left{
+
+            .img-process{
+
+            }
+            .text-process{
+              text-align: center;
+            }
+            .arrow{
+              position: absolute;
+              background: url(/img/arrow-def.png)no-repeat;
+              background-position: right;
+              width: 250px;
+              height: 60px;
+              top: 0;
+              -webkit-transition: 400ms;
+              -moz-transition: 400ms;
+              -ms-transition: 400ms;
+              -o-transition: 400ms;
+              transition: 400ms;
+              &:hover{
+
+              }
+            }
+          }
+          .description-text-block{
+            margin-top: 50px;
+            .text-description{
+              text-align: left;
+              margin-left: 45px;
+            }
+          }
+        }
+      }
+    }
   }
 }
