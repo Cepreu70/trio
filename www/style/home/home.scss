@@ -72,18 +72,6 @@
               .style-add{
                 margin-top: 55px;
               }
-              .right-slid-text{
-                position: relative;
-                text-align: left;
-                color: #b793b8;
-                font-family: CoreSans;
-                font-weight: 500;
-                font-size: 17px;
-                line-height: 20px;
-                margin-bottom: 10px;
-                margin-top: 225px;
-                padding-bottom: 50px;
-              }
               .img-center-slid {
                 position: relative;
                 max-width: 70%;
@@ -142,6 +130,25 @@
                   margin-bottom: 10px;
                   margin-top: 10px;
                 }
+                .icons-text {
+                  position: relative;
+                  text-align: left;
+                  color: #fff;
+                  font-family: CoreSans;
+                  font-weight: 500;
+                  font-size: 20px;
+                  display: inline-block;
+                  width: 80%;
+                  left: 12%;
+                  line-height: 25px;
+                  margin-bottom: 10px;
+                  margin-top: 10px;
+                  left: 20%;
+                  .trio-sign-top{
+                    position: absolute;
+                    left: -40px;
+                  }
+                }
                 .key-center-slid {
                   position: relative;
                   text-align: center;
@@ -156,6 +163,22 @@
                   margin-bottom: 10px;
                   margin-top: 0px;
                   top: 60px;
+                }
+                .right-slid-text{
+                  position: relative;
+                  text-align: center;
+                  font-weight: 500;
+                  display: inline-block;
+                  width: 95%;
+                  left: 12%;
+                  margin-bottom: 10px;
+                  margin-top: 0px;
+                  top: 0px;
+                  color: #b793b8;
+                  font-family: CoreSans;
+                  font-weight: 500;
+                  font-size: 17px;
+                  line-height: 20px;
                 }
               }
             }
@@ -189,14 +212,6 @@
               width: 250px;
               height: 60px;
               top: 0;
-              -webkit-transition: 400ms;
-              -moz-transition: 400ms;
-              -ms-transition: 400ms;
-              -o-transition: 400ms;
-              transition: 400ms;
-              &:hover{
-
-              }
             }
           }
           .description-text-block{
