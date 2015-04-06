@@ -1,9 +1,14 @@
 <div ng-controller="galleryController as gallery" ng-init="gallery.init()">
-    <h1>Angular Animations Shenanigans</h1>
-    <h2>Gallery</h2>
-    <h2>Gallery</h2>
-    <h2>Test</h2>
-    <h2>Tema</h2>
-    <a href="portfolio" class="waves-effect waves-light btn">portfolio</a>
-    <a href="/" class="waves-effect waves-light btn">Home</a>
+    <div class="types">
+        <a href="gallery" class="{{!gallery.params.category ? 'active' : ''}}">Все работы</a>
+        <a ng-repeat="category in gallery.categories" ng-href="gallery/?category={{category.id}}" class="{{gallery.params.category == category.id ? 'active' : ''}}">{{category.name}}</a>
+    </div>
+    <div class="gallery">
+        <div class="responsive-box" ng-repeat="preview in gallery.previews | filter: gallery.myFilter" ng-style="{'background-image':'url(' + preview.imgURL + ')'}">
+            <a class="boxInner waves-effect waves-light" href="portfolio?page={{preview.pageUrl}}">
+                <p class="name" ng-bind="preview.name"></p>
+                <p class="description" ng-bind="preview.description"></p>
+            </a>
+        </div>
+    </div>
 </div>

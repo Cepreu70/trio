@@ -12,23 +12,20 @@ var app;
                         controller: 'homeController'
                     })
                     .when('/gallery', {
-                        templateUrl: 'app/view/gallery/gallery.html',
-                        controller: 'galleryController'
+                        templateUrl: 'app/view/gallery/gallery.html'
                     })
                     .when('/portfolio', {
-                        templateUrl: 'app/view/portfolio/portfolio.html',
-                        controller: 'portfolioController'
+                        templateUrl: 'app/view/portfolio/portfolio.html'
                     });
                 $locationProvider.html5Mode(true);
             }])
 
-        .controller('appCtrl', ['$route', '$routeParams', '$location',
+        .controller('appCtrl', ['$scope', '$route', '$routeParams', '$location',
             function($scope, $route, $routeParams, $location) {
                 $scope.pageClass = 'page-home';
                 this.$route = $route;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
-
 
                 // Sticky menu
                 this.init = function(){

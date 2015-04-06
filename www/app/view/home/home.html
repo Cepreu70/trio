@@ -174,8 +174,8 @@
             </div>
         </div>
     <div class="gallery" ng-controller="galleryController as gallery">
-        <div class="responsive-box" ng-repeat="preview in gallery.previews | shuffle | maxCount: 8" style="{{'background-image: url(\'' + preview.imgURL + '\');'}}">
-            <a class="boxInner" href="{{preview.pageUrl}}">
+        <div class="responsive-box" ng-repeat="preview in gallery.previews | maxCount: 8" ng-style="{'background-image':'url(' + preview.imgURL + ')'}">
+            <a class="boxInner waves-effect waves-light" ng-href="portfolio/?page={{preview.pageUrl}}">
                 <p class="name" ng-bind="preview.name"></p>
                 <p class="description" ng-bind="preview.description"></p>
             </a>

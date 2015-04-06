@@ -1,9 +1,11 @@
 body, html{
   min-height: 100% !important;
   height: 100%;
+  margin: 0;
+  padding: 0;
   width: 100%;
   position: relative;
-  background-color: black;
+  background-color: white;
   font-family: CoreSans;
 }
 
@@ -20,6 +22,7 @@ div, span, img, a, p{
   top: 0;
   transform: translateZ(0);
   width:100%;
+  min-height: 100%;
 }
 
 

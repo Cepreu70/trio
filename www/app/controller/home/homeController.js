@@ -5,13 +5,11 @@
         $appScope.template.closeMenu();
         $appScope.app.pageClass = 'page-home';
 
-
+        var $bodyScope = angular.element(document.getElementsByTagName('body')[0]).scope();
+        $bodyScope.template.headerStyle = 'normal';
 
         this.name = "homeController";
         this.params = $routeParams;
 
-        $(document).ready(function(){
-
-        });
     }])
 })();

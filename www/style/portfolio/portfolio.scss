@@ -1,3 +1,51 @@
+@import '../app/core/init';
+
 .page-portfolio{
-  background:#E59400; color:#a55400;
+  .heading{
+    background-color: white;
+    padding-top: 110px;
+    text-align: left;
+    a{
+      cursor: pointer;
+      padding: 10px;
+      margin: 20px;
+      color: #2e2e2e;
+      display: inline-block;
+      &:hover{
+        text-decoration: underline;
+      }
+      &.active{
+        color: #1b1b1b;
+        text-decoration: underline;
+        font-weight: 500;
+      }
+    }
+  }
+  .menu{
+    background-color: #eac12e;
+
+    a{
+      font-size: 18px;
+      color: #2e2e2e;
+      padding: 35px;
+      display: inline-block;
+      top: 0;
+      &.left-page{
+        position: absolute;
+        text-align: left;
+        float: left;
+        left: 0;
+      }
+      &.current-page{
+        width: 100%;
+        text-align: center;
+      }
+      &.next-page{
+        position: absolute;
+        text-align: right;
+        float: right;
+        right: 0;
+      }
+    }
+  }
 }
