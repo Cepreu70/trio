@@ -2,8 +2,12 @@
 
 //инкапсуляция
 .portfolio-inner-page.smart-astana{
+  .not-full-width{
+    padding: 40px;
+    padding-bottom: 10px;
+  }
   .view-welcome{
-    height: 700px;
+    height: 730px;
     width: 100%;
     overflow: hidden;
     .graph-d3{
@@ -11,13 +15,132 @@
       width: 2700px;
       height: 170px;
       position: absolute;
-      left: 0; bottom: 0; right: 0;
+      left: 0; bottom: 36px; right: 0;
       svg{
         width: 100%;
         height: 100%;
         transform: rotateX(180deg);
       }
     }
-  }
+    .sa-heading{
+      text-align: left;
 
+      .caption{
+
+        font-size: 72px;
+        font-weight: 900;
+      }
+      .description{
+        font-size: 36px;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+    }
+    .sa-description{
+      left: 50%;
+      width: 50%;
+      position: absolute;
+      top: 320px;
+      text-align: left;
+      padding-left: 120px;
+      font-size: 18px;
+    }
+    .devices{
+      width: 100%;
+      bottom: 0;
+      height: 500px;
+
+      img{
+        position: absolute;
+        bottom: 0;
+      }
+      .iMac{
+        left: 231px;
+      }
+      .iPad{
+        left: 542px;
+        bottom: -153px;
+      }
+      .iPhone{
+        left: 669px;
+        bottom: -193px;
+      }
+      .iMacBook{
+        left: 0;
+        bottom: -140px;
+      }
+    }
+  }
+  .view-task{
+    width: 100%;
+    overflow: hidden;
+    .sa-heading{
+      font-size: 36px;
+      text-transform: uppercase;
+      text-align: left;
+      margin-bottom: 130px;
+    }
+    .sa-description{
+      margin-top: 50px;
+      text-align: left;
+      width: 50%;
+      display: inline-block;
+      vertical-align: top;
+      font-size: 18px;
+      .description-accent{
+        margin-top: 110px;
+        margin-bottom: 30px;
+      }
+      i{
+        font-size: 24px;
+      }
+    }
+    .dashboards{
+      vertical-align: top;
+      width: 48%;
+      display: inline-block;
+      height: 840px;
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .dash-amsterdam{
+        left: -200px;
+        top: 346px;
+      }
+
+      .dash-citizen{
+        top: -70px;
+        left: 200px;
+      }
+
+      .dash-donderdag{
+        top: 560px;
+        left: 310px;
+      }
+    }
+  }
+  .view-prototypes{
+    text-align: left;
+    padding-bottom: 100px;
+    .sa-heading{
+      font-size: 36px;
+    }
+    .illustration{
+      color: white;
+      width: 1280px;
+      margin: 0 auto;
+      height: 543px;
+      background-image: url('img/portfolio/smart-astana/prototypes.jpg');
+
+      .sa-description{
+        width: 70%;
+        padding-left: 120px;
+        bottom: 120px;
+        position: absolute;
+      }
+    }
+  }
 }

@@ -23,6 +23,19 @@
   }
   .menu{
     background-color: #eac12e;
+    line-height: 0;
+    width: 100%;
+    overflow: hidden;
+    #navigation-panel{
+      transition: transform $animation-time * 2;
+      &.to-left{
+        transform: translate(82%);
+
+      }
+      &.to-right{
+        transform: translate(-82%);
+      }
+    }
 
     a{
       font-size: 18px;
@@ -30,21 +43,50 @@
       padding: 35px;
       display: inline-block;
       top: 0;
+      cursor: pointer;
+
+      i{
+        font-size: 14px;
+      }
+
       &.left-page{
         position: absolute;
         text-align: left;
         float: left;
         left: 0;
+        width: 50%;
+
+        i{
+          margin-right: 10px;
+        }
       }
       &.current-page{
         width: 100%;
         text-align: center;
+
+        .caption{
+          margin: 0;
+          top: 8px;
+          font-size: 16px;
+          font-weight: 600;
+        }
+
+        i{
+          top: -13px;
+          display: inline-block;
+          position: relative;
+        }
       }
       &.next-page{
         position: absolute;
         text-align: right;
         float: right;
         right: 0;
+        width: 50%;
+
+        i{
+          margin-left: 10px;
+        }
       }
     }
   }

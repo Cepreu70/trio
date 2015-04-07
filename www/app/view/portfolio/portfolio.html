@@ -5,10 +5,10 @@
            ng-class="{'active':(portfolio.currentPreview.categories.indexOf(category.id) > -1)}">{{category.name}}</a>
     </div>
     <div class="menu">
-        <div class="not-full-width">
-            <a class="current-page waves-effect waves-light" ng-href="portfolio/?page={{portfolio.currentPreview.pageUrl}}"><i class="trio-sign-top"></i>{{ portfolio.currentPreview.name }}</a>
-            <a class="left-page waves-effect waves-light" ng-href="portfolio/?page={{portfolio.previousPreview.pageUrl}}"><i class="trio-sign-left"></i>{{ portfolio.previousPreview.name }}</a>
-            <a class="next-page waves-effect waves-light" ng-href="portfolio/?page={{portfolio.nextPreview.pageUrl}}">{{ portfolio.nextPreview.name }} <i class="trio-sign-right"></i></a>
+        <div class="not-full-width" id="navigation-panel">
+            <a class="current-page"><i class="trio-sign-top"></i><p class="caption"> {{ portfolio.currentPreview.alias }} </p></a>
+            <a class="left-page" ng-click="portfolio.navigate(portfolio.previousPreview.pageUrl, 'left')"><i class="trio-sign-left"></i>{{ portfolio.previousPreview.alias }}</a>
+            <a class="next-page" ng-click="portfolio.navigate(portfolio.nextPreview.pageUrl, 'right')">{{ portfolio.nextPreview.alias }} <i class="trio-sign-right"></i></a>
         </div>
 
     </div>

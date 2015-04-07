@@ -1,6 +1,6 @@
 (function() {
 
-    app.controller('portfolioController', function($scope, $routeParams, $http) {
+    app.controller('portfolioController', function($scope, $routeParams, $http, $location) {
         var $appScope = getScope('appCtrl');
         $appScope.template.closeMenu();
         $appScope.app.pageClass = 'page-portfolio';
@@ -17,6 +17,12 @@
         this.currentPreview = {};
         this.previousPreview = {};
         this.nextPreview = {};
+
+        this.navigate = function(url, param){
+            $('#navigation-panel').addClass('to-' + param);
+            $location.search("page="+ url);
+
+        };
 
         this.server = {
             getCategories: function(){
