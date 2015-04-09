@@ -26,7 +26,7 @@
                     .append("rect")
                     .attr("x", function(d, i){ return i * 8})
                     .attr("width", 4)
-                    .attr("height", function(d){ return d.height * 10 })
+                    .attr("height", function(d){ return 0 })
                     .attr("y", 0)
                     .attr("fill", "#b2cab7"),
 

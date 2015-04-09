@@ -3,7 +3,7 @@ var app;
 
     'use strict';
 
-    app = angular.module('ngApp', ['ngRoute', 'ngAnimate'])
+    app = angular.module('ngApp', ['ngAnimate', 'ngRoute'])
         .config(['$routeProvider', '$locationProvider',
             function($routeProvider, $locationProvider) {
                 $routeProvider
@@ -35,7 +35,6 @@ var app;
                     });
                 };
                 this.init();
-
 
             }])
 

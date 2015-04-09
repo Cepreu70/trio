@@ -17,7 +17,7 @@
         this.currentPreview = {};
         this.previousPreview = {};
         this.nextPreview = {};
-
+        window.scrollTo(0,0);
         this.navigate = function(url, param){
             $('#navigation-panel').addClass('to-' + param);
             $location.search("page="+ url);

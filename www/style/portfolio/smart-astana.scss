@@ -40,7 +40,7 @@
       left: 50%;
       width: 50%;
       position: absolute;
-      top: 320px;
+      top: 300px;
       text-align: left;
       padding-left: 120px;
       font-size: 18px;
@@ -50,23 +50,24 @@
       bottom: 0;
       height: 500px;
 
+
       img{
         position: absolute;
         bottom: 0;
       }
       .iMac{
-        left: 231px;
+        left: 231px - 50px;
       }
       .iPad{
-        left: 542px;
+        left: 542px + 50px;
         bottom: -153px;
       }
       .iPhone{
-        left: 669px;
+        left: 669px - 50px;
         bottom: -193px;
       }
       .iMacBook{
-        left: 0;
+        left: 0 + 50px;
         bottom: -140px;
       }
     }
@@ -79,6 +80,7 @@
       text-transform: uppercase;
       text-align: left;
       margin-bottom: 130px;
+      left: -3000px;
     }
     .sa-description{
       margin-top: 50px;
@@ -117,14 +119,17 @@
       }
 
       .dash-donderdag{
-        top: 560px;
-        left: 310px;
+        top: 330px;
+        left: 560px;
       }
     }
   }
   .view-prototypes{
     text-align: left;
     padding-bottom: 100px;
+
+    width: 100%;
+    overflow: hidden;
     .sa-heading{
       font-size: 36px;
     }
@@ -135,12 +140,114 @@
       height: 543px;
       background-image: url('img/portfolio/smart-astana/prototypes.jpg');
 
+      overflow: hidden;
       .sa-description{
         width: 70%;
         padding-left: 120px;
         bottom: 120px;
         position: absolute;
+
+        left: -1000px;
       }
+    }
+  }
+  .view-widgets{
+    width: 100%;
+    height: 1300px;
+    overflow: hidden;
+    text-align: left;
+    color: black;
+    .bg-image{
+      position: absolute;
+      background: url('img/portfolio/smart-astana/layers-bg.jpg') no-repeat center center;
+      background-size: cover;
+      width: 100%;
+      height: 130%;
+    }
+
+    .not-full-width{
+
+      .sa-description{
+        width: 50%;
+
+        padding-right: 40px;
+        font-size: 18px;
+      }
+      .widgets-container{
+        width: 1280px;
+        height: 955px;
+        top: 50px;
+        .widget{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          img{
+            position: absolute;
+            z-index: 1;
+          }
+          .hint{
+            position: absolute;
+            z-index: 2;
+
+            &.hint-footer{
+              top: 370px;
+              left: 30px;
+            }
+            &.hint-slider{
+              top: 315px;
+              left: 110px;
+            }
+            &.hint-widgets{
+              top: 245px;
+              left: 375px;
+            }
+
+            &.hint-twitter{
+              top: 130px;
+              left: 630px;
+            }
+            &.hint-header{
+              top: -18px;
+              left: 786px;
+            }
+            &.hint-news{
+              top: 150px;
+              left: 880px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .view-preview{
+    width: 100%;
+    overflow: hidden;
+    top: -130px;
+    .mac-book{
+      height: 600px;
+      width: 1210px;
+      margin: 0 auto;
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .screen{
+        position: absolute;
+
+        top: 60px;
+        left: 215px;
+        width: 780px;
+        height: 482px;
+
+        border: 2px solid black;
+        border-radius: 4px;
+
+        overflow: hidden;
+
+      }
+
     }
   }
 }

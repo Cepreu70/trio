@@ -13,6 +13,9 @@ module.exports = {
     ],
     devSecond: [
         'cssmin'
+    ],
+    devThird: [
+        'postcss'
     ]
 
 };

@@ -7,3 +7,4 @@ dev:
   tasks:
     - 'concurrent:devFirst'
     - 'concurrent:devSecond'
+    - 'concurrent:devThird'
