@@ -249,5 +249,53 @@
       }
 
     }
+    .hint{
+      position: absolute;
+      top: 0;
+      left:0;
+    }
+    .mac-sa{
+      margin-top: 170px;
+    }
+    .share-buttons{
+      margin-top: 30px;
+
+      //fix services bug
+      .stMainServices {
+        height: auto !important;
+      }
+      .stButton_gradient{
+        height: auto !important;
+      }
+    }
+  }
+  .gallery{
+    .circle-box{
+      border-radius: 50%;
+      display: inline-block;
+      width: 18%;
+      padding-bottom: 18%;
+      float: left;
+      margin-left: 3.5%;
+      margin-right: 3.5%;
+      margin-bottom: 150px;
+      text-align: center;
+      overflow: inherit;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background $animation-time;
+      &:hover{
+        background-size: 110% 110%;
+      }
+      .name{
+        left: 0;
+        right: 0;
+        position: absolute;
+        bottom: -80px;
+        color: #333;
+        font-weight: 900;
+      }
+    }
   }
 }
