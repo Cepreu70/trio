@@ -40,7 +40,7 @@
           margin: 0 auto;
           .row-style {
             margin-bottom: 0px;
-            overflow: hidden;
+
             .images-block{
               z-index: 1;
               width: 50%;
@@ -145,7 +145,8 @@
               float: left;
               .img-ttt {
                 position: relative;
-                max-width: 100%;
+                max-width: 80%;
+                left: 15px;
                 margin-top: 130px;
                 width: 1920px;
                 margin-bottom: 45px;
@@ -221,7 +222,7 @@
               float: left;
               .img-komitet {
                 position: relative;
-                max-width: 100%;
+                max-width: 92%;
                 margin-top: 130px;
                 width: 1920px;
                 margin-bottom: 45px;
@@ -263,8 +264,9 @@
                         margin-top: 37px;
                         width: 1920px;
                         margin-bottom: 35px;
-                        margin-left: 20%;
-                        top: 145px;
+                        margin-left: -112.5px;
+                        left: 50%;
+                        top: 65px;
                       }
                       .key-center-slid {
                         position: relative;
@@ -368,7 +370,7 @@
               float: left;
               .img-stairs {
                 position: relative;
-                max-width: 85%;
+                max-width: 75%;
                 margin-top: 130px;
                 width: 1920px;
                 margin-bottom: 45px;
@@ -379,7 +381,10 @@
               display: inline-block;
               .ttt {
                 position: relative;
-                max-width: 100%;
+                max-width: 80%;
+                left: 15px;
+
+
                 margin-top: 130px;
                 width: 1920px;
                 margin-bottom: 35px;
@@ -461,6 +466,7 @@
     .development-process-phases{
       width: 100%;
       background: #fff;
+      overflow: hidden;
       .not-full-width{
         max-width: 1305px;
         margin: 0 auto;
