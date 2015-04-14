@@ -46,7 +46,7 @@
                         'from_email': 'info@trio.kz',
                         'to': [
                             {
-                                'email': 'PogorelowMax@gmail.com',
+                                'email': 'os@trio.kz',
                                 'name': 'Заявка',
                                 'type': 'to'
                             }
