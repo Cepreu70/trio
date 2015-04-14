@@ -55,7 +55,6 @@
                         'subject': 'Форма связаться!',
                         'html': '<p><b>компания:</b> ' + template.data.company + '</p>' +
                         '<p><b>ФИО:</b> ' + template.data.name + ' ' + template.data.secondName + '</p>' +
-                        '<p><b>email:</b> ' + template.data.email + '</p>' +
                         '<p><b>Сообщение:</b> ' + template.data.message + '</p>' +
                         '<p><b>Телефон:</b> ' + template.data.telephone + '</p>' +
                         '<p><b>Email:</b> ' + template.data.email + '</p>'
