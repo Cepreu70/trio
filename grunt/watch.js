@@ -30,7 +30,8 @@ module.exports = {
     styles: {
         files: [
             'www/style/**/*.scss',
-            'www/vendor/**/*.scss'
+            'www/vendor/**/*.scss',
+            'www/vendor/**/*.css'
         ],
         tasks: [
             'sass:dev',

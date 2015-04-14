@@ -1,7 +1,7 @@
 @import '../app/core/init';
 
 .page-home {
-  .parallax-container {
+  .video-container {
     height: 960px;
     @include respond-to(md) {
       height: auto;
@@ -494,16 +494,3 @@
     }
   }
 }
-  .heading {
-    position: absolute;
-    top: 0px;
-    text-align: left;
-    padding-left: 35px;
-    padding-right: 35px;
-    color: #646464;
-    font-family: CoreSans;
-    font-weight: 900;
-    font-size: 20pt;
-    width: 100%;
-    z-index: 2;
-  }

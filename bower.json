@@ -19,6 +19,8 @@
     "underscore": "latest",
     "jquery": "latest",
     "font-awesome": "latest",
-    "d3": "latest"
-  }
+    "d3": "latest",
+    "slick.js": "~1.5.0"
+  },
+  "devDependencies": {}
 }

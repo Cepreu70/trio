@@ -11,5 +11,11 @@
         this.name = "homeController";
         this.params = $routeParams;
 
+        $('.key-moments-block').slick({
+            infinite: true,
+            dots: false,
+            autoplay: true,
+            autoplaySpeed: 6000
+        });
     }])
 })();
