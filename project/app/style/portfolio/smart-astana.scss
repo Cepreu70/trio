@@ -1,0 +1,301 @@
+@import '../app/core/init';
+
+//инкапсуляция
+.portfolio-inner-page.smart-astana{
+  .not-full-width{
+    padding: 40px;
+    padding-bottom: 10px;
+  }
+  .view-welcome{
+    height: 730px;
+    width: 100%;
+    overflow: hidden;
+    .graph-d3{
+      margin: auto;
+      width: 2700px;
+      height: 170px;
+      position: absolute;
+      left: 0; bottom: 36px; right: 0;
+      svg{
+        width: 100%;
+        height: 100%;
+        transform: rotateX(180deg);
+      }
+    }
+    .sa-heading{
+      text-align: left;
+
+      .caption{
+
+        font-size: 72px;
+        font-weight: 900;
+      }
+      .description{
+        font-size: 36px;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+    }
+    .sa-description{
+      left: 50%;
+      width: 50%;
+      position: absolute;
+      top: 300px;
+      text-align: left;
+      padding-left: 120px;
+      font-size: 18px;
+    }
+    .devices{
+      width: 100%;
+      bottom: 0;
+      height: 500px;
+
+
+      img{
+        position: absolute;
+        bottom: 0;
+      }
+      .iMac{
+        left: 231px - 50px;
+      }
+      .iPad{
+        left: 542px + 50px;
+        bottom: -153px;
+      }
+      .iPhone{
+        left: 669px - 50px;
+        bottom: -193px;
+      }
+      .iMacBook{
+        left: 0 + 50px;
+        bottom: -140px;
+      }
+    }
+  }
+  .view-task{
+    width: 100%;
+    overflow: hidden;
+    .sa-heading{
+      font-size: 36px;
+      text-transform: uppercase;
+      text-align: left;
+      margin-bottom: 130px;
+      left: -3000px;
+    }
+    .sa-description{
+      margin-top: 50px;
+      text-align: left;
+      width: 50%;
+      display: inline-block;
+      vertical-align: top;
+      font-size: 18px;
+      .description-accent{
+        margin-top: 110px;
+        margin-bottom: 30px;
+      }
+      i{
+        font-size: 24px;
+      }
+    }
+    .dashboards{
+      vertical-align: top;
+      width: 48%;
+      display: inline-block;
+      height: 840px;
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .dash-amsterdam{
+        left: -200px;
+        top: 346px;
+      }
+
+      .dash-citizen{
+        top: -70px;
+        left: 200px;
+      }
+
+      .dash-donderdag{
+        top: 330px;
+        left: 560px;
+      }
+    }
+  }
+  .view-prototypes{
+    text-align: left;
+    padding-bottom: 100px;
+
+    width: 100%;
+    overflow: hidden;
+    .sa-heading{
+      font-size: 36px;
+    }
+    .illustration{
+      color: white;
+      width: 1280px;
+      margin: 0 auto;
+      height: 543px;
+      background-image: url('public/img/portfolio/smart-astana/prototypes.jpg');
+
+      overflow: hidden;
+      .sa-description{
+        width: 70%;
+        padding-left: 120px;
+        bottom: 120px;
+        position: absolute;
+
+        left: -1000px;
+      }
+    }
+  }
+  .view-widgets{
+    width: 100%;
+    height: 1300px;
+    overflow: hidden;
+    text-align: left;
+    color: black;
+    .bg-image{
+      position: absolute;
+      background: url('public/img/portfolio/smart-astana/layers-bg.jpg') no-repeat center center;
+      background-size: cover;
+      width: 100%;
+      height: 130%;
+    }
+
+    .not-full-width{
+
+      .sa-description{
+        width: 50%;
+
+        padding-right: 40px;
+        font-size: 18px;
+      }
+      .widgets-container{
+        width: 1280px;
+        height: 955px;
+        top: 50px;
+        .widget{
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          img{
+            position: absolute;
+            z-index: 1;
+          }
+          .hint{
+            position: absolute;
+            z-index: 2;
+
+            &.hint-footer{
+              top: 370px;
+              left: 30px;
+            }
+            &.hint-slider{
+              top: 315px;
+              left: 110px;
+            }
+            &.hint-widgets{
+              top: 245px;
+              left: 375px;
+            }
+
+            &.hint-twitter{
+              top: 130px;
+              left: 630px;
+            }
+            &.hint-header{
+              top: -18px;
+              left: 786px;
+            }
+            &.hint-news{
+              top: 150px;
+              left: 880px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .view-preview{
+    width: 100%;
+    overflow: hidden;
+    top: -130px;
+    .mac-book{
+      height: 600px;
+      width: 1210px;
+      margin: 0 auto;
+      img{
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .screen{
+        position: absolute;
+
+        top: 60px;
+        left: 215px;
+        width: 780px;
+        height: 482px;
+
+        border: 2px solid black;
+        border-radius: 4px;
+
+        overflow: hidden;
+
+      }
+
+    }
+    .hint{
+      position: absolute;
+      top: 0;
+      left:0;
+    }
+    .mac-sa{
+      margin-top: 170px;
+    }
+    .share-buttons{
+      margin-top: 30px;
+
+      //fix services bug
+      .stMainServices {
+        height: auto !important;
+      }
+      .stButton_gradient{
+        height: auto !important;
+      }
+    }
+  }
+  .gallery{
+    .circle-box{
+      border-radius: 50%;
+      display: inline-block;
+      width: 18%;
+      padding-bottom: 18%;
+      float: left;
+      margin-left: 3.5%;
+      margin-right: 3.5%;
+      margin-bottom: 150px;
+      text-align: center;
+      overflow: inherit;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: background $animation-time;
+      &:hover{
+        background-size: 110% 110%;
+      }
+      .name{
+        left: 0;
+        right: 0;
+        position: absolute;
+        bottom: -80px;
+        color: #333;
+        font-weight: 900;
+      }
+    }
+  }
+}

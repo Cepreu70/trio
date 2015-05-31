@@ -1,15 +1,28 @@
 module.exports = {
-    // Development settings
-    dev: {
+
+    app: {
         options: {
             outputStyle: 'nested',
             sourceMap: true
         },
         files: [{
             expand: true,
-            cwd: 'www/',
-            src: ['vendor/**/*.scss', 'style/**/*.scss' ],
-            dest: 'assets/css',
+            cwd: 'project/app/style/',
+            src: ['**/*.scss', '**/*.sass'],
+            dest: 'cache/app',
+            ext: '.css'
+        }]
+    },
+    vendor: {
+        options: {
+            outputStyle: 'nested',
+            sourceMap: true
+        },
+        files: [{
+            expand: true,
+            cwd: 'project/vendor',
+            src: ['**/*.sass', '**/*.scss'],
+            dest: 'cache/vendor',
             ext: '.css'
         }]
     }

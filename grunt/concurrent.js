@@ -1,21 +1,31 @@
 module.exports = {
 
-    // Опции
+    // Максимальное количество задач выполняющихся одновременно ( зависит от количества ядер процессора )
     options: {
-        limit: 3
+        limit: 5
     },
 
-    // Задачи разработки
-    devFirst: [
-        'sass:dev',
-        'uglify:vendor',
-        'uglify:local'
+    //Потоки задач, в одном потоке задачи могут выполняться одновременно.
+    stream1: [
+        'sass:app',
+        'sass:vendor',
+        'sync:view',
+        'uglify:app',
+        'uglify:vendor'
     ],
-    devSecond: [
-        'cssmin'
+
+    stream2: [
+        'cssmin:app',
+        'cssmin:vendor',
+        'sync:public',
+        'preprocess'
     ],
-    devThird: [
-        'postcss'
+
+    stream3:[
+        'sync:db',
+        'clean:cache',
+        'autoprefixer:app',
+        'autoprefixer:vendor'
     ]
 
 };

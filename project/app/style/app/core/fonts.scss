@@ -1,0 +1,7 @@
+@import 'init';
+
+@include fontFace('CoreSans','public/font/CoreSans/Light/CoreSansLight');
+@include fontFace('CoreSans','public/font/CoreSans/Regular/CoreSansRegular', 500);
+@include fontFace('CoreSans','public/font/CoreSans/Heavy/CoreSansHeavy', 900);
+
+@include fontFace('PFBeauSans','public/fonts/PFBeauSans/Regular/PFBeauSansRegular');

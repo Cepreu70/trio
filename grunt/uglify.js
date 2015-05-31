@@ -1,18 +1,20 @@
 module.exports = {
+    app: {
+        options: {
+            beautify: true,
+            mangle: false,
+            compress: false
+        },
+        src: ['project/config/**/*.js', 'project/helpers/**/*.js', 'project/app/controller/**/*.js'],
+        dest: 'www/app.js'
+    },
     vendor: {
         options: {
             beautify: true,
-            mangle: false
+            mangle: false,
+            compress: false
         },
-        src: ['www/vendor/**/*.js'],
+        src: ['project/vendor/**/*.js'],
         dest: 'www/vendor.js'
-    },
-    local: {
-        options: {
-            beautify: true,
-            mangle: false
-        },
-        src: ['www/app/helper/**/*.js', 'www/app/data/**/*.js', 'www/app/config/**/*.js', 'www/app/models/**/*.js', 'www/app/controller/**/*.js'],
-        dest: 'www/app.js'
     }
 };
