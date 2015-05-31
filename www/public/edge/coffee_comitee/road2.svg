@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="2564" height="169" viewBox="0 0 2564 169">
+  <defs>
+    <style>
+
+      .cls-3 {
+        stroke: #ffffff;
+        stroke-width: 5px;
+        fill: none;
+      }
+
+      .cls-4 {
+        stroke: #ffffff;
+        stroke-width: 1px;
+        fill: none;
+      }
+
+      .cls-6 {
+        fill: #ffffff;
+      }
+    </style>
+  </defs>
+  <g id="дорога">
+    <rect id="rect-1" class="cls-3" x="-17" y="42" width="2738" height="127"/>
+    <rect id="rect-2" class="cls-4" x="-88" y="49" width="2791" height="113"/>
+    <image xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAACe8AAAAqAgMAAABddtqoAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACVBMVEUAAAD///8AAABzxoNxAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxIAAAsSAdLdfvwAAADoSURBVHja7daxDcNADMXQM+ABzhul8P4zpUun8gAipNr3e2qt371ruCA4DNceNkFwGu7PMAqC0/AMmyA4DpT8Bz7A5D/wASb/gQ8w+Q98QMl/4ANM/gMfYPIf+ACT/8AHlPwHPsDkP/ABJv+BDzD5D3xAyX/gA0z+Ax9g8h/4AJP/wAeU/Ac+wOQ/8AEm/4EPMPkPfEDJf+ADTP4DH2DyH/gAk//AB5T8Bz7A5D/wASb/gQ8w+Q98QMl/4ANM/gMfYPIf+ACT/8AHlPwHPsDkP/ABJv+BDzD5D3xAyX8ghD1sMH9B8LfwBeiEtUr/7aiuAAAAAElFTkSuQmCC" width="2543" height="42"/>
+    <path d="M45.000,1.000 C45.000,1.000 45.000,0.000 45.000,0.000 C45.000,0.000 2631.000,0.000 2631.000,0.000 C2631.000,0.000 2631.000,1.000 2631.000,1.000 C2631.000,1.000 45.000,1.000 45.000,1.000 Z" id="path-1" class="cls-6" fill-rule="evenodd"/>
+  </g>
+</svg>

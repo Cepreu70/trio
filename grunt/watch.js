@@ -10,7 +10,8 @@ module.exports = {
             'project/app/view/**'
         ],
         tasks: [
-            'preprocess'
+            'preprocess',
+            'sync:view'
         ]
     },
 

@@ -1,0 +1,14 @@
+<div ng-controller="galleryController as gallery" ng-init="gallery.init()">
+    <div class="types">
+        <a href="gallery" class="{{!gallery.params.category ? 'active' : ''}}">Все работы</a>
+        <a ng-repeat="category in gallery.categories" ng-href="gallery/?category={{category.id}}" class="{{gallery.params.category == category.id ? 'active' : ''}}">{{category.name}}</a>
+    </div>
+    <div class="gallery">
+        <div class="responsive-box" ng-repeat="preview in gallery.previews | filter: gallery.myFilter" ng-style="{'background-image':'url(' + preview.imgURL + ')'}">
+            <a class="boxInner waves-effect waves-light" href="portfolio?page={{preview.pageUrl}}">
+                <p class="name" ng-bind="preview.name"></p>
+                <p class="description" ng-bind="preview.description"></p>
+            </a>
+        </div>
+    </div>
+</div>
