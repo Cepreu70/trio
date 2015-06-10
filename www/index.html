@@ -3,10 +3,14 @@
 <html>
 <head>
     <!-- STYLES IN HEADER -->
+    <meta charset="UTF-8">
     <base href="/">
     <link rel="stylesheet" href="app.css"/>
-</head>
 
+    <style>
+        .edgeLoad-EDGE-4631667 { visibility:hidden; }
+    </style>
+</head>
 <!-- apply our angular app -->
 <body ng-app="ngApp" ng-controller="templateController as template">
 
@@ -197,6 +201,17 @@
 
 <!--OTHER -->
 <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU" type="text/javascript"></script>
+<script>
+    console.log('Edge');
+    AdobeEdge.loadComposition('search', 'EDGE-4631667', {
+        scaleToFit: "none",
+        centerStage: "none",
+        minW: "0",
+        maxW: "undefined",
+        width: "550px",
+        height: "400px"
+    }, {dom: [ ]}, {dom: [ ]});
+</script>
 
 <!--App -->
 <script src="app.js"></script>
