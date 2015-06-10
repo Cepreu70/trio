@@ -1,4 +1,4 @@
-# POWERme.at
+# Trio.kz
 TRIO оф. сайт
 
 ## Структура проекта
