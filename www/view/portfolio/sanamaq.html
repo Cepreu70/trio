@@ -1,9 +1,0 @@
-<img src="public/img/portfolio/sanamaq.jpg" style="margin: 0 auto; max-width: 100%;">
-
-<div class="not-full-width">
-    <div class="gallery" ng-controller="galleryController as gallery">
-        <a class="circle-box waves-effect waves-light z-depth-2" ng-repeat="preview in gallery.previews | shuffle | maxCount: 4" ng-style="{'background-image':'url(' + preview.imgURL + ')'}" ng-href="portfolio/?page={{preview.pageUrl}}">
-            <p class="name" ng-bind="preview.name"></p>
-        </a>
-    </div>
-</div>
