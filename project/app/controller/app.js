@@ -26,7 +26,7 @@ var app;
                 this.$route = $route;
                 this.$location = $location;
                 this.$routeParams = $routeParams;
-
+                window.AdobeEdgeCounter = 0;
                 // Sticky menu
                 this.init = function(){
                     $(window).on("scroll", function() {

@@ -25,30 +25,47 @@
   .content {
     height: auto;
     width: 100%;
+    .caption.key-moments{
+      position: absolute;
+      color: white;
+      font-weight: 900;
+      font-size: 36px;
+      z-index: 1;
+      margin: 0;
+      margin-top: $margin;
+      padding: $margin
+    }
     .slider{
       height: 720px;
       .slide{
         width: 100%;
         height: 720px;
-        &.parymide{
-          background-color: rgba(45,185,118,1);
+        background-size: cover !important;
+        text-align: left;
+        &.spheres{
+          background: url('public/img/home/slider-bg1.jpg') center center no-repeat;
 
+          #edge-spheres{
+            margin: 0 auto;
+          }
+        }
+        &.parymide{
+          background: url('public/img/home/slider-bg2.jpg') center center no-repeat;
           #edge-parymide{
-            margin: 0 auto
+            top: 100px;
+            margin: 0 auto;
           }
         }
         &.stairway{
-          background-color: rgb(50, 142, 185);
-
+          background: url('public/img/home/slider-bg3.jpg') center center no-repeat;
           #edge-stairway{
-            margin: 0 auto
+            margin: 0 auto;
           }
         }
         &.cofee_commitee{
-          background-color: rgb(185, 67, 160);
-
+          background: url('public/img/home/slider-bg4.jpg') center center no-repeat;
           #edge-cofee_commitee{
-            margin: 0 auto
+            margin: 0 auto;
           }
         }
 

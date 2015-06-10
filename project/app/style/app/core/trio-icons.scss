@@ -11,41 +11,51 @@ $path-to-icons: 'public/icon/trio-icons/trio-icons';
   font-style: normal;
 }
 
-i {
-  font-family: 'trio-icons';
+[data-icon]:before {
+  font-family: "trio-icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
   speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.trio-close:before {
-  content: "\e605";
-}
-
-.trio-sign:before {
-  content: "\e604";
-}
-
-.trio-sign-top:before {
-  content: "\e601";
-}
-
-.trio-sign-left:before {
-  content: "\e602";
-}
-
-.trio-sign-right:before {
-  content: "\e603";
+[class^="trio-"]:before,
+[class*=" trio-"]:before {
+  font-family: "trio-icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .trio-pen:before {
-  content: "\e600";
+  content: "a";
 }
-
+.trio-sign-top:before {
+  content: "b";
+}
+.trio-sign-left:before {
+  content: "c";
+}
+.trio-sign-right:before {
+  content: "d";
+}
+.trio-sign-bottom:before {
+  content: "e";
+}
+.trio-close:before {
+  content: "f";
+}
+.trio-left-arrow:before {
+  content: "g";
+}
+.trio-right-arrow:before {
+  content: "h";
+}

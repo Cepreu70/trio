@@ -54,7 +54,7 @@ body {
 
 .not-full-width {
   max-width: 1305px;
-  min-width: 1305px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -201,9 +201,26 @@ body {
       transition: opacity $animation-time;
       color: white;
       text-decoration: none;
-      padding: 22px;
+      padding: 60px;
+
+      @include response(1700px, 4560px){
+        padding: 60px;
+      }
+      @include response(1450px, 1700px){
+        padding: 50px;
+      }
+      @include response(1100px, 1450px){
+        padding: 40px;
+      }
+      @include response(600px, 1100px){
+        padding: 40px;
+      }
+      @include response(480px, 600px){
+        padding: 60px;
+      }
       .name{
         margin-top: -20px;
+        margin-bottom: 40px;
         font-size: 22px;
         font-weight: 900;
         transition: margin $animation-time;
@@ -220,7 +237,7 @@ body {
           font-size: 18px;
         }
         @include response(480px, 600px){
-          font-size: 17px;
+          font-size: 32px;
         }
       }
       .description{
@@ -239,7 +256,7 @@ body {
           font-size: 13px;
         }
         @include response(480px, 600px){
-          font-size: 12px;
+          font-size: 18px;
         }
       }
     }
