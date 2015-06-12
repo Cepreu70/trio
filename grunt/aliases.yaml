@@ -1,10 +1,9 @@
 default:
-  description: 'Default (production) build'
+  description: 'билд по всем задачам'
   tasks:
-    - dev
-dev:
-  description: 'Development build'
+    - 'concurrent'
+
+server:
+  description: 'запуска локального сервера'
   tasks:
-    - 'concurrent:devFirst'
-    - 'concurrent:devSecond'
-    - 'concurrent:devThird'
+    - 'connect'

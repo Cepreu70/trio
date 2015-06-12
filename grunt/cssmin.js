@@ -1,7 +1,13 @@
 module.exports = {
-    combine: {
+    app: {
         files: {
-            'www/app.css': ['assets/css/**/*.css', 'www/vendor/**/*.css']
+            'www/app.css': ['cache/app/**/*.css']
+        }
+    },
+    vendor: {
+        files: {
+            'www/vendor.css': ['cache/vendor/**/*.css', 'project/vendor/**/*.css']
         }
     }
+
 };

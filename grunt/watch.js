@@ -5,46 +5,73 @@ module.exports = {
         livereload: true
     },
 
-    localScripts: {
+    templateHTML: {
         files: [
-            'www/app/helper/**/*.js',
-            'www/app/controller/**/*.js',
-            'www/app/models/**/*.js',
-            'www/app/data/**/*.js',
-            'www/app/config/**/*.js'
+            'project/app/view/**'
         ],
         tasks: [
-            'uglify:local'
+            'preprocess',
+            'sync:view'
+        ]
+    },
+
+    publicData: {
+        files: [
+            'project/public/**'
+        ],
+        tasks: [
+            'sync:public'
+        ]
+    },
+
+    DB: {
+        files: [
+            'project/db/**'
+        ],
+        tasks: [
+            'sync:db'
+        ]
+    },
+
+    appScripts: {
+        files: [
+            'project/**/*.js'
+        ],
+        tasks: [
+            'uglify:app'
         ]
     },
 
     vendorScripts: {
         files: [
-            'www/vendor/**/*.js'
+            'project/vendor/**/*.js'
         ],
         tasks: [
             'uglify:vendor'
         ]
     },
 
-    styles: {
+    appStyles: {
         files: [
-            'www/style/**/*.scss',
-            'www/vendor/**/*.scss',
-            'www/vendor/**/*.css'
+            'project/app/style/**/*.scss', 'project/app/style/**/*.css', 'project/app/style/**/*.sass'
         ],
         tasks: [
-            'sass:dev',
-            'cssmin',
-            'postcss'
+            'sass:app',
+            'cssmin:app',
+            'clean:cache',
+            'autoprefixer:app'
         ]
     },
-    html: {
+
+    vendorStyles: {
         files: [
-            'www/**/*.html'
+            'project/vendor/**/*.css', 'project/vendor/**/*/sass', 'project/vendor/**/*/scss'
         ],
         tasks: [
-
+            'sass:vendor',
+            'cssmin:vendor',
+            'clean:cache',
+            'autoprefixer:vendor'
         ]
     }
 };
