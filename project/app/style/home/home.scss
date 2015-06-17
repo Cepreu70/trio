@@ -79,35 +79,44 @@
       .not-full-width{
         max-width: 1305px;
         margin: 0 auto;
+        padding: 40px;
         padding-top: 100px;
         padding-bottom: 50px;
-        .row-style{
-          margin-bottom: 0px;
-          overflow: hidden;
-          .col-style-left{
 
-            .img-process{
-
+        .phases{
+          justify-content: space-between;
+          display: flex;
+          align-items: center;
+          padding-bottom: 50px;
+          .phase{
+            cursor: pointer;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(0,0,0, 0.001);
+            transition: background 400ms;
+            &:hover{
+              background: rgba(0,0,0, 0.1);
             }
             .text-process{
-              text-align: center;
-            }
-            .arrow{
-              position: absolute;
-              background: url('public/img/arrow-def.png')no-repeat;
-              background-position: right;
-              width: 250px;
-              height: 60px;
-              top: 0;
+              margin-bottom: 0;
             }
           }
-          .description-text-block{
-            margin-top: 50px;
-            .text-description{
-              text-align: left;
-              margin-left: 45px;
+          .arrow{
+            display: inline-block;
+            width: 43px;
+            height: 30px;
+            transition: background-image 400ms;
+            background-image: url('public/img/arrow-hover.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            &.active{
+              background-image: url('public/img/arrow-def.png');
             }
           }
+        }
+        .description{
+          text-align: left;
         }
       }
     }

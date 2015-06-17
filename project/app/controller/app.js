@@ -8,8 +8,7 @@ var app;
             function($routeProvider, $locationProvider) {
                 $routeProvider
                     .when('/', {
-                        templateUrl: 'view/home/home.html',
-                        controller: 'homeController'
+                        templateUrl: 'view/home/home.html'
                     })
                     .when('/gallery', {
                         templateUrl: 'view/gallery/gallery.html'

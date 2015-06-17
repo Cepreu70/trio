@@ -89,6 +89,19 @@
       display: inline-block;
       vertical-align: top;
       font-size: 18px;
+
+      .trio-sign-top{
+        display: inline-block;
+        vertical-align: top;
+        font-size: 34px;
+        padding-right: 30px;
+      }
+      .trio-text{
+        display: inline-block;
+        width: 80%;
+        vertical-align: top;
+      }
+
       .description-accent{
         margin-top: 110px;
         margin-bottom: 30px;
@@ -172,6 +185,19 @@
 
         padding-right: 40px;
         font-size: 18px;
+
+        .trio-sign-top{
+          display: inline-block;
+          vertical-align: middle;
+          font-size: 34px;
+          padding-right: 30px;
+        }
+        .trio-text{
+          display: inline-block;
+          width: 80%;
+          vertical-align: middle;
+        }
+
       }
       .widgets-container{
         width: 1280px;
@@ -253,6 +279,18 @@
       position: absolute;
       top: 0;
       left:0;
+      .trio-sign-top{
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 34px;
+        padding-right: 30px;
+      }
+      .trio-text{
+        text-align: left;
+        display: inline-block;
+        width: 80%;
+        vertical-align: middle;
+      }
     }
     .mac-sa{
       margin-top: 170px;
