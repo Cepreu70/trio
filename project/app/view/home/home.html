@@ -6,66 +6,73 @@
     </video>
 </div>
 <div class="content">
-        <div class="slider">
-            <div class="slide parymide">
-                <div id="edge-parymide" class="EDGE-1946368">
-                </div>
-            </div>
-            <div class="slide cofee_commitee">
-                <div id="edge-cofee_commitee" class="EDGE-3425786">
-                </div>
-            </div>
-
-            <div class="slide stairway">
-                <div id="edge-stairway" class="EDGE-9038984">
-                </div>
-            </div>
-
-        </div>
-        <div class="development-process-phases" style="background: #fff">
-            <div class="not-full-width">
-                <div class="row row-style">
-                    <div class="col s2 col-style-left">
-                        <img src="public/img/earch.png" class="img-process">
-                        <p class="text-process" style="padding-top: 10px;">Исследования</p>
-                        <div class="arrow">
-
-                        </div>
-                    </div>
-                    <div class="col s3 col-style-left">
-                        <img src="public/img/tree-paper.png" class="img-process">
-                        <p class="text-process" style="padding-top: 20px;">Прототипирование</p>
-                        <div class="arrow" style="width: 330px">
-
-                        </div>
-                    </div>
-                    <div class="col s3 col-style-left">
-                        <img src="public/img/pen.png" class="img-process">
-                        <p class="text-process" style="padding-top: 20px;">Визуализация</p>
-                        <div class="arrow" style="width: 300px">
-
-                        </div>
-                    </div>
-                    <div class="col s2 col-style-left">
-                        <img src="public/img/gear.png" class="img-process">
-                        <p class="text-process">Техническая<br>разработка</p>
-                        <div class="arrow" style="width: 215px">
-
-                        </div>
-                    </div>
-                    <div class="col s2 col-style-left">
-                        <img src="public/img/bulb-def.png" class="img-process">
-                        <p class="text-process">Обслуживание</p>
-                        <div class="arrow">
-
-                        </div>
-                    </div>
-                    <div class="col s10 description-text-block">
-                        <p class="text-description">На этом этапе происходит техническая разработка проекта. Верстка, программирование, интеграция с административной частью сайта, тестирование.</p>
-                    </div>
-                </div>
+    <div class="not-full-width">
+        <p class="caption key-moments">КЛЮЧЕВЫЕ МОМЕНТЫ КОМПАНИИ</p>
+    </div>
+    <div class="slider">
+        <div class="slide spheres">
+            <div id="edge-spheres" class="EDGE-1636752">
             </div>
         </div>
+        <div class="slide parymide">
+            <div id="edge-parymide" class="EDGE-1946368">
+            </div>
+        </div>
+        <div class="slide cofee_commitee">
+            <div id="edge-cofee_commitee" class="EDGE-3425786">
+            </div>
+        </div>
+
+        <div class="slide stairway">
+            <div id="edge-stairway" class="EDGE-9038984">
+            </div>
+        </div>
+
+    </div>
+    <div class="development-process-phases" style="background: #fff">
+        <div class="not-full-width">
+            <div class="row row-style">
+                <div class="col s2 col-style-left">
+                    <img src="public/img/earch.png" class="img-process">
+                    <p class="text-process" style="padding-top: 10px;">Исследования</p>
+                    <div class="arrow">
+
+                    </div>
+                </div>
+                <div class="col s3 col-style-left">
+                    <img src="public/img/tree-paper.png" class="img-process">
+                    <p class="text-process" style="padding-top: 20px;">Прототипирование</p>
+                    <div class="arrow" style="width: 330px">
+
+                    </div>
+                </div>
+                <div class="col s3 col-style-left">
+                    <img src="public/img/pen.png" class="img-process">
+                    <p class="text-process" style="padding-top: 20px;">Визуализация</p>
+                    <div class="arrow" style="width: 300px">
+
+                    </div>
+                </div>
+                <div class="col s2 col-style-left">
+                    <img src="public/img/gear.png" class="img-process">
+                    <p class="text-process">Техническая<br>разработка</p>
+                    <div class="arrow" style="width: 215px">
+
+                    </div>
+                </div>
+                <div class="col s2 col-style-left">
+                    <img src="public/img/bulb-def.png" class="img-process">
+                    <p class="text-process">Обслуживание</p>
+                    <div class="arrow">
+
+                    </div>
+                </div>
+                <div class="col s10 description-text-block">
+                    <p class="text-description">На этом этапе происходит техническая разработка проекта. Верстка, программирование, интеграция с административной частью сайта, тестирование.</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="gallery" ng-controller="galleryController as gallery">
         <div class="responsive-box" ng-repeat="preview in gallery.previews | maxCount: 8" ng-style="{'background-image':'url(' + preview.imgURL + ')'}">
             <a class="boxInner waves-effect waves-light" ng-href="portfolio/?page={{preview.pageUrl}}">
