@@ -263,22 +263,20 @@ body {
   }
   .btn-floating{
     left: 50%;
-    margin-left: -27.75px;
-    border-radius: 27.75px;
+    margin-left: -87.75px;
+    border-radius: 87.75px;
     top: 20px;
     position: absolute;
+    width: 170px !important;
+    color: white;
     white-space: nowrap;
     transition: width $animation-time, color $animation-time;
-    color: #333;
+
     i{
       position: absolute;
       color: inherit;
       width: auto;
       left: 14px;
-    }
-    &:hover {
-      width: 170px;
-      color: white;
     }
     span{
       margin-left: 60px;

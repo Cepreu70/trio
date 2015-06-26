@@ -46,6 +46,8 @@ label {
     color: $input-focus-color;
   }
 
+  textarea.ng-valid.ng-touched,
+  input.ng-valid.ng-touched,
   input[type=text].valid,
   input[type=password].valid,
   input[type=email].valid,
@@ -59,6 +61,8 @@ label {
     @include box-shadow(0 1px 0 0 $input-success-color);
   }
 
+  textarea.ng-invalid.ng-touched,
+  input.ng-invalid.ng-touched,
   input[type=text].invalid,
   input[type=password].invalid,
   input[type=email].invalid,

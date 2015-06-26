@@ -3,7 +3,7 @@ var app;
 
     'use strict';
 
-    app = angular.module('ngApp', ['ngAnimate', 'ngRoute'])
+    app = angular.module('ngApp', ['ngAnimate', 'ngRoute', 'ui.mask'])
         .config(['$routeProvider', '$locationProvider',
             function($routeProvider, $locationProvider) {
                 $routeProvider

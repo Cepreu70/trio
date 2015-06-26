@@ -2,16 +2,13 @@
 <html>
 <head>
     <!-- STYLES IN HEADER -->
-    <meta charset="UTF-8">
     <base href="/">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="app.css"/>
+    <link rel="stylesheet" href="vendor.css"/>
 </head>
 
-    <style>
-        .edgeLoad-EDGE-4631667 { visibility:hidden; }
-    </style>
-</head>
 <!-- apply our angular app -->
 <body ng-app="ngApp" ng-controller="templateController as template">
 
@@ -100,13 +97,6 @@
                 </li>
 
                 <li>
-                    <a class="menu-link" href="/blog">
-                        <i class="trio-sign-top"></i>
-                        <span class="menu-caption"> Блог </span>
-                    </a>
-                </li>
-
-                <li>
                     <a class="menu-link" href="/contacts">
                         <i class="trio-sign-top"></i>
                         <span class="menu-caption"> Контакты </span>
@@ -148,48 +138,48 @@
     <div class="vertical-container">
         <div class="vertical-content">
             <div class="not-full-width">
-                <form class="col s12">
+                <form name="getContactForm" class="col s12" novalidate>
                     <div class="row">
                         <div class="input-field col s6">
-                            <input id="first_name" type="text" class="validate" ng-model="template.data.name">
+                            <input id="first_name" type="text" ng-model="template.data.name" required>
                             <label for="first_name">Имя</label>
                         </div>
                         <div class="input-field col s6">
-                            <input id="last_name" type="text" class="validate" ng-model="template.data.secondName">
+                            <input id="last_name" type="text" class="validate" ng-model="template.data.secondName" required >
                             <label for="last_name">Фамилия</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="company" type="text" class="validate" ng-model="template.data.company">
+                            <input id="company" type="text" class="validate" ng-model="template.data.company" required >
                             <label for="company">Компания</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="topic" type="text" class="validate" ng-model="template.data.theme">
+                            <input id="topic" type="text" class="validate" ng-model="template.data.theme" required >
                             <label for="topic"> Тема </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <textarea id="text-message" class="materialize-textarea" ng-model="template.data.message"></textarea>
+                            <textarea id="text-message" class="materialize-textarea" ng-model="template.data.message" required ></textarea>
                             <label for="text-message"> Текст сообщения </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="telephone" type="text" class="validate" ng-model="template.data.telephone">
+                            <input id="telephone" ng-pattern="/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/" required type="text" ng-model="template.data.telephone" required >
                             <label for="telephone"> Телефон </label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="email" type="email" class="validate" ng-model="template.data.email">
+                            <input id="email" type="email" class="validate" ng-model="template.data.email" required >
                             <label for="email">Email</label>
                         </div>
                     </div>
-                    <a class="waves-effect waves-light btn yellow darken-2" ng-click="template.sendMessage()"> Отправить </a>
+                    <a class="waves-light btn" ng-class="getContactForm.$invalid ? 'disabled grey white-text' : 'waves-effect yellow darken-2'" ng-disabled="getContactForm.$invalid" ng-click="getContactForm.$valid ? template.sendMessage(): ''"> Отправить </a>
                 </form>
             </div>
         </div>
@@ -202,25 +192,10 @@
 
 <!--OTHER -->
 <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.full&lang=ru-RU" type="text/javascript"></script>
-<script>
-    console.log('Edge');
-    AdobeEdge.loadComposition('search', 'EDGE-4631667', {
-        scaleToFit: "none",
-        centerStage: "none",
-        minW: "0",
-        maxW: "undefined",
-        width: "550px",
-        height: "400px"
-    }, {dom: [ ]}, {dom: [ ]});
-</script>
 
 <!--App -->
 <script src="app.js"></script>
 
-
-<!-- social sharing plugin http://www.sharethis.com/ -->
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "edd30dc4-5324-427d-94b2-5e7708193959", doNotHash: true, doNotCopy: true, hashAddressBar: true});</script>
 
 <script>
 

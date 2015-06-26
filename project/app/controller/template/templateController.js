@@ -11,7 +11,7 @@
             company: '',
             theme: '',
             message: '',
-            telephone: '',
+            telephone: '+',
             email: ''
         };
 
