@@ -42,30 +42,109 @@
         height: 720px;
         background-size: cover !important;
         text-align: left;
+        display:flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-content: space-around;
+        align-items: center;
+        padding: 0 140px;
+        .flex-element{
+          order: 0;
+          flex-grow: 1;
+          flex-shrink: 0;
+          width: 100px;
+          &.x2{
+            flex-grow: 2;
+          }
+        }
+        .description{
+          color: white;
+          max-width: 400px;
+          min-width: 350px;
+          .sign{
+            position: absolute;
+            left: 0;
+            font-size: 18px;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: space-around;
+            align-items: center;
+            border-radius: 50%;
+            background: white;
+          }
+        }
         &.spheres{
           background: url('public/img/home/slider-bg1.jpg') center center no-repeat;
 
           #edge-spheres{
-            margin: 0 auto;
+            max-width: 700px;
+            transform: scale(0.8,0.8)
+          }
+
+          .description{
+            padding-left: 60px;
+          }
+          .sign{
+            color: #0886B4
           }
         }
         &.parymide{
           background: url('public/img/home/slider-bg2.jpg') center center no-repeat;
           #edge-parymide{
-            top: 100px;
-            margin: 0 auto;
+            max-width: 900px;
+            transform: scale(0.8,0.8)
           }
-        }
-        &.stairway{
-          background: url('public/img/home/slider-bg3.jpg') center center no-repeat;
-          #edge-stairway{
-            margin: 0 auto;
+          .description{
+            padding-left: 60px;
+          }
+          .sign{
+            color: #1AAB68
           }
         }
         &.cofee_commitee{
+          background: url('public/img/home/slider-bg3.jpg') center center no-repeat;
+          .slide-wrapper{
+            overflow: hidden;
+            top: 100px;
+            width: 100%;
+            box-sizing: border-box;
+            bottom: 0;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: space-between;
+            align-items: center;
+            #edge-cofee_commitee{
+              top: -100px;
+              max-width: 1200px;
+              transform: scale(0.8,0.8);
+              overflow: visible !important;
+            }
+            .description{
+              top: -100px;
+              padding-left: 60px;
+            }
+            .sign{
+              color: rgb(188, 179, 22);
+            }
+          }
+
+          .description{
+            left: -100px
+          }
+        }
+        &.stairway{
           background: url('public/img/home/slider-bg4.jpg') center center no-repeat;
-          #edge-cofee_commitee{
-            margin: 0 auto;
+          #edge-stairway{
+            max-width: 700px;
+            transform: scale(0.8,0.8)
           }
         }
 
