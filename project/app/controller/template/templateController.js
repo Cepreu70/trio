@@ -38,60 +38,20 @@
             toast('Сервер рассматривает ваше сообщение', 4000);
             $.ajax({
                 type: 'POST',
-                url: 'https://mandrillapp.com/api/1.0/messages/send.json',
+                url: 'http://trio.kz/js/checkuot-phone.php',
                 data: {
-                    'key': 'QXY_O5_ZRIXYljkTI2u0IQ',
-                    'message':
-                    {
-                        'from_email': 'info@trio.kz',
-                        'to': [
-                            {
-                                'email': 'os@trio.kz',
-                                'name': 'Заявка',
-                                'type': 'to'
-                            }
-                        ],
-                        'autotext': 'true',
-                        'subject': 'Форма связаться!',
-                        'html': '<p><b>компания:</b> ' + template.data.company + '</p>' +
+
+                        'name': template.data.name + ' ' + template.data.secondName,
+                        'mail': template.data.email,
+                        'text': '<p><b>компания:</b> ' + template.data.company + '</p>' +
                         '<p><b>ФИО:</b> ' + template.data.name + ' ' + template.data.secondName + '</p>' +
                         '<p><b>Сообщение:</b> ' + template.data.message + '</p>' +
                         '<p><b>Телефон:</b> ' + template.data.telephone + '</p>' +
                         '<p><b>Email:</b> ' + template.data.email + '</p>'
-                    }
 
                 }
             }).done(function(response) {
-                $.ajax({
-                    type: 'POST',
-                    url: 'https://mandrillapp.com/api/1.0/messages/send.json',
-                    data: {
-                        'key': 'QXY_O5_ZRIXYljkTI2u0IQ',
-                        'message':
-                        {
-
-                            'from_email': 'info@trio.kz',
-                            'to': [
-                                {
-                                    'email': template.data.email,
-                                    'name': 'Заявка',
-                                    'type': 'to'
-                                }
-                            ],
-                            'autotext': 'true',
-                            'subject': 'Ваша заявка рассматривается',
-                            'html': 'Спасибо мы приняли вашу заявку, ожидайте мы с вами свяжемся!'
-                        }
-
-                    },
-                    success: function(){
-                        toast('Сообщение доставлено успешно', 4000);
-                        console.log(response); // if you're into that sorta thing
-                    },
-                    error: function(){
-                        toast('Ваше сообщение не прошло проверку', 4000);
-                    }
-                });
+                toast('Сообщение доставлено успешно', 4000);
             });
         }
     })
